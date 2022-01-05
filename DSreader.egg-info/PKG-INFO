@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: DSreader
+Version: 0.0.1
+Summary: Read data from Digital Standard vegetation mapping projects
+Home-page: https://github.com/tdmeij/DSreader
+Author: Thomas de Meij
+Author-email: thomasdemeij@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# DSreader
+Read vegetation data from Digital Standard vegetation surveys
+
+

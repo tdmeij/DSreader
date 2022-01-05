@@ -1,0 +1,9 @@
+LICENSE
+README.md
+setup.py
+DSreader/__init__.py
+DSreader.egg-info/PKG-INFO
+DSreader.egg-info/SOURCES.txt
+DSreader.egg-info/dependency_links.txt
+DSreader.egg-info/requires.txt
+DSreader.egg-info/top_level.txt
