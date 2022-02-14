@@ -37,7 +37,7 @@ class ReadPolyShape:
         ----------
         fpath : str
             filepath to ESRI shapefile
-        fixerrors : bool, default True
+        fix_errors : bool, default True
             try to fix readerrors
         """
         self._fpath = fpath

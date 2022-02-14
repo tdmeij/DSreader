@@ -13,30 +13,43 @@ class ListProjects:
 
     Methods
     -------
-    projects
-        Return pd.DataFrame of project directories under root.
-    projectpaths
-        Return pd.DataFrame with fullpath of all project files.
-    check_selection
-        Return pd.DataFrame with names of projects and filenames
-        that seem to match the project (for manually checking guesses)
+    list_projects
+        Return tabele of project directories under root.
+    list_files
+        Return table with all files of given filetype under root
+    projectfiles_counts
+        Return table of file counts by project for given filtetype
+    filter_mdbfiles
+        Return table with project mdbfiles
+    filter_shapefiles
+        Return table with project shapefiles
+    find_projectfiles
+        Return table with all projects and filepaths found
 
     Notes
     -----
-    Projects should be organised in subfolders under a root folder.
-    Projectfolders should be at the second level beneath the root folder. 
+    The method find_projectfiles() returns a table with all projects 
+    and the corresponding shapefile and access madfile, if they were 
+    found. This table is the main result for this class, all the other 
+    methods are merely preparations and checks.
+
+    Projects are supposed to be organised in subfolders under a root 
+    folder. Projectfolders should be at the second level beneath the 
+    root folder. 
     The first level beneath the root folder is called 'provincie'. 
     A typical project folder path should look like:
     '..\01_Standaard\Drenthe\Dr 0007_Hijken_1989' 
     where '..\01_Standaard\' is the root folder.
     """
 
-    def __init__(self,rootdir):
+    def __init__(self,rootdir,relpaths=True):
         """
         Parameters
         ----------
         rootdir : str
-            root directory with project directories
+            Root directory with project directories
+        repaths : boolean, default True
+            Return relative filepaths
         """
         if not isinstance(rootdir,str):
             raise TypeError(f'rootdir must be of type string not {type(rootdir)}')
@@ -45,16 +58,44 @@ class ListProjects:
             raise TypeError(f'{rootdir} is not a valid directory name.')
 
         self._rootdir = rootdir
-        self._projects = self.projects()
+        self._relpaths = relpaths
+        #self._projects = self.list_projects()
 
     def __repr__(self):
         nprj = len(self._projects)
         return (f'{nprj} projects')
 
-    def projects(self):
-        """Return list of project folders at level 2 under the root folder"""
-        # projects are stored in a directory structure that looks like:
-        # ..\01_Standaard\Drenthe\Dr 0007_Hijken_1989
+    def _relativepaths(self,column):
+        """Replace absolute path with path relative to root"""
+        newcolumn = column.apply(lambda x:'..\\'+x.removeprefix(
+            self._rootdir) if not pd.isnull(x) else x)
+        return newcolumn
+
+    def _absolutepaths(self,column):
+        """Replace path relative to root with absolute path"""
+        newcolumn = column.apply(
+                lambda x:os.path.join(self._rootdir,x.lstrip('..\\')))
+        return newcolumn
+
+    def list_projects(self):
+        """Return table of projects
+
+        Notes
+        -----
+        Digital Standard vegetation mapping projects are stored in a 
+        directory structure below the root folder '..\01_Standaard\'
+        that looks like:
+         ..\01_Standaard\Drenthe\Dr 0007_Hijken_1989
+        First level 'Drenthe' are Dutch provinces, second level 
+        'Dr 0007_Hijken_1989' are project directories.
+        Projectnames are derived from foldernames at level 2 under the 
+        root folder.
+
+        Mapping projects that cross province boundaries can be present
+        as a project in both provinces. Therefore, grouping must be done
+        on the combination of 'province' and 'project'.
+        
+        """
         prvlist = []    #'Drenthe'
         prjlist = []    #'Dr 0007_Hijken_1989'
         yearlist = []   #'1989'
@@ -86,230 +127,305 @@ class ListProjects:
             yearlist += prjyears
             pathlist += prjpaths
 
-        self._projects = DataFrame(data=list(zip(prvlist,yearlist,prjlist,pathlist)),
-            columns=['provincie','year','project','prjdir'])
+        self._projects = DataFrame(data=list(zip(prvlist,prjlist,yearlist,pathlist)),
+            columns=['provincie','project','year','prjdir'])
+        self._projects = self._projects.set_index(keys=['provincie','project'],
+            verify_integrity=True)
+
+        # relative path to prjdir
+        if self._relpaths:
+            self._projects['prjdir'] = self._relativepaths(self._projects['prjdir'])
+
         return self._projects
 
-    def _listfiletype(self,filetype=None,colname=None):
+    def _validate_filetype(self,filetype=None):
+        """Return valid filetype string or None"""
+        if filetype is not None:
+            if isinstance(filetype,str):
+                filetype=filetype.lstrip('.')
+                if not len(filetype)==3:
+                        warnings.warn(f'{filetype} is not a valid filetype.')
+                        filetype=None
+            else:
+                warnings.warn(f'{filetype} is not a valid filetype.')
+                filetype=None
+        return filetype
+
+    def _file_in_projectdir(self,filetbl,pathcol=None):
         """
-        Return table of all files of specified filetype under root
+        Return boolean mask for files in project directory with 
+    `   preserved index
 
         Parameters
         ----------
-        filetype : str
-            list of file will be restricted to filetype
-        colname : str
-            results will be stored in colomn name colname
-
-        Return
-        ------
-        pd.DataFrame
+        filetbl : pd.DataFrame
+            table with filepathnames as returned by list_files()
+        pathcol : str
+            column name with filepath
         """
-        # check variable filetype
-        if isinstance(filetype,str):
-            filetype=filetype.lstrip('.')
-            if not len(filetype)==3:
-                    warnings.warn(f'{filetype} is not a valid filetype.')
-                    filetype=None
+        prjtbl = self.list_projects()
+        prjdirs = Series(index=filetbl.index,dtype='object')
+        for idx in prjdirs.index:
+            prv = filetbl.loc[idx,'provincie']
+            prj = filetbl.loc[idx,'project']
+            prjdirs.loc[idx] = prjtbl.loc[(prv,prj),'prjdir']
+        filedirs = filetbl[pathcol].apply(lambda x:os.path.dirname(x))
+        mask = filedirs==prjdirs
+        return mask
 
+    def list_files(self,filetype=None):
+        """
+        Return table of all files by project for given filetype 
+
+        Parameters
+        ----------
+        filetype : str, optional
+            list of file will be restricted to filetype
+        colname : str, optional
+            filepath column name 
+
+        Returns
+        -------
+        pd.DataFrame
+
+        Notes
+        -----
+        Projects with no files of given filetype will not be present in
+        the table that is returned.
+        """
+        filetype = self._validate_filetype(filetype)
         if filetype is None:
             warnings.warn(f'Filetype is None. All files wil be listed.')
 
-        if colname is None:
-            colname='fpath'
-            if isinstance(filetype,str):
-                colname = f'{filetype}fpath'
+        fpathcol='fpath'
+        fnamecol='fname'
+        if isinstance(filetype,str):
+            fpathcol=f'{filetype}path'
+            fnamecol=f'{filetype}name'
 
-        # DataFrame of filepaths by project
+        prjtbl = self.list_projects()
+        if self._relpaths: # restore absolute paths
+            prjtbl['prjdir'] = self._absolutepaths(prjtbl['prjdir'])
+
+        # create list of dicts for each file under a project directory
+        # and create dataframe with all filepaths by provincie, project
         pathlist = []
-        for idx,row in self._projects.iterrows():
-            
-            for rootdir,subdirs,files in os.walk(row['prjdir']):
+        empty_projects = []
+        for (prv,prj),row in prjtbl.iterrows():
+            for prjdir,subdirs,files in os.walk(row['prjdir']):
                 for f in files:
+                    filepath = os.path.join(prjdir,f)
+                    #fname = 
                     rowdict = row.to_dict()
-                    rowdict[colname] = str(os.path.join(rootdir,f))
+                    rowdict['provincie'] = prv
+                    rowdict['project'] = prj
+                    rowdict[fpathcol] = str(filepath)
+                    rowdict[fnamecol] = f
                     pathlist.append(rowdict)
         tbl = pd.DataFrame(pathlist)
 
+        # reorder columns
+        ##colnames = prjcols+[fnamecol,fpathcol]
+        ##misscols = [col for col in tbl.columns if col not in colnames ]
+        ##colnames = colnames + misscols
+        colnames = ['provincie','project']+[fnamecol,fpathcol]
+        tbl = tbl[colnames]
+
         if filetype is not None:
-            mask = tbl[colname].str.endswith(f'.{filetype}')
+            mask = tbl[fpathcol].str.endswith(f'{filetype}')
             tbl = tbl[mask].copy()
+
+        if self._relpaths: #remove root from paths
+            tbl[fpathcol] = self._relativepaths(tbl[fpathcol])
 
         return tbl
 
 
-    def _selectfiletype(self,filetype,guessfile=False):
+    def projectfiles_counts(self,filetbl,colname=None,fill_missing=False):
         """
-        Return table with all files of given filetype and indication of 
-        file that looks like the best match for the project"""
+        Return table of file counts by project for given filtetype
 
-        if filetype.startswith('.'):
-            filetype=filetype[1:]
+        Parameters
+        ----------
+        filetbl : pd.DataFrame
+            table with files listed by project
+        colname : str, optional
+            column name to use for counts
 
-        # colnames depend on filetype
-        pathcol=filetype+'path'
-        filedircol=filetype+'dir'
-        selcol=filetype+'sel'
-        namecol=filetype+'name'
-        simcol=filetype+'sim'
-        guescol=filetype+'gues'
+        Returns
+        -------
+        pd.DataFrame
 
-        # find all filepaths of type filetype
-        files = self._listfiletype(filetype=filetype,colname=pathcol)
+        Notes
+        -----
+        This methods presumes a DataFrame as returned by the list_files 
+        method, but any dataframe with the columns 'provincie' and 
+        'project' should be accepted.
+        """
+        if not isinstance(filetbl,pd.DataFrame):
+            warnings.warn(f'{filetbl} is not a DataFrame')
+            return None
 
-        dirpaths = files[pathcol].apply(lambda x:os.path.dirname(x))
-        files[filedircol]=dirpaths
+        if colname not in filetbl.columns:
+            warnings.warn(f'{colname} not in filetbl')
+            colname = None
 
-        # calculate string similarity between file name and project name
-        srfilenames = files[pathcol].apply(lambda x:os.path.splitext(
-            os.path.basename(x))[0])
-        filenames = list(srfilenames.values)
-        files[namecol]=filenames
-        prjnames = list(files['project'].values)
-        similarities = [difflib.SequenceMatcher(None, p1, p2).ratio() 
-            for (p1,p2) in zip(filenames,prjnames)]
-        files[simcol]=similarities
+        grp = filetbl.groupby(by=['provincie','project'])
+        filecounts = grp.count()
+        if colname is not None:
+            filecounts = filecounts[colname].copy()
+            filecounts.name = f'{colname}_counts'
 
-        files[selcol]=False
-        files[guescol]=False
+        if fill_missing:
+            index = self.list_projects().index
+            filecounts = filecounts.reindex(index=index,fill_value=0)
 
-        for (provincie,project),tbl in files.groupby(['provincie','project']):
+        return filecounts
 
-            rowidx=None
-            if len(tbl)==0: #no file found
-                warnings.warn((f'No {filetype} file found for project {prj}'))
 
-            if len(tbl)==1: #just one file
-                rowidx = tbl.index[0]
-                files.loc[rowidx,selcol]=True
+    def filter_mdbfiles(self,filetbl,pathfilter=None):
+        """
+        Return table with project mdbfiles
 
-            if len(tbl)>1: #multiple files
+        Paramters
+        ---------
+        filetbl : pd.DataFrame
+            table with mdb filepaths as returned by list_files() method
+        pathfilter : list of string, optional
+            mdb filepaths with these keywords will be ignored
 
-                # mask: file is in project folder
-                filedir = tbl[filedircol].apply(os.path.normcase).values
-                prjdir = tbl['prjdir'].apply(os.path.normcase).values
-                inroot = np.where(filedir==prjdir,True,False)
+        Notes
+        -----
+        Valid mdb projectfiles can have any filename. although names 
+        with reference to the project name are most common.
+        """
 
-                # mask: filename is like vlakken
-                isname = tbl[namecol].str.lower()=='vlakken'
-                hasname = tbl[namecol].str.lower().str.contains('vlakken')
+        if pathfilter is not None:
+            if not isinstance(pathfilter,list):
+                warnings.warn((f'Input argument pathtags with invalid '),
+                    (f'value {pathtfilter} will be ignored.'))
 
-                if len(tbl[inroot])==1: #just one file in project folder
-                    rowidx = tbl[inroot].index[0]
-                    files.loc[rowidx,selcol]=True
+        # mask for filepaths
+        if pathfilter:
+            mask_fpath = filetbl['mdbpath'].str.lower().str.contains(
+                '|'.join(pathfilter),na=False)
+        else:
+            mask_fpath = Series(data=False,index=filetbl.index)
 
-                if filetype=='shp':
-                    # for shapefiles any file with name vlakken 
-                    # has preference
+        # mask for mdbfile in project directory
+        mask_prjdir = self._file_in_projectdir(filetbl,pathcol='mdbpath')
 
-                    if len(tbl[inroot&isname])==1:
-                        rowidx = tbl[inroot&isname].index[0]
-                        files.loc[rowidx,selcol]=True
 
-                    elif len(tbl[inroot&hasname])==1:
-                        rowidx = tbl[inroot&hasname].index[0]
-                        files.loc[rowidx,selcol]=True
+        # masktbl is a temporary copy of filetbl with columns for masking
+        # mask_fname and mask_prjdir are series with the same index
+        # as DataFrame filetbl.
+        masktbl = filetbl.copy()
+        masktbl['maskfpath'] = mask_fpath
+        masktbl['maskprj'] = mask_prjdir
+        masktbl['masksel'] = False
 
-                    elif len(tbl[isname])==1:
-                        rowidx = tbl[isname].index[0]
-                        files.loc[rowidx,selcol]=True
+        # step-wise select most probable mdb projectfile
+        for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
 
-                    elif len(tbl[hasname])==1:
-                        rowidx = tbl[hasname].index[0]
-                        files.loc[rowidx,selcol]=True
+            if len(tbl)==1: # only one mdbfile found
+                idx = tbl.index[0]
+            elif len(tbl[tbl['maskprj']])==1: # only one mdb in prjdir
+                idx = tbl[tbl['maskprj']].index[0]
+            elif len(tbl[tbl['maskprj']&~tbl['maskfpath']])==1:
+                idx = tbl[tbl['maskprj']&~tbl['maskfpath']].index[0]
+            elif len(tbl[~tbl['maskfpath']])==1:
+                idx = tbl[~tbl['maskfpath']].index[0]
+            else:
+                idx = None
 
-                if (guessfile is True) and (rowidx is None):
-                    # from here on its all guesswork
+            if idx is not None:
+                masktbl.loc[idx,'masksel']=True
 
-                    if filetype=='shp':
+        self._mdbsel = masktbl
+        return filetbl[masktbl['masksel']]
 
-                        if len(tbl[isname])>1:
-                            # select on highest similarity between file name 
-                            # and project name
-                            rowidx = tbl[isname].sort_values(simcol).index[-1]
-                            files.loc[rowidx,selcol]=True
-                            files.loc[rowidx,guescol]=True
 
-                        elif len(tbl[hasname])>1:
-                            # select on highest similarity between file name 
-                            # and project name
-                            rowidx = tbl[hasname].sort_values(simcol).index[-1]
-                            files.loc[rowidx,selcol]=True
-                            files.loc[rowidx,guescol]=True
+    def filter_shapefiles(self,filetbl):
+        """
+        Return table with project shapefiles
 
-                if (guessfile is True) and (rowidx is None):
-                    # this second if prevents duplicate shp entries
+        Paramters
+        ---------
+        filetbl : pd.DataFrame
+            table with mdb filepaths as returned by list_files() method
 
-                    if len(tbl[inroot])>1: #multiple files in prj folder, 
-                        # select by similarity between file name and project name
-                        rowidx = tbl[inroot].sort_values(simcol).index[-1]
-                        files.loc[rowidx,selcol]=True
-                        files.loc[rowidx,guescol]=True
+        Notes
+        -----
+        Valid shapefiles are called 'vlakken', 'Vlakken', or they have
+        the keyword 'vlak' somewhere in their filename.
+        """
 
-                    if len(tbl[inroot])==0: #no filetype files in project folder
-                        # last resort: take file with highest simililarity 
-                        # from all available files, regardless
-                        # of directory
-                        rowidx = tbl.sort_values(simcol).index[-1]
-                        files.loc[rowidx,selcol]=True
-                        files.loc[rowidx,guescol]=True
-        return files
+        # masks for filename 'vlakken'
+        namecol='shpname'
+        isname = filetbl[namecol].str.lower()=='vlakken.shp'
+        likename = filetbl[namecol].str.lower().str.contains('vlak')
 
-    def projectpaths(self,relpaths=True):
-        """Return table with filepaths for all projects"""
+        # mask for file in project directory
+        mask_prjdir = self._file_in_projectdir(filetbl,pathcol='shppath')
 
-        prj = self.projects()
-        prj = prj[['provincie','project']].copy()
+        # masktbl is a temporary copy of filetbl with columns for masking
+        # mask_fname and mask_prjdir are series with the same index
+        # as DataFrame filetbl.
+        masktbl = filetbl.copy()
+        masktbl['isname'] = isname
+        masktbl['likename'] = likename
+        masktbl['inprj'] = mask_prjdir
+        masktbl['masksel'] = False
 
-        if not hasattr(self,'_mdbfiles'):
-            self._mdbfiles = self._selectfiletype('mdb',guessfile=True)
-        selected = self._mdbfiles['mdbsel']==True
-        mdb = self._mdbfiles[selected].copy()
+        # step-wise select most probable shp projectfile
+        for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
 
-        if not hasattr(self,'_shpfiles'):
-            self._shpfiles = self._selectfiletype('shp',guessfile=True)
-        selected = self._shpfiles['shpsel']==True
-        shp = self._shpfiles[selected].copy()
+            if len(tbl[tbl['isname']])==1: # only one file vlakken
+                idx = tbl[tbl['isname']].index[0]
+            elif len(tbl[tbl['isname']&tbl['inprj']])==1:
+                idx = tbl[tbl['isname']&tbl['inprj']].index[0]
+            elif len(tbl[tbl['likename']])==1:
+                idx = tbl[tbl['likename']].index[0]
+            elif len(tbl[tbl['likename']&tbl['inprj']])==1:
+                idx = tbl[tbl['likename']&tbl['inprj']].index[0]
+            else:
+                idx = None
 
-        mergecols = ['provincie','project']
-        prj = pd.merge(prj,mdb,how='left',left_on=mergecols,
-            right_on=mergecols,suffixes=[None,'_from_mdb'],
-            validate='one_to_one')
-        prj = pd.merge(prj,shp,how='left',left_on=mergecols,
-            right_on=mergecols,suffixes=[None,'_from_shp'],)
-            #validate='one_to_one')
+            if idx is not None:
+                masktbl.loc[idx,'masksel']=True
 
-        dup_mdb = [x for x in prj.columns if '_from_mdb' in x]
+        self._shpsel = masktbl
+        return filetbl[masktbl['masksel']]
+
+
+    def find_projectfiles(self):
+        """Return table with all projects and filepaths found"""
+
+        prj = self.list_projects()
+        prj = prj[['year']].copy()
+
+        shp = self.list_files(filetype='shp')
+        shpsel = self.filter_shapefiles(shp).set_index(
+            keys=['provincie','project'],verify_integrity=True)
+
+        mdb = self.list_files(filetype='mdb')
+        pathtags = ['conversion','catl','ctl','soorten','kopie','test',
+            'kievit','oud','database','db1','test','fout','themas',
+             'toestand','backup','cmsi']
+        mdbsel = self.filter_mdbfiles(mdb,pathfilter=pathtags).set_index(
+            keys=['provincie','project'],verify_integrity=True)
+
+        prj = pd.merge(prj,shpsel,left_index=True,right_index=True,
+            how='left',suffixes=[None,'_from_shp'],validate='one_to_one')
+        prj = pd.merge(prj,mdbsel,left_index=True,right_index=True,
+            how='left',suffixes=[None,'_from_mdb'],validate='one_to_one')
+
+        # drop duplicaste columns names
         dup_shp = [x for x in prj.columns if '_from_shp' in x]
+        dup_mdb = [x for x in prj.columns if '_from_mdb' in x]
         duplicates = dup_mdb+dup_shp
         prj = prj.drop(columns=duplicates)
 
-        if relpaths: #remove root from paths
-            for col in ['prjdir','mdbpath','mdbdir','shppath','shpdir']:
-                prj[col] = prj[col].apply(lambda x:'..\\'+x.removeprefix(
-                    self._rootdir) if not pd.isnull(x) else x)
-
         return prj
 
-    def check_selection(self,filetype=None,filename=None):
-        """Return table with guessed project files for manual check"""
-
-        prj = self.projectpaths()
-        colnames = ['project','provincie','mdbname','shpname']
-        prj = prj[colnames].copy()
-
-        if filename is not None:
-            #write to excel
-            writer = pd.ExcelWriter(filename) 
-            prj.to_excel(writer, sheet_name='results', index=True, na_rep='NaN')
-
-            # auto-adjust column width
-            for column in prj:
-                column_width = max(prj[column].astype(str).map(len).max(), len(column))
-                col_idx = prj.columns.get_loc(column)
-                writer.sheets['results'].set_column(col_idx, col_idx, column_width)
-
-            writer.save()
-
-        return prj
 
