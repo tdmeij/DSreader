@@ -294,6 +294,16 @@ class ListProjects:
 
         return filecounts
 
+    def _list_ambiguous(self,masktbl):
+        tblist = []
+        for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
+            if not tbl['masksel'].any():
+                tblist.append(tbl)
+        if tblist:
+            ambiguous = pd.concat(tblist)
+        else:
+            ambiguous = DataFrame(columns=masktbl.columns)
+        return ambiguous
 
     def filter_mdbfiles(self,filetbl,discardtags=None,default_tags=False,priority_filepaths=None):
         """
@@ -392,11 +402,7 @@ class ListProjects:
 
         # create table of projects with to many ambiguous files to 
         # select a project mdb file
-        tblist = []
-        for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
-            if not tbl['masksel'].any():
-                tblist.append(tbl)
-        ambiguous = pd.concat(tblist)
+        ambiguous = self._list_ambiguous(masktbl)
 
         return mdbtbl,ambiguous
 
@@ -474,11 +480,7 @@ class ListProjects:
 
         # create table of projects with to many ambiguous files to 
         # select a project mdb file
-        tblist = []
-        for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
-            if not tbl['masksel'].any():
-                tblist.append(tbl)
-        ambiguous = pd.concat(tblist)
+        ambiguous = self._list_ambiguous(masktbl)
 
         return shptbl, ambiguous
 
