@@ -6,8 +6,8 @@ prevent GeoPandas from opening a shapefile are logged and
 fixed as much as possible.
 """
 
-
-from pathlib import Path
+import os
+#from pathlib import Path
 import pandas as pd
 import geopandas as gpd
 import fiona
@@ -41,7 +41,7 @@ class ReadPolyShape:
             try to fix readerrors
         """
         self._fpath = fpath
-        if not Path(self._fpath).is_file():
+        if not os.path.isfile(self._fpath):
             raise ValueError(f'{self._fpath} is not a valid filepath.')
 
         self._shape = self._readfile(self._fpath)
@@ -53,6 +53,14 @@ class ReadPolyShape:
             warnings.warn((f'Importerrrors cound not be fixed '
                 f'on shapefile {self._fpath}.'))
 
+        if self._shape is not None:
+            self._shape.columns = map(str.lower,self._shape.columns)
+
+    def __repr__(self):
+        fname = os.path.basename(self._fpath)
+        #shpname = os.path.splitext(fname)[0]
+        nrows = len(self._shape)
+        return f'{fname} (n={nrows})'
 
     def _readfile(self,fpath):
         """Read shapefile using standard GeoPandas read_file method"""

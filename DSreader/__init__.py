@@ -1,7 +1,11 @@
 """
 DSreader is a python package for reading data from vegetation maps 
-organised according to the Digital Standard dataformat as developed 
-by de Dutch National Forestry Service (Staatsbosbeheer).
+organised according to the Digital Standard.
+
+The digital Standard is a dataformat developed in the nineties
+by the Dutch National Forestry Service (Staatsbosbeheer). A vegetion
+map comprises an ESRI shapefile with polygons and an Microsoft Access 
+database with information about the content of the polygons.
 
 Classes
 -------
@@ -14,6 +18,9 @@ ReadPolyShape
 
 """
 
+# import classes
+from .maptables import MapTables
 from .read.readshape import ReadPolyShape
 from .read.readmdb import ReadMdb
 from .filedirtools.listprojects import ListProjects
+

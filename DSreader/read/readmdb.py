@@ -8,7 +8,7 @@ import pyodbc
 
 class ReadMdb:
     """
-    Read tables from .mdb file
+    Read tables from a Microsoft Access mdb file
 
     Methods
     -------
@@ -51,7 +51,7 @@ class ReadMdb:
 
     def _connect(self):
 
-        self._mdbopen_errors = []
+        self._mdbopen_error = None
         self._conn = None
         self._cur = None
         try:
@@ -66,10 +66,11 @@ class ReadMdb:
             self._err = err
             #print(self._err.args[0])
             warnings.warn((f'Could not open .mdb file {self._mdbpath}'))
-            self._mdbopen_errors.append(
-                {'errtype':self._err.__class__,
-                 'errmsg':repr(self._err),
-                 'fpath':self._mdbpath,})
+            self._mdbopen_error = {
+                'errtype':self._err.__class__,
+                'errmsg':repr(self._err),
+                'fpath':self._mdbpath,
+                }
 
         return self._cur
 
@@ -77,12 +78,12 @@ class ReadMdb:
         """Return cursor, returns None if file could not be opened"""
         return self._cur
 
-    def errors(self):
+    def error(self):
         """
         Return list of dicts with readfile errors. Returns None if
         no errers occurred.
         """
-        return self._mdbopen_errors
+        return self._mdbopen_error
 
     def tablenames(self):
         """Return list of tablenames in database"""
@@ -92,12 +93,11 @@ class ReadMdb:
                 tblnames.append(table_info.table_name)
         return tblnames
 
-
     def table(self,tblname):
         """Return specified table as pd.DataFrame"""
         qrstr = f'select * from [{tblname}]'
         self._cur.execute(qrstr)
-        colnames = [column[0].lower() for column in self._cur.description]
+        colnames = [column[0] for column in self._cur.description]
 
         data = []
         for row in self._cur.fetchall():
@@ -105,7 +105,6 @@ class ReadMdb:
 
         table = DataFrame(data, columns=colnames)
         return table
-
 
     def all_tables(self):
         """Return OrderedDict with all tables"""
