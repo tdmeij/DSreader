@@ -46,8 +46,8 @@ class ListProjects:
     """
 
     _discardtags = ['conversion','ConversionPGB','catl','ctl','soorten','kopie','test',
-        'kievit','oud','oude','database','db1','test','fout','themas','florakartering',
-        'flora','toestand','backup','foutmelding',]
+        'kievit','oud','oude','db1','test','fout','themas','florakartering',
+        'flora','toestand','backup','foutmelding','Geodatabase',] #'database',
 
     def __init__(self,rootdir,relpaths=True):
         """
@@ -350,9 +350,12 @@ class ListProjects:
 
         # mask for tags in pathfilter
         if discardtags:
-            lowertags = [x.lower() for x in discardtags]
-            mask_fpath = filetbl['mdbpath'].str.lower().str.contains(
-                '|'.join(lowertags),na=False)
+            ##lowertags = [x.lower() for x in discardtags]
+            ##mask_fpath = filetbl['mdbpath'].str.lower().str.contains(
+            ##    '|'.join(lowertags),na=False,regex=True,case=False)
+            ##mask_fpath = filetbl['mdbpath'].str.contains(
+            ##    '|'.join(discardtags),na=False,regex=True,case=False)
+            mask_fpath = filetbl['mdbpath'].apply(lambda x: any([tag.lower() in str(x).lower() for tag in discardtags]))
         else:
             mask_fpath = Series(data=False,index=filetbl.index)
 
@@ -367,12 +370,12 @@ class ListProjects:
         # step-wise select most probable mdb projectfile
         for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
 
-            if len(tbl)==1: 
-                # only one mdbfile found
-                idx = tbl.index[0]
-            elif len(tbl[tbl['maskprj']])==1: 
+            if len(tbl[tbl['maskfpath']])==1: 
+                # only one mdbfile found after excluding unlikely files
+                idx = tbl[tbl['maskfpath']].index[0]
+            elif len(tbl[tbl['maskprj']&tbl['maskfpath']])==1: 
                 # only one mdb in prjdir
-                idx = tbl[tbl['maskprj']].index[0]
+                idx = tbl[tbl['maskprj']&tbl['maskfpath']].index[0]
             elif len(tbl[tbl['maskprj']&tbl['maskfpath']])==1:
                 # only one mdb in prjdir after discarding unlikely 
                 # files by pathname
