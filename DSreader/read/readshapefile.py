@@ -14,18 +14,18 @@ import fiona
 import json
 import warnings
 
-class ReadPolyShape:
+class ReadShapeFile:
     """
-    Open ESRI polygon shapefile as GeoPandas object
+    Open ESRI shapefile as GeoPandas object
 
     Methods
     -------
     shape()
-        Return GeoDataFrame
+        Return shapefile data as GeoDataFrame
     error()
-        Return open shape error message 
+        Return open file error message as dict
     columns()
-        Return shapefile column names
+        Return list of shapefile column names
     """
 
     _empty_error = {'class':None,'msg':None,'fpath':None}
@@ -38,48 +38,56 @@ class ReadPolyShape:
         fpath : str
             filepath to ESRI shapefile
         fix_errors : bool, default True
-            try to fix readerrors
+            try to fix geometry errors
+
         """
         self._fpath = fpath
+        self._fname = os.path.basename(self._fpath)
         if not os.path.isfile(self._fpath):
             raise ValueError(f'{self._fpath} is not a valid filepath.')
 
+        # read shapefile
         self._shape = self._readfile(self._fpath)
-        if (self._shape is None) and (fix_errors==True) and (
-            self._read_error is not None):
+        if (self._shape is None) and (fix_errors==True): 
+            # there was a read error, try to fix it
             self._shape = self._fix_errors()
-
-        if (self._shape is None) and (self._read_error is not None):
-            warnings.warn((f'Importerrrors cound not be fixed '
-                f'on shapefile {self._fpath}.'))
+            if self._shape is None:
+                warnings.warn((f'Importerrrors cound not be fixed '
+                    f'on shapefile {self._fpath}.'))
 
         if self._shape is not None:
             self._shape.columns = map(str.lower,self._shape.columns)
+            
+            # get geometry type
+            self._geom_type = list(set(self._shape.geom_type))[0].lower()
+            if len(set(self._shape.geom_type))>1:                
+                warnings.warn((f'{self._fname} contains multiple'
+                    f'geometry types.' ))
 
     def __repr__(self):
-        fname = os.path.basename(self._fpath)
-        #shpname = os.path.splitext(fname)[0]
         nrows = len(self._shape)
-        return f'{fname} (n={nrows})'
+        return f'{self._fname} (n={nrows})'
 
     def _readfile(self,fpath):
         """Read shapefile using standard GeoPandas read_file method"""
-        self._read_error = None
+        self._read_error = {'class':'','msg':'','fpath':''}
         try:
             gdf = gpd.read_file(fpath)
 
         except Exception as e:
-            self._read_error = (
-                {'class':e.__class__,
-                 'msg':repr(e),
-                 'fpath':fpath,})
+            self._read_error = {
+                'class':e.__class__,
+                'msg':repr(e),
+                'fpath':fpath,}
             gdf = None
 
-        else:
-            if not gdf.geom_type[0]=='Polygon':
-                warnings.warn((f'Geometry type is {gdf.geom_type[0]} '
-                    f'not "Polygon" on file {self._fpath}.'))
-                gdf = None
+            """
+            else:
+                if not gdf.geom_type[0]=='Polygon':
+                    warnings.warn((f'Geometry type is {gdf.geom_type[0]} '
+                        f'not "Polygon" on file {self._fpath}.'))
+                    gdf = None
+            """
 
         finally:
             return gdf

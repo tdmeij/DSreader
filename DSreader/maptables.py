@@ -114,9 +114,21 @@ class MapTables:
         })
 
 
-    def __init__(self,tables):
+    def __init__(self,tables=None,mdbpath=None):
+        """MapTables constructor.
+        
+        Parameters
+        ----------
+        tables : OrderedDict
+            Dictionary of tables from mdb file
+        mdbpath : string
+            Filepath to mdb sourcefile (for userwarnings).
+        """
 
         self._tbldict = tables
+        if mdbpath is None:
+            mdbpath = ''
+        self._filepath = mdbpath
 
         # numeric to string type
         self._tbldict['Element'] = self._tbldict['Element'].astype(
@@ -132,14 +144,14 @@ class MapTables:
         self._tbldict['CbsSoort']=self._tbldict['CbsSoort'].astype(
             {'cbs_srtcode':str,})
 
-        # change 5.0 to 5 stingtype
+        # change vevangbaarheid 5.0 to 5 stingtype
         self._tbldict['SbbType']['sbbcat_vervangbaarheid']=self._tbldict['SbbType']['sbbcat_vervangbaarheid'].str[:1]
 
         # convert column locatietype to lowercase
         # (locatietype can be: 'v','l','V','L')
         self._tbldict['Element']['locatietype'] = self._tbldict['Element']['locatietype'].str.lower()
 
-        # fix small errors that occur in just a few (or just one) file
+        # fix small errors that occur in just a few (or just one) mdbfiles
         # smallfix01
         colnames = self._tbldict['Element'].columns
         if ((not 'sbbtype' in colnames) and ('sbbtype1' in colnames)):
@@ -148,9 +160,10 @@ class MapTables:
 
 
     def __repr__(self):
-        n=len(self._tbldict['Element'])
-        return f'{n} elements'
+        return f'MapTables (n={self.__len__()})'
 
+    def __len__(self):
+        return len(self._tbldict['Element'])
 
     @classmethod
     def from_mdb(cls,filepath):
@@ -172,7 +185,7 @@ class MapTables:
         mdb = ReadMdb(filepath)
 
         if not mdb.all_tables():
-            raise Exception(f'{mdb._mdbpath} is not a valid Digitale Standaard database.')
+            raise Exception(f'{mdb._filepath} is not a valid Digitale Standaard database.')
         #if any([item in mdb.tablenames() for item in cls._DS_tablenames]):
         #    raise Exception(f'{mdb} is not a valid Digitale Standaard database.')
 
@@ -186,7 +199,7 @@ class MapTables:
                 mdbtbl = mdbtbl.rename(columns=cls._mapping_colnames[tblname])
             maptables[tblname] = mdbtbl
 
-        return cls(maptables)
+        return cls(tables=maptables,mdbpath=filepath)
 
 
     def get_vegtype(self):
@@ -321,21 +334,7 @@ class MapTables:
         return mapabi[mapabi['abio_code'].notnull()]
 
 
-def cleantree(maindir):
-    """Delete all gpkg files in directory maindir and subdirs"""
-    for f in Path(maindir).rglob('*.*'):
-        try:
-            f.unlink()
-        except OSError as e:
-            print("Error: %s : %s" % (f, e.strerror))
 
-def absolutepaths(column=None,rootdir=None):
-    """Replace path relative to root with absolute path"""
-    newcolumn = column.apply(
-            lambda x:os.path.join(rootdir,x.lstrip('..\\'))
-            if not pd.isnull(x) else np.nan
-            )
-    return newcolumn
 
 
 
