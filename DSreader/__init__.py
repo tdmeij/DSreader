@@ -21,6 +21,7 @@ ReadPolyShape
 # import classes
 from .maptables import MapTables
 from .mapelements import MapElements
+from .mapdata import MapData
 from .read.readshapefile import ReadShapeFile
 from .read.readmdb import ReadMdb
 from .filedirtools.listprojects import ListProjects
