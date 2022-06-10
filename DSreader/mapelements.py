@@ -46,7 +46,7 @@ class MapElements:
             self._geom_type = list(set(self._shape.geom_type))[0].lower()
 
             if self._shape.crs is None:
-                self._shape.set_crs('epsg:28992')
+                self._shape = self._shape.set_crs('epsg:28992')
 
 
     def __repr__(self):
