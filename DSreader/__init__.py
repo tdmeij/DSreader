@@ -24,6 +24,7 @@ from .mapelements import MapElements
 from .mapdata import MapData
 from .read.readshapefile import ReadShapeFile
 from .read.readmdb import ReadMdb
+from .tools.sampleshape import SampleShape
 from .tools.listprojects import ListProjects
 from .data import data
 
