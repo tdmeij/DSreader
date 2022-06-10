@@ -26,6 +26,7 @@ from .read.readshapefile import ReadShapeFile
 from .read.readmdb import ReadMdb
 from .tools.sampleshape import SampleShape
 from .tools.listprojects import ListProjects
+from .plot.sankey_two_maps import SankeyTwoMaps
 from .data import data
 
 # import functions
