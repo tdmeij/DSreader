@@ -85,6 +85,6 @@ class MapElements:
                 f'not type {fptype}.')
 
         # open shapefile and check presence of column ElmID
-        shp = ReadShapeFile(filepath,fix_errors=True)
+        shp = ReadShapeFile(filepath)
         
         return cls(shape=shp._shape,filepath=filepath)

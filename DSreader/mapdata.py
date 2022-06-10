@@ -1,8 +1,11 @@
 
+import os
 from collections import OrderedDict
 import warnings
+import numpy as np
 from pandas import Series, DataFrame
 import pandas as pd
+from shapely.geometry import Point
 import geopandas as gpd
 
 from .maptables import MapTables
@@ -43,7 +46,7 @@ class MapData:
             oppha='oppha', 
             geometry='geometry', 
         ),
-        'pointspecies':OrderedDict(
+        'pointspecies' : OrderedDict(
             pntid='pntid', 
             pntloctype='loctype', 
             srtgroep='srtgroep', 
@@ -58,7 +61,16 @@ class MapData:
             xcr='xcr', 
             ycr='ycr', 
             geometry='geometry',
-        )
+        ),
+        'abiotiek' : OrderedDict(
+            elmid='elmid',
+            oppha='oppha', 
+            locatietype='loctype', 
+            datum='datum',
+            abio_code='abio_code', 
+            abio_wrn='abio_wrn',
+            geometry='geometry',
+        ),
     } # shapefile maximum column width is 10
 
 
@@ -94,14 +106,16 @@ class MapData:
         self._linepath = self._mapelements_lines._filepath
 
         self._poly = self._mapelements_polygons.get_shape()
-        self._poly = self._poly[['elmid','geometry']].copy()
-        self._poly = self._poly.astype({'elmid':'str'})
+        if not self._poly.empty:
+            self._poly = self._poly[['elmid','geometry']].copy()
+            self._poly = self._poly.astype({'elmid':'str'})
+            self._poly['oppha']=self._poly['geometry'].area/10000
 
         self._lines = self._mapelements_lines.get_shape()
-        self._lines = self._lines[['elmid','geometry']].copy()
-        self._lines = self._lines.astype({'elmid':'str'})
+        if not self._lines.empty:
+            self._lines = self._lines[['elmid','geometry']].copy()
+            self._lines = self._lines.astype({'elmid':'str'})
 
-        self._poly['oppha']=self._poly['geometry'].area/10000
 
 
     def __repr__(self):
@@ -146,7 +160,11 @@ class MapData:
         return cls(maptables=tables,polygons=poly,lines=line)
 
 
-    def get_vegtype(self,element='v'):
+    def get_poly(self):
+        """Return shapefile polygons"""
+        return self._poly
+
+    def get_vegtype(self,loctype='v'):
         """
         Return mapped polygons with vegetation type
         
@@ -163,10 +181,10 @@ class MapData:
 
 
         """
-        if element=='v':
+        if loctype=='v':
             shape = self._poly
             shapepath = self._polypath
-        if element=='l':
+        if loctype=='l':
             shape = self._lines
             shapepath = self._linepath
 
@@ -179,7 +197,7 @@ class MapData:
 
         try:
             shape = pd.merge(shape,vegtbl,how='left',left_on='elmid',right_on='elmid',
-                validate='one_to_many')
+                ) #validate='one_to_many') TURNED OFF BECAUSE OF DUPLICATE ELMIDS
                 
         except Exception as e:
             warnings.warn((f'Merge caused fatal exception: "{e}" '
@@ -192,7 +210,7 @@ class MapData:
 
         return shape
 
-    def get_mapspecies(self,element='v'):
+    def get_mapspecies(self,loctype='v'):
         """Return map polygons with species data
 
 
@@ -207,12 +225,12 @@ class MapData:
 
 
         """
-        if element=='v':
+        if loctype=='v':
             shape = self._poly
-        if element=='l':
+        if loctype=='l':
             shape = self._lines
             
-        mapspec = self._maptbl.get_mapspecies(loctype=element)
+        mapspec = self._maptbl.get_mapspecies(loctype=loctype)
 
         mapspec = pd.merge(shape,mapspec,how='outer',left_on='elmid',
             right_on='elmid',validate='many_to_many')
@@ -232,14 +250,46 @@ class MapData:
         return spc
 
 
-    def to_shapefile(self,tablename=None,element='v',filepath=None):
+    def get_abiotiek(self,loctype='v'):
+        """Return environmental observations"""
+        if loctype not in ['v','l']:
+            warnings.warn((f'Invalid loctype {loctype}, '
+                f'abiotiek for loctype "v" will be returned.'))
+            loctype='v'
+
+        if loctype=='v':
+            shape = self._poly
+            shppath = self._polypath
+        if loctype=='l':
+            shape = self._lines
+            shppath = self._linepath
+
+        abi = self._maptbl.get_abiotiek(loctype=loctype)
+
+        #try:
+        abi = pd.merge(shape,abi,how='left',left_on='elmid',
+            right_on='elmid',validate='many_to_many') 
+                
+        #except Exception as e:
+        #    warnings.warn((f'Merge caused fatal exception: "{e}" '
+        #        f'on shapefile {shppath}" '
+        #        f'and Access database "{self._maptblpath}"'))
+        #    abi = DataFrame()
+
+        #else:
+        abi = abi.dropna(subset=['locatietype'])
+
+        return abi
+
+
+    def to_shapefile(self,tablename=None,loctype='v',filepath=None):
         """Save table to ESRI shapefile
 
         Parameters
         ----------
         tablenamne : {'vegtype','mapspecies','pointspecies'}
             Kinde of table to save
-        element : {'v','l'}
+        loctype : {'v','l'}
             map element type
         filepath : str
             Valid filepath for shapefile
@@ -256,17 +306,17 @@ class MapData:
         shapefile or it is an empty DataFrame.
         """
         # validate tablename
-        tablenames = ['vegtype','mapspecies','pointspecies']
+        tablenames = ['vegtype','mapspecies','pointspecies','abiotiek']
         if tablename not in tablenames:
             warnings.warn((f'{tablename} is not a valid tablename. '
                 f'No file has been saved.'))
             return DataFrame()
 
         # validate element
-        if element not in ['v','l']:
-             warnings.warn((f'{element} is not a valid element type. '
+        if loctype not in ['v','l']:
+             warnings.warn((f'{loctype} is not a valid element type. '
                 f'Elements of type "v" will be saved.'))           
-             element='v'
+             loctype='v'
 
         # validate filepath and correct
         dirname = os.path.dirname(filepath)
@@ -281,11 +331,13 @@ class MapData:
 
         # get the right table 
         if tablename=='vegtype':
-            table = self.get_vegtype(element=element)
+            table = self.get_vegtype(loctype=loctype)
         elif tablename=='mapspecies':
-            table = self.get_mapspecies(element=element)
+            table = self.get_mapspecies(loctype=loctype)
         elif tablename=='pointspecies':
             table = self.get_pointspecies()
+        elif tablename=='abiotiek':
+            table = self.get_abiotiek(loctype=loctype)
         else:
             raise ValueError('{tablename} is not a valid table name.')
 

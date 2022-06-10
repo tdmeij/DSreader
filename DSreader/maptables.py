@@ -143,6 +143,9 @@ class MapTables:
             {'locatie_id':str,'krtsrt_srtcode':str,})
         self._tbldict['CbsSoort']=self._tbldict['CbsSoort'].astype(
             {'cbs_srtcode':str,})
+        self._tbldict['KarteringAbiotiek']=self._tbldict['KarteringAbiotiek'].astype(
+            {'locatie_id':str,})
+
 
         # change vevangbaarheid 5.0 to 5 stingtype
         self._tbldict['SbbType']['sbbcat_vervangbaarheid']=self._tbldict['SbbType']['sbbcat_vervangbaarheid'].str[:1]

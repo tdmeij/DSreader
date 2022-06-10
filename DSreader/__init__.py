@@ -24,5 +24,8 @@ from .mapelements import MapElements
 from .mapdata import MapData
 from .read.readshapefile import ReadShapeFile
 from .read.readmdb import ReadMdb
-from .filedirtools.listprojects import ListProjects
+from .tools.listprojects import ListProjects
 
+# import functions
+from .tools.filetools import relativepaths as relativepaths
+from .tools.filetools import absolutepaths as absolutepaths

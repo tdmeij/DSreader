@@ -7,6 +7,8 @@ from pandas import Series, DataFrame
 import pandas as pd
 import difflib
 
+from .filetools import relativepaths,absolutepaths
+#import relativepaths, absolutepaths
 
 class ListProjects:
     """
@@ -47,7 +49,7 @@ class ListProjects:
 
     _discardtags = ['conversion','ConversionPGB','catl','ctl','soorten','kopie','test',
         'kievit','oud','oude','db1','test','fout','themas','florakartering',
-        'flora','toestand','backup','foutmelding','Geodatabase',] #'database',
+        'flora','toestand','backup','foutmelding','Geodatabase',]
 
     def __init__(self,rootdir,relpaths=True):
         """
@@ -77,16 +79,24 @@ class ListProjects:
 
     def _relativepaths(self,column):
         """Replace absolute path with path relative to root"""
-        newcolumn = column.apply(lambda x:'..\\'+x.removeprefix(
-            self._rootdir) if not pd.isnull(x) else x)
+
+        #newcolumn = column.apply(lambda x:'..\\'+x.removeprefix(
+        #    self._rootdir) if not pd.isnull(x) else x)
+
+        newcolumn = relativepaths(column,self._rootdir)
+
         return newcolumn
 
     def _absolutepaths(self,column):
         """Replace path relative to root with absolute path"""
-        newcolumn = column.apply(
-                lambda x:os.path.join(self._rootdir,x.lstrip('..\\'))
-                if not pd.isnull(x) else np.nan
-                )
+
+        #newcolumn = column.apply(
+        #        lambda x:os.path.join(self._rootdir,x.lstrip('..\\'))
+        #        if not pd.isnull(x) else np.nan
+        #        )
+
+        newcolumn = absolutepaths(column,self._rootdir)
+
         return newcolumn
 
     def list_projects(self):
@@ -155,6 +165,8 @@ class ListProjects:
         if filetype is not None:
             if isinstance(filetype,str):
                 filetype=filetype.lstrip('.')
+                #if not filetype.startswith('.'):
+                #    filetype = f'.{filetype}'
                 if not len(filetype)==3:
                         warnings.warn(f'{filetype} is not a valid filetype.')
                         filetype=None
@@ -242,7 +254,7 @@ class ListProjects:
         tbl = tbl[colnames]
 
         if filetype is not None:
-            mask = tbl[fpathcol].str.endswith(f'{filetype}')
+            mask = tbl[fpathcol].str.endswith(f'.{filetype}')
             tbl = tbl[mask].copy()
 
         if relpaths: #remove root from paths
@@ -370,20 +382,20 @@ class ListProjects:
         # step-wise select most probable mdb projectfile
         for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
 
-            if len(tbl[tbl['maskfpath']])==1: 
-                # only one mdbfile found after excluding unlikely files
+            if len(tbl)==1:
+                # just one mdb in entire project tree structure
+                idx = tbl.index[0]
+            elif len(tbl[tbl['maskprj']])==1:
+                # exactly one mdb in prjdir
+                idx = tbl[tbl['maskprj']].index[0]
+            elif len(tbl[tbl['maskfpath']])==1: 
+                # only one mdbfile found in entire tree structure 
+                # after excluding unlikely files
                 idx = tbl[tbl['maskfpath']].index[0]
-            elif len(tbl[tbl['maskprj']&tbl['maskfpath']])==1: 
-                # only one mdb in prjdir
-                idx = tbl[tbl['maskprj']&tbl['maskfpath']].index[0]
             elif len(tbl[tbl['maskprj']&tbl['maskfpath']])==1:
                 # only one mdb in prjdir after discarding unlikely 
                 # files by pathname
                 idx = tbl[tbl['maskprj']&tbl['maskfpath']].index[0]
-            elif len(tbl[tbl['maskfpath']])==1:
-                # only one file at all after masking unlikely files
-                # by pathname
-                idx = tbl[tbl['maskfpath']].index[0]
             else:
                 idx = None
 

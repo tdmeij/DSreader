@@ -21,25 +21,28 @@ class ReadShapeFile:
     Methods
     -------
     shape()
-        Return shapefile data as GeoDataFrame
-    error()
-        Return open file error message as dict
+        Return shapefile data as GeoDataFrame.
+    shape_errors()
+        Return table of errors in shapefile that have been fixed.
     columns()
-        Return list of shapefile column names
+        Return list of shapefile column names.
     """
 
     _empty_error = {'class':None,'msg':None,'fpath':None}
     _bad_polygons = []
 
-    def __init__(self,fpath,fix_errors=True):
+    def __init__(self,fpath):
         """
         Parameters
         ----------
         fpath : str
             filepath to ESRI shapefile
-        fix_errors : bool, default True
-            try to fix geometry errors
 
+
+        Notes
+        -----
+        Geometry errors in shapefile are fixed as much as possible.
+        Fixed errors can be retriwved with shape_errors()
         """
         self._fpath = fpath
         self._fname = os.path.basename(self._fpath)
@@ -47,116 +50,142 @@ class ReadShapeFile:
             raise ValueError(f'{self._fpath} is not a valid filepath.')
 
         # read shapefile
-        self._shape = self._readfile(self._fpath)
+        self._shape,self._shape_errors = self._readfile(self._fpath)
+
+        """
         if (self._shape is None) and (fix_errors==True): 
             # there was a read error, try to fix it
             self._shape = self._fix_errors()
             if self._shape is None:
                 warnings.warn((f'Importerrrors cound not be fixed '
                     f'on shapefile {self._fpath}.'))
+        """
 
-        if self._shape is not None:
+        if not self._shape.empty:
             self._shape.columns = map(str.lower,self._shape.columns)
             
             # get geometry type
             self._geom_type = list(set(self._shape.geom_type))[0].lower()
-            if len(set(self._shape.geom_type))>1:                
-                warnings.warn((f'{self._fname} contains multiple'
-                    f'geometry types.' ))
+            self._geom_typeset = set(self._shape.geom_type)
+
+
 
     def __repr__(self):
         nrows = len(self._shape)
         return f'{self._fname} (n={nrows})'
 
     def _readfile(self,fpath):
-        """Read shapefile using standard GeoPandas read_file method"""
-        self._read_error = {'class':'','msg':'','fpath':''}
+
+        shape_errors = pd.DataFrame()
         try:
+            # read with GeoPandas
             gdf = gpd.read_file(fpath)
 
         except Exception as e:
-            self._read_error = {
+
+            self._gpd_read_err = {
                 'class':e.__class__,
                 'msg':repr(e),
-                'fpath':fpath,}
-            gdf = None
+                'fpath':fpath,
+                }
 
-            """
-            else:
-                if not gdf.geom_type[0]=='Polygon':
-                    warnings.warn((f'Geometry type is {gdf.geom_type[0]} '
-                        f'not "Polygon" on file {self._fpath}.'))
-                    gdf = None
-            """
+            # error: shapefile .shx file is read only and fiona needs 
+            # writing permisson for reading a shapefile, somehow...
+            errmsg = self._gpd_read_err['msg']
+            if '.shx for writing' in errmsg:
+                raise PermissionError((f"Fiona {errmsg}"
+                    f"(Fiona can not open .shx file that is read only)"))
 
-        finally:
-            return gdf
+            # try to fix geometry errors
+            gdf, shape_errors = self._read_shape_with_errors(fpath)
 
-    def _fix_errors(self):
+        else:
+            self._gpd_read_err = None
+        
+            # check for None type geometries (GeoPandas does not check
+            # for this when reading a shapefile, but it's method geom.type
+            # will fail)
+            if None in set(gdf.geom_type):
+                gdf, shape_errors = self._read_shape_with_errors(fpath)
 
-        err = self._read_error['msg']
-        gdf = None
+        if gdf.empty:
+            warnings.warn((f'Empty shapefile: {self._fpath}.'))
 
-        # reconstruct missing shx index file
-        if 'Set SHAPE_RESTORE_SHX config option to YES' in err:
-            # .shx index files are automatically recalculated
-            # by changing GDAL standard setting:
-            fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',True)
-            # beware: now all .shx files are recreated, even when there not
-            # missing or corrupted
-            gdf = self._readfile(self._fpath)
-            fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',False)
+        return gdf,shape_errors
 
-        # try to fix linear ring error
-        if 'A LinearRing must have at least 3 coordinate tuples' in err:
-            self._fionashape = fiona.open(self._fpath)
-            gdf = self._fix_linear_ring_error(self._fionashape)
-            if gdf is not None:
-                self._read_error = None
+    def _read_shape_with_errors(self,fpath):
 
-        return gdf
+        fiona_errors = []
+        reclist = []
 
+        # open shapefile with fiona
+        # .shx index files are automatically rebuild
+        # by changing GDAL standard setting:
+        fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',True)
+        # beware: now all .shx files are recreated, even when there not
+        # missing or corrupted
+        #####gdf = self._readfile(self._fpath)
+        self._fiona = fiona.open(fpath)
+        fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',False)    
 
-    def _fix_linear_ring_error(self,shapesource):
-        """Return GeoDataFrame with a copy of all polygons except 
-        polygons with less than three points"""
+        # validate shape items one by one and copy valid items
+        for key in self._fiona.keys():
 
-        # Fixes GeoPandas error message:
-        # 'LinearRing must have at least 3 coordinate tuples'
+            # copy feature from fiona to dict
+            feature = self._fiona.get(key)
+            fid = feature['id']
+            geom = feature['geometry']
 
-        oldshape = list(shapesource)
-        newshape = []
-        for feature in oldshape:
-        # feature is a dict with keys type,id,properties,geometry
-            if feature["geometry"] is not None:
-                geom = feature['geometry']
-                coords = geom['coordinates']
+            # error: Geometry is None
+            if geom is None:
+                fiona_errors.append({
+                    'fid':fid,
+                    'geomtype':'None',
+                    'error':f'Geometry is None',
+                    'fpath':self._fiona.path,
+                    })
+                continue # simply ignore this feature
+
+            # error: polygon field contains rings with less than three nodes
+            if geom['type']=='Polygon':
                 newcoords = []
-                for poly in coords:
-
-                    if len(poly)<3:
-                        self._bad_polygons.append(
-                            {'id':feature['id'],'length':len(poly)})
-                        print(self._bad_polygons[-1])
+                badrings = 0
+                for ring in geom['coordinates']:
+                    if len(ring)<3:
+                        badrings+=1
                     else:
-                        newcoords.append(poly)
+                        newcoords.append(ring)
 
+                if badrings!=0:
+                    fiona_errors.append({
+                        'fid':fid,
+                        'geomtype': geom['type'],
+                        'error':f'Dropped {badrings} rings with less than three nodes',
+                        'fpath':self._fiona.path,
+                        })
+        
                 feature['geometry']['coordinates']=newcoords
-            newshape.append(feature)
 
-        # convert to geopandas
-        dfnew = pd.DataFrame(newshape)
-        jsongeom = json.loads(dfnew.to_json(orient='records'))
+            # append validated feature to reclist
+            reclist.append(feature)
+        
+
+        # create GeoDataFrame from fiona reclist
+        df = pd.DataFrame(reclist)
+        jsongeom = json.loads(df.to_json(orient='records'))
         gdf = gpd.GeoDataFrame.from_features(jsongeom)
-        return gdf
+
+        errors = pd.DataFrame(fiona_errors)
+
+        return gdf,errors
 
     def shape(self):
         """Return shape as GeoPandas"""
         return self._shape
 
-    def error(self):
-        """Return error message as dict, returns None when no errors occured"""
-        return self._read_error
+    def shape_errors(self):
+        """Return table of errors in shapefile that have been fixed"""
+        return self._shape_errors
 
     def columns(self):
         """Return shapefile column names as list"""
