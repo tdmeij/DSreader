@@ -27,9 +27,6 @@ setup(
     packages=["DSreader"],
     include_package_data=True,
     install_requires=["pandas", ""],
-    #entry_points={
-    #    "console_scripts": [
-    #        "realpython=reader.__main__:main",
-    #    ]
-    #},
+    include_package_data=True,
+    package_data={'': ['data/*.csv']},
 )
