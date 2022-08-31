@@ -28,7 +28,7 @@ class MapData:
              sbbcat_wetnaam='sbb_wetnm',
              sbbcat_nednaam='sbb_nednm',
              sbbcat_kortenaam='sbb_kortnm',
-             sbbcat_vervangbaarheid='sbb_vevang',
+             sbbcat_vervangbaarheid='sbb_vervang',
              oppha='oppha',
              geometry='geometry',
         ),
@@ -164,7 +164,7 @@ class MapData:
         """Return shapefile polygons"""
         return self._poly
 
-    def get_vegtype(self,loctype='v'):
+    def get_vegtype(self,loctype='v',select='all'):
         """
         Return mapped polygons with vegetation type
         
@@ -173,7 +173,9 @@ class MapData:
         ----------
         element : {'v','l'}, default ' v'
             Map element type.
-
+        select : {'all','maxcov'}, default 'all'
+            Select from multiple instances of polygon.
+            maxcov : select vegetation type with largest numeric cover.
 
         Returns
         -------
@@ -188,7 +190,7 @@ class MapData:
             shape = self._lines
             shapepath = self._linepath
 
-        vegtbl = self._maptbl.get_vegtype()
+        vegtbl = self._maptbl.get_vegtype(select=select)
 
         if vegtbl.empty:
             name = str(vegtbl)
@@ -281,6 +283,9 @@ class MapData:
 
         return abi
 
+    def get_boundary(self):
+        """Return outer boundary of mapped area"""
+        return self._mapelements_polygons.get_boundary()
 
     def to_shapefile(self,tablename=None,loctype='v',filepath=None):
         """Save table to ESRI shapefile

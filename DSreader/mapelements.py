@@ -19,6 +19,8 @@ class MapElements:
         Return geometry type (vlakken or lines)
     get_filepath : str
         Return sourcefile path
+    get_boundary : shape
+        Return outer boundary of mappend area
 
     Classmethods
     ------------
@@ -67,6 +69,15 @@ class MapElements:
         
     def get_filepath(self):
         return self._filepath
+
+    def get_boundary(self):
+        """Return outer boundary of mapped area"""
+        outline = self._shape.copy()
+        outline['diss']=1
+        outline = outline.dissolve('diss')
+        outline = outline.geometry.boundary
+        return outline
+        
 
     @classmethod
     def from_shapefile(cls,filepath):

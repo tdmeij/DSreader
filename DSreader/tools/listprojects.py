@@ -13,10 +13,10 @@ from .filetools import relativepaths,absolutepaths
 class ListProjects:
     """
     Find filepaths to ESRI shapefiles and Microsoft Acces database files 
-    for each projectfolder under given root directory.
+    for each projectfolder under a given root directory.
 
     The method projectfiles_table() returns a table with all projects 
-    and the corresponding shapefile and access madfile, if they were 
+    and the corresponding shapefile and access mdbfile, if they were 
     found. This table is the main result for this class, all the other 
     methods are merely preparations and checks.
 
@@ -260,7 +260,7 @@ class ListProjects:
         if relpaths: #remove root from paths
             tbl[fpathcol] = self._relativepaths(tbl[fpathcol])
 
-        return tbl
+        return tbl.reset_index(drop=True)
 
 
     def projectfiles_counts(self,filetbl,colname=None,fill_missing=True):
@@ -290,8 +290,12 @@ class ListProjects:
             warnings.warn(f'{filetbl} is not a DataFrame')
             return None
 
+        if colname is None:
+            colname = 'shpname'
         if colname not in filetbl.columns:
-            warnings.warn(f'{colname} not in filetbl')
+            warnings.warn((f'"{colname}" not in filetbl columns: '
+                f'{list(filetbl)}. Counts for all columns will be '
+                f'returned.'))
             colname = None
 
         grp = filetbl.groupby(by=['provincie','project'])
@@ -307,13 +311,36 @@ class ListProjects:
         return filecounts
 
     def _list_ambiguous(self,masktbl):
+        """
+        Return table of all filenames for projects where no single 
+        projectfile could be identified with certainty.
+        
+        Parameters
+        ----------
+        masktbl : pd.DataFrame
+            Boolean values for filtering.
+
+        Returns
+        -------
+        pd.DataFrame
+        """
         tblist = []
+
+        # group all files by project. If any file is marked 'masksel'
+        # then this file is the wanted projectfile. If no such file
+        # is present, return a table with all filenames in a project
+        # and let the user sort it all out.
         for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
-            if not tbl['masksel'].any():
+            any_masksel = tbl['masksel'].any()
+            if 'likename' in list(tbl):
+                any_likename = tbl['likename'].any()
+            else:
+                any_likename = True
+            if (not any_masksel) and any_likename:
                 tblist.append(tbl)
-        if tblist:
+        if tblist: #return table of ambigous filenames
             ambiguous = pd.concat(tblist)
-        else:
+        else: #return empty dataframe
             ambiguous = DataFrame(columns=masktbl.columns)
         return ambiguous
 
@@ -422,40 +449,75 @@ class ListProjects:
         return mdbtbl,ambiguous
 
 
-    def filter_shapefiles(self,filetbl,priority_filepaths=None):
+    def filter_shapefiles(self,filetbl,shptype='polygon',colprefix=None,
+        priority_filepaths=None):
         """
-        Return table with project shapefiles
+        Return table with project shapefiles and table with possible 
+        projectfiles for projects where no single projectfile could be 
+        identified with certainty.
 
         Parameters
         ----------
         filetbl : pd.DataFrame
-            Table with mdb filepaths as returned by list_files() method.
+            Table with filepaths as returned by list_files() method.
+        shptype : {'polygon','line','point'}, default 'polygon'
+            Type of shapefile to filter.
+        colprefix : str, optional
+            Column in filetbl with filename. If None, default name is
+            inferred from value of shptype.
         priority_filepaths : list of strings, optional
             Filepaths equal to a string in this list will be selected
             as project shapefile
 
+        Returns
+        -------
+        pd.DataFrame, pd.DataFrame
+
         Notes
         -----
-        Valid shapefiles are called 'vlakken', 'Vlakken', or they have
-        the keyword 'vlak' somewhere in their filename.
+        Valid shapefiles with vegetation polygons are called 'vlakken', 
+        'Vlakken', or they have the keyword 'vlak' somewhere in their 
+        filename. For line elements these keywords are 'lijnen' or 
+        'lijn'. For point elements keyword is 'point'.
         """
 
-        # masks for filename 'vlakken'
-        namecol='shpname'
-        isname = filetbl[namecol].str.lower()=='vlakken.shp'
-        likename = filetbl[namecol].str.lower().str.contains('vlak')
+        # masks for filename contains keyword
+        if shptype=='polygon':
+            key_isname = 'vlakken.shp'
+            key_contains = 'vlak'
+            if colprefix is None:
+                colprefix = 'poly'
+        elif shptype=='line':
+            key_isname = 'lijnen.shp'
+            key_contains = 'lijn'
+            if colprefix is None:
+                colprefix = 'line'
+        elif shptype=='point':
+            key_isname = 'punten.shp'
+            key_contains = 'punt'
+            if colprefix is None:
+                colprefix = 'point'
+        else:
+            raise(f'{shptype} is not a valid shapefile type. ')
+
+        namecol='shppath'
+        pathcol='shppath'
+
+        isname = filetbl[namecol].str.lower()==key_isname
+        likename = filetbl[namecol].str.lower().str.contains(key_contains)
 
         # mask for file in project directory
-        mask_prjdir = self._file_in_projectdir(filetbl,pathcol='shppath')
+        masktbl = filetbl.copy()
+        mask_prjdir = self._file_in_projectdir(masktbl,pathcol=pathcol)
 
         # masktbl is a temporary copy of filetbl with columns for masking
         # mask_fname and mask_prjdir are series with the same index
         # as DataFrame filetbl.
-        masktbl = filetbl.copy()
         masktbl['isname'] = isname
         masktbl['likename'] = likename
         masktbl['inprj'] = mask_prjdir
         masktbl['masksel'] = False
+
 
         # step-wise select most probable shp projectfile
         for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
@@ -481,7 +543,7 @@ class ListProjects:
             # Parameter shpfilepaths contains a list of filepaths of 
             # shapefiles. If any of these filepaths is present in 
             # column shppath, this file will be selected.
-                mask = tbl['shppath'].isin(priority_filepaths)
+                mask = tbl[pathcol].isin(priority_filepaths)
                 if len(tbl[mask])==1:
                     idx = tbl[mask].index[0]
 
@@ -490,18 +552,27 @@ class ListProjects:
 
         self._shpfilter = masktbl
 
-        # create table of projects with selected mdb filesd
-        shptbl = filetbl[masktbl['masksel']]
+        # rename columns in table
+        if colprefix is not None:
+            filetbl = filetbl.rename(columns={
+                'shpname': f'{colprefix}name',
+                'shppath': f'{colprefix}path',
+                })
+
+        # create table of projects with selected project files
+        shptbl = filetbl[masktbl['masksel']].reset_index(drop=True)
+        shptbl = shptbl.sort_values(by=['provincie','project'])
 
         # create table of projects with to many ambiguous files to 
-        # select a project mdb file
-        ambiguous = self._list_ambiguous(masktbl)
+        # select a project file
+        ambiguous = self._list_ambiguous(masktbl).reset_index(drop=True)
+        ambiguous = ambiguous.sort_values(by=['provincie','project'])
 
         return shptbl, ambiguous
 
 
     def projectfiles_table(self,relpaths=True,discardtags=None,default_tags=True,
-        mdbpaths=None,shppaths=None):
+        mdbpaths=None,polypaths=None,linepaths=None,pointpaths=None):
         """
         Return table with all projects and filepaths found
 
@@ -525,34 +596,52 @@ class ListProjects:
         if default_tags:
             discardtags = self._discardtags
 
-        # projecttable
-        prj = self.list_projects()
-        prj = prj[['year']].copy()
-
-        # find shapefiles
-        shp = self.list_files(filetype='shp')
-        shpsel,_ = self.filter_shapefiles(shp,
-            priority_filepaths=shppaths)
-        shpsel = shpsel.set_index(
-                keys=['provincie','project'],verify_integrity=True)
-
+        # find mdb files
         mdblist = self.list_files(filetype='mdb')
         mdbsel,_ = self.filter_mdbfiles(mdblist,
             discardtags=discardtags,priority_filepaths=mdbpaths)
         mdbsel = mdbsel.set_index(keys=['provincie','project'],
             verify_integrity=True)
 
-        # merge tables with mdb and shp files
-        prj = pd.merge(prj,shpsel,left_index=True,right_index=True,
-            how='left',suffixes=[None,'_from_shp'],validate='one_to_one')
-        prj = pd.merge(prj,mdbsel,left_index=True,right_index=True,
+        # table of all available shapefiles
+        shp = self.list_files(filetype='shp')
+        
+        # find polygon shapefiles
+        polysel,_ = self.filter_shapefiles(shp,shptype='polygon',
+            priority_filepaths=polypaths)
+        polysel = polysel.set_index(
+                keys=['provincie','project'],verify_integrity=True)
+
+        # find line shapefiles
+        linesel,_ = self.filter_shapefiles(shp,shptype='line',
+            priority_filepaths=linepaths)
+        linesel = linesel.set_index(
+                keys=['provincie','project'],verify_integrity=True)
+
+        # find point shapefiles
+        pointsel,_ = self.filter_shapefiles(shp,shptype='point',
+            priority_filepaths=pointpaths)
+        pointsel = pointsel.set_index(
+                keys=['provincie','project'],verify_integrity=True)
+
+        # merge file tables with base project table
+        baseprj = self.list_projects()
+        baseprj = baseprj[['year']].copy()
+
+        prj = pd.merge(baseprj,mdbsel,left_index=True,right_index=True,
             how='left',suffixes=[None,'_from_mdb'],validate='one_to_one')
+        prj = pd.merge(prj,polysel,left_index=True,right_index=True,
+            how='left',suffixes=[None,'_from_poly'],validate='one_to_one')
+        prj = pd.merge(prj,linesel,left_index=True,right_index=True,
+            how='left',suffixes=[None,'_from_line'],validate='one_to_one')
+        prj = pd.merge(prj,pointsel,left_index=True,right_index=True,
+            how='left',suffixes=[None,'_from_point'],validate='one_to_one')
 
         # drop duplicaste columns names
-        dup_shp = [x for x in prj.columns if '_from_shp' in x]
-        dup_mdb = [x for x in prj.columns if '_from_mdb' in x]
-        duplicates = dup_mdb+dup_shp
-        prj = prj.drop(columns=duplicates)
+        colnames = []
+        for tag in ['_from_mdb','_from_poly','_from_line','_from_point']:
+            colnames = colnames + [x for x in prj.columns if tag in x]
+        prj = prj.drop(columns=colnames)
 
         # relative paths or absolute paths
         if not relpaths:

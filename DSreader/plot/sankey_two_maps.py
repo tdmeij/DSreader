@@ -32,7 +32,8 @@ class SankeyTwoMaps:
         Parameter changes is a pandas series with multiindex 
         'from' and 'two' with values showing quantities of changes.
         """
-
+        if isinstance(changes,pd.DataFrame):
+            changes = changes.squeeze()
         if not isinstance(changes,pd.Series):
             raise Exception(f'Expect class pandas.Series, not {changes.__class__}')
         self._changes = changes
@@ -42,6 +43,7 @@ class SankeyTwoMaps:
     #def __repr__(self):
     #    return (f'{self._changes}')
 
+    @classmethod
     def _changes_example(self):
         """Return example of pandas Series with changes"""
         mydict = {
@@ -126,8 +128,19 @@ class SankeyTwoMaps:
                 xpos.append(0.9)
         return xpos
 
-    def _ypos(self,labels):
-        """Return list of ypositions for all labels"""   
+    def _ypos(self,labels,lowerpos = 0.8,upperpos = 0.0):
+        """Return list of ypositions for all labels
+        (Reference for ypos is from top down)
+        """   
+        ypos=[]
+        cumrelarea = self._label_areas()
+        for lbl in self.labels:
+            year = lbl.split('_')[0]
+            size = cumrelarea.loc[lbl,year]
+            abspos = upperpos+(lowerpos-upperpos)*size/2
+            ypos.append(abspos)
+            
+        """
         ypos=[]
         for lab in labels:
             if 'K1' in lab:
@@ -138,7 +151,31 @@ class SankeyTwoMaps:
                 ypos.append(0.5)
             if 'K4' in lab:
                 ypos.append(0.9)
+        """
         return ypos
+
+    def _label_areas(self):
+        """Return relative cumulative areas of labels"""
+
+        # table of areas of labels (rows) by years (columns)
+        idx = [f'{year}_{kenm}' for year in [self.fromyear,self.toyear] for kenm in ['K1','K2','K3','K4',]]
+        area = DataFrame(columns=[self.fromyear,self.toyear],index=idx,dtype='float64')
+        for key in set(self._changes.index.get_level_values(0)):
+            area.loc[key,self.fromyear] = self._changes.loc[(key,slice(None))].sum()
+        for key in set(self._changes.index.get_level_values(1)):
+            area.loc[key,self.toyear] = self._changes.loc[(slice(None),key)].sum()
+        area = area.fillna(0)
+
+        # table of relative cumulatice areas
+        cumrel = area.copy()
+        for col in cumrel.columns:
+            cumrel[col]=cumrel[col]/cumrel[col].sum()
+            cumrel[col]=cumrel[col].cumsum()
+
+        
+        return cumrel
+
+
 
     def _create_fig(self,plotname):
 

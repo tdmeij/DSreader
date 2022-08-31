@@ -205,10 +205,15 @@ class MapTables:
         return cls(tables=maptables,mdbpath=filepath)
 
 
-    def get_vegtype(self):
+    def get_vegtype(self,select='all'):
         """
         Return vegetation type for each mapped element.
 
+        Parameters
+        ----------
+        select : {'all','maxcov'}, default 'all'
+            Select from multiple instances of polygon.
+            maxcov : select vegetation type with largest numeric cover.
         Notes
         -----
         A mapped element can have multiple vegetation types. Therefore 
@@ -247,7 +252,12 @@ class MapTables:
             'vegtype_bedekkingnum',
             'sbbcat_code', 'sbbcat_wetnaam','sbbcat_nednaam',
             'sbbcat_kortenaam','sbbcat_vervangbaarheid']
-        element = element[colnames]
+        element = element[colnames].copy()
+
+        if select=='maxcov':
+            element = element.sort_values(['elmid',
+                'vegtype_bedekkingnum'],ascending=False)
+            element = element.groupby('elmid').head(1)
 
         return element.copy()
 
