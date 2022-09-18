@@ -3,12 +3,13 @@
 from pandas import Series, DataFrame
 import pandas as pd
 from collections import OrderedDict
+import warnings
 from .read.readmdb import ReadMdb
 
 
 class MapTables:
     """
-    Collection of tables with data related to vegetation map polygons
+    Tables with data related to vegetation map elements
 
     Methods
     -------
@@ -115,14 +116,18 @@ class MapTables:
 
 
     def __init__(self,tables=None,mdbpath=None):
-        """MapTables constructor.
-        
+        """
         Parameters
         ----------
         tables : OrderedDict
             Dictionary of tables from mdb file
         mdbpath : string
             Filepath to mdb sourcefile (for userwarnings).
+
+        Notes
+        -----
+        Use classmethod MapTables.from_mdb(<filepath>) to create a 
+        MapTables instance with data from a Microsoft Access mdb file.
         """
 
         self._tbldict = tables
@@ -188,7 +193,11 @@ class MapTables:
         mdb = ReadMdb(filepath)
 
         if not mdb.all_tables():
-            raise Exception(f'{mdb._filepath} is not a valid Digitale Standaard database.')
+            msg = f'{filepath} is not a valid Digitale Standaard database.'
+            ##raise Exception(msg)
+            warnings.warn(msg)
+            return None
+            
         #if any([item in mdb.tablenames() for item in cls._DS_tablenames]):
         #    raise Exception(f'{mdb} is not a valid Digitale Standaard database.')
 
@@ -205,12 +214,14 @@ class MapTables:
         return cls(tables=maptables,mdbpath=filepath)
 
 
-    def get_vegtype(self,select='all'):
+    def get_vegtype(self,loctype='v',select='all'):
         """
         Return vegetation type for each mapped element.
 
         Parameters
         ----------
+        loctype : {'v','l'}, default 'l'
+            Element location type
         select : {'all','maxcov'}, default 'all'
             Select from multiple instances of polygon.
             maxcov : select vegetation type with largest numeric cover.
@@ -223,11 +234,16 @@ class MapTables:
         The fields bedekking and bedekking_num show the cover a 
         vegetation type has within a map polygon.
         """
+        if loctype not in ['v','l']:
+            warnings.warn((f'Loctype must be "v" of "l", not {loctype}. '
+                f'Elements of loctyp "v" will be returned.'))
+            loctype = 'v'
+
 
         elmcolnames = ['locatie_id', 'elmid', 'locatietype', 'datum']
         element = self._tbldict['Element'][elmcolnames]
-        isvlak = element['locatietype']=='v'
-        element = element[isvlak].copy()
+        isloctype = element['locatietype']==loctype
+        element = element[isloctype].copy()
 
         vegloc = self._tbldict['KarteringVegetatietype']
         element = pd.merge(element,vegloc,left_on='locatie_id',
@@ -268,8 +284,9 @@ class MapTables:
             lambda x: x.strftime('%d%m%Y') if not pd.isna(x) else '')
         return pntsrt
 
+    """
     def get_year(self):
-        """Return year of mapping, returns 0000 if no dates are present"""
+        Return year of mapping, returns 0000 if no dates are present
         dates = pd.to_datetime(self._tbldict['Element']['datum'],errors='coerce')
         years = list(dates.dt.year.unique())
 
@@ -278,6 +295,18 @@ class MapTables:
                 return '0000'
             return str(years[0])
         return str(min(years))+'-'+str(max(years))
+    """
+
+    def get_years(self):
+        """Return frequency of mapped elements by year."""
+        dates = pd.to_datetime(self._tbldict['Element']['datum'],errors='coerce')
+        years = dates.dt.year.value_counts(sort=False)
+
+        if years.empty:
+            warnings.warn((f'No valid dates in {self._filepath}.'),stacklevel=1)
+            ##return None
+
+        return years
 
     def get_mapspecies(self,loctype='all'):
         """Return species data attached to mapped elements.

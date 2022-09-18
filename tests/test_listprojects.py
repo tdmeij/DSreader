@@ -58,9 +58,9 @@ def test_selectfiletype_shp(lp):
     assert not result.empty
 
 def test_projectfiles_table(lp):
-    result = lp.projectfiles_table(relpaths=True,default_tags=True,
-        mdbpaths=None,shppaths=None)
+    result = lp.projectfiles_table(relpaths=True,discardtags=None,
+        default_tags=True,mdbpaths=None,polypaths=None,linepaths=None,
+        pointpaths=None)
     #TODO: test with mdbpaths and shppaths
     assert(isinstance(result,pd.DataFrame))
     assert not result.empty
-

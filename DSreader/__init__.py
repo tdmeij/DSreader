@@ -7,15 +7,33 @@ by the Dutch National Forestry Service (Staatsbosbeheer). A vegetion
 map comprises an ESRI shapefile with polygons and an Microsoft Access 
 database with information about the content of the polygons.
 
-Classes
--------
+Main package classes
+--------------------
+MapData
+    Manage vegetion map data and connect spatial data to non-spatial
+    data.
+
+Helper classes
+--------------
 ListProjects
     Create table of filenames organised by project under a given root file
+MapElements
+    Manage spatial data for map elements.
+MapTables
+    Manage tables with non-spatial data related to mapped elements.
 ReadMdb
-    Read Microsoft Access .mdb file and extract tables as pd.DataFrame
-ReadPolyShape
-    Read ESRI Shapefile with vegetation polygons
+    Read Microsoft Access .mdb file and extract tables as pd.DataFrame.
+ReadShapeFile
+    Read ESRI Shapefile and correct errors if necessary.
 
+Classes for spatial analysis
+----------------------------
+SampleShape
+    Create regular grid and sample polygon map at grid points.
+SankeyTwoMaps
+    Plot Sankey diagram comparing changes in management quality between 
+    two maps.
+   
 """
 
 # import classes

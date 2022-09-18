@@ -7,7 +7,6 @@ fixed as much as possible.
 """
 
 import os
-#from pathlib import Path
 import pandas as pd
 import geopandas as gpd
 import fiona
@@ -37,7 +36,6 @@ class ReadShapeFile:
         ----------
         fpath : str
             filepath to ESRI shapefile
-
 
         Notes
         -----
@@ -80,6 +78,7 @@ class ReadShapeFile:
         try:
             # read with GeoPandas
             gdf = gpd.read_file(fpath)
+            gdf.index.name = 'fid' #geopandas sets shapefile fid as index
 
         except Exception as e:
 
@@ -90,7 +89,7 @@ class ReadShapeFile:
                 }
 
             # error: shapefile .shx file is read only and fiona needs 
-            # writing permisson for reading a shapefile, somehow...
+            # writing permisson for reading a shapefile, apparently...
             errmsg = self._gpd_read_err['msg']
             if '.shx for writing' in errmsg:
                 raise PermissionError((f"Fiona {errmsg}"
@@ -141,8 +140,8 @@ class ReadShapeFile:
                 fiona_errors.append({
                     'fid':fid,
                     'geomtype':'None',
-                    'error':f'Geometry is None',
-                    'fpath':self._fiona.path,
+                    'error':f'Geometry type is None',
+                    #'fpath':self._fiona.path,
                     })
                 continue # simply ignore this feature
 
@@ -160,8 +159,8 @@ class ReadShapeFile:
                     fiona_errors.append({
                         'fid':fid,
                         'geomtype': geom['type'],
-                        'error':f'Dropped {badrings} rings with less than three nodes',
-                        'fpath':self._fiona.path,
+                        'error':f'Dropped rings with less than three nodes',
+                        #'fpath':self._fiona.path,
                         })
         
                 feature['geometry']['coordinates']=newcoords
@@ -174,22 +173,24 @@ class ReadShapeFile:
         df = pd.DataFrame(reclist)
         jsongeom = json.loads(df.to_json(orient='records'))
         gdf = gpd.GeoDataFrame.from_features(jsongeom)
+        gdf.index.name = 'fid' #geopandas sets shapefile fid as index
 
         errors = pd.DataFrame(fiona_errors)
 
         return gdf,errors
 
     def shape(self):
-        """Return shape as GeoPandas"""
+        """Return shape as GeoPandas dataframe"""
         return self._shape
 
     def shape_errors(self):
-        """Return table of errors in shapefile that have been fixed"""
+        """Return Pandas dataframe with polygon errors."""
         return self._shape_errors
 
     def columns(self):
         """Return shapefile column names as list"""
         return list(self._shape.columns)
 
-
-
+    def filepath(self):
+        """Return shapefilepath"""
+        return self._fpath

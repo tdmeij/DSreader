@@ -1,1 +1,7 @@
 pandas
+numpy
+geopandas
+fiona
+json
+pyodbc
+plotly

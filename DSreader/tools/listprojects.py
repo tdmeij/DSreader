@@ -8,7 +8,6 @@ import pandas as pd
 import difflib
 
 from .filetools import relativepaths,absolutepaths
-#import relativepaths, absolutepaths
 
 class ListProjects:
     """
@@ -47,9 +46,10 @@ class ListProjects:
         
     """
 
-    _discardtags = ['conversion','ConversionPGB','catl','ctl','soorten','kopie','test',
-        'kievit','oud','oude','db1','test','fout','themas','florakartering',
-        'flora','toestand','backup','foutmelding','Geodatabase',]
+    _discardtags = ['conversion','ConversionPGB','catl','ctl','soorten',
+        'kopie','test','kievit','oud','oude','db1','test','fout',
+        'themas','florakartering','flora','toestand','backup',
+        'foutmelding','Geodatabase',]
 
     def __init__(self,rootdir,relpaths=True):
         """
@@ -61,7 +61,8 @@ class ListProjects:
             Return relative filepaths
         """
         if not isinstance(rootdir,str):
-            raise TypeError(f'rootdir must be of type string not {type(rootdir)}')
+            raise TypeError((f'rootdir must be of type string '
+                f'not {type(rootdir)}'))
 
         if not os.path.isdir(rootdir):
             raise TypeError(f'{rootdir} is not a valid directory name.')
@@ -137,9 +138,17 @@ class ListProjects:
             # get years from folder name
             prjyears = []
             for prj in prjnames:
+                """
                 match = re.match(r'.*([1-2][0-9]{3})', prj)
                 if match is not None:
                     prjyears.append(match.group(1))
+                else:
+                    prjyears.append('')
+                """
+                
+                allmatches = re.findall(r'([1-2][0-9]{3})', prj)
+                if len(allmatches)>0:
+                    prjyears.append(allmatches[0])
                 else:
                     prjyears.append('')
 

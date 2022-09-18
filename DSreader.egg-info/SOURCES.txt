@@ -2,6 +2,8 @@ LICENSE
 README.md
 setup.py
 DSreader/__init__.py
+DSreader/mapdata.py
+DSreader/mapelements.py
 DSreader/maptables.py
 DSreader.egg-info/PKG-INFO
 DSreader.egg-info/SOURCES.txt
