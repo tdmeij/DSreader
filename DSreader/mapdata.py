@@ -197,7 +197,7 @@ class MapData:
         
         Parameters
         ----------
-        element : {'v','l'}, default ' v'
+        loctype : {'v','l'}, default ' v'
             Map element type.
         select : {'all','maxcov'}, default 'all'
             Select from multiple instances of polygon.

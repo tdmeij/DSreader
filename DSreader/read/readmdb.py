@@ -65,12 +65,17 @@ class ReadMdb:
         except pyodbc.Error as err:
             self._err = err
             #print(self._err.args[0])
-            warnings.warn((f'Could not open .mdb file {self._mdbpath}'))
             self._mdbopen_error = {
                 'errtype':self._err.__class__,
                 'errmsg':repr(self._err),
                 'fpath':self._mdbpath,
                 }
+            warnings.warn((f'Could not open .mdb file {self._mdbpath} '
+             f'because of an {self._mdbopen_error["errtype"]} error. '
+             f'Full error message: {self._mdbopen_error["errmsg"]}.'))
+
+            #self._cur.close()
+            #self._conn.close()
 
         return self._cur
 
@@ -78,9 +83,9 @@ class ReadMdb:
         """Return cursor, returns None if file could not be opened"""
         return self._cur
 
-    def error(self):
+    def read_error(self):
         """
-        Return list of dicts with readfile errors. Returns None if
+        Return dict with readfile error message. Returns None if
         no errers occurred.
         """
         return self._mdbopen_error
@@ -115,5 +120,8 @@ class ReadMdb:
             cat[key] = table
         return cat
 
+    def filepath(self):
+        """Return path to mdb sourcefile."""
+        return self._mdbpath
 
 

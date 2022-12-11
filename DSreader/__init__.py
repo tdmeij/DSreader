@@ -28,10 +28,10 @@ ReadShapeFile
 
 Classes for spatial analysis
 ----------------------------
-SampleShape
+SamplePolygonMap
     Create regular grid and sample polygon map at grid points.
 SankeyTwoMaps
-    Plot Sankey diagram comparing changes in management quality between 
+    Plot Sankey flow chart comparing changes in management quality between 
     two maps.
    
 """
@@ -42,11 +42,12 @@ from .mapelements import MapElements
 from .mapdata import MapData
 from .read.readshapefile import ReadShapeFile
 from .read.readmdb import ReadMdb
-from .tools.sampleshape import SampleShape
-from .tools.listprojects import ListProjects
+from .sample.samplepolygonmap import SamplePolygonMap
+from .tools.projectstable import ProjectsTable
 from .plot.sankey_two_maps import SankeyTwoMaps
+from .tools.conversions import year_from_string
 from .data import data
 
 # import functions
-from .tools.filetools import relativepaths as relativepaths
-from .tools.filetools import absolutepaths as absolutepaths
+from .tools.filetools import relativepath as relativepath
+from .tools.filetools import absolutepath as absolutepath

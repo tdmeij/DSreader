@@ -1,47 +1,59 @@
 
 import os
 import numpy as np
+from pandas import Series, DataFrame
 import pandas as pd
 
-def relativepaths(column,rootdir):
+def relativepath(abspath,rootdir):
     """Replace absolute path names with paths relative to root
     
     Parameters
     ----------
-    column : pd.Series
-        Absolute pathnames
+    abspath : pd.Series | str
+        Absolute pathname.
 
     rootdir : str
         Absolute path to root directory
 
     Returns
     -------
-    pd.Series
+    pd.Series, str
     
     """
-    newcolumn = column.apply(lambda x:'..\\'+x.removeprefix(
-        rootdir) if not pd.isnull(x) else x)
-    return newcolumn
+    if isinstance(abspath,Series):
+        relpath = abspath.apply(lambda x:'..\\'+x.removeprefix(
+            rootdir) if not pd.isnull(x) else x)
 
-def absolutepaths(column,rootdir):
-    """Replace relative path names with absolute paths
+    elif isinstance(abspath,str):
+        relpath = '..\\'+abspath.removeprefix(rootdir)
+
+    return relpath
+
+
+
+def absolutepath(relpath,rootdir):
+    """Replace relative path name with absolute path name.
     
     Parameters
     ----------
-    column : pd.Series
-        Relative pathnames
+    relpath : pd.Series | str
+        Relative pathnames.
 
     rootdir : str
-        Absolute path to root directory
+        Absolute path to root directory.
 
     Returns
     -------
-    pd.Series
+    pd.Series, str
     
     """
-    newcolumn = column.apply(
-            lambda x:os.path.join(rootdir,x.lstrip('..\\'))
-            if not pd.isnull(x) else np.nan
-            )
-    return newcolumn
+    if isinstance(relpath,Series):
+        abspath = relpath.apply(
+                lambda x:os.path.join(rootdir,x.lstrip('..\\'))
+                if not pd.isnull(x) else np.nan
+                )
+    elif isinstance(relpath,str):
+        abspath = os.path.join(rootdir,relpath.lstrip('..\\'))
+
+    return abspath
 

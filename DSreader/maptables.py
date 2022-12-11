@@ -115,14 +115,14 @@ class MapTables:
         })
 
 
-    def __init__(self,tables=None,mdbpath=None):
+    def __init__(self,tables=None,filepath=None): ##,mdb=None):
         """
         Parameters
         ----------
         tables : OrderedDict
             Dictionary of tables from mdb file
-        mdbpath : string
-            Filepath to mdb sourcefile (for userwarnings).
+        mdb : ReadMdb object, optional
+            Original source with tables
 
         Notes
         -----
@@ -131,47 +131,19 @@ class MapTables:
         """
 
         self._tbldict = tables
-        if mdbpath is None:
-            mdbpath = ''
-        self._filepath = mdbpath
-
-        # numeric to string type
-        self._tbldict['Element'] = self._tbldict['Element'].astype(
-            {'locatie_id':str,'elmid':str,})
-        self._tbldict['KarteringVegetatietype']=self._tbldict['KarteringVegetatietype'].astype(
-            {'locatie_id':str,})
-        self._tbldict['VegetatieType'] = self._tbldict['VegetatieType'].astype(
-            {'sbbcat_id': str, 'sbbcat2_id': str,}) 
-        self._tbldict['SbbType'] = self._tbldict['SbbType'].astype(
-            {"sbbcat_id": str, "sbbcat_versie": str, "sbbcat_vervangbaarheid": str,}) 
-        self._tbldict['KarteringSoort']=self._tbldict['KarteringSoort'].astype(
-            {'locatie_id':str,'krtsrt_srtcode':str,})
-        self._tbldict['CbsSoort']=self._tbldict['CbsSoort'].astype(
-            {'cbs_srtcode':str,})
-        self._tbldict['KarteringAbiotiek']=self._tbldict['KarteringAbiotiek'].astype(
-            {'locatie_id':str,})
-
-
-        # change vevangbaarheid 5.0 to 5 stingtype
-        self._tbldict['SbbType']['sbbcat_vervangbaarheid']=self._tbldict['SbbType']['sbbcat_vervangbaarheid'].str[:1]
-
-        # convert column locatietype to lowercase
-        # (locatietype can be: 'v','l','V','L')
-        self._tbldict['Element']['locatietype'] = self._tbldict['Element']['locatietype'].str.lower()
-
-        # fix small errors that occur in just a few (or just one) mdbfiles
-        # smallfix01
-        colnames = self._tbldict['Element'].columns
-        if ((not 'sbbtype' in colnames) and ('sbbtype1' in colnames)):
-            self._tbldict['Element']=self._tbldict['Element'].rename(
-                columns={'sbbtype1':'sbbtype'})
-
+        ##self._mdb = mdb
+        self._filepath = filepath
+        #if mdb is not None:
+        #    self._filepath = mdb.filepath()
 
     def __repr__(self):
         return f'MapTables (n={self.__len__()})'
 
     def __len__(self):
-        return len(self._tbldict['Element'])
+        nelm = 0
+        if self._tbldict:
+            nelm = len(self._tbldict['Element'])
+        return nelm
 
     @classmethod
     def from_mdb(cls,filepath):
@@ -182,6 +154,10 @@ class MapTables:
         ----------
         filepath : str
             valid filepath to Microsoft Access mdb file
+
+        Returns
+        -------
+        MapTables 
         """
 
         if not isinstance(filepath,str):
@@ -192,12 +168,10 @@ class MapTables:
         # open mdb file and check format is Digitale Standaard
         mdb = ReadMdb(filepath)
 
+        # After mdb readerror return empty MapTables object
         if not mdb.all_tables():
-            msg = f'{filepath} is not a valid Digitale Standaard database.'
-            ##raise Exception(msg)
-            warnings.warn(msg)
-            return None
-            
+            return cls(tables=None) ##,mdb=mdb)
+
         #if any([item in mdb.tablenames() for item in cls._DS_tablenames]):
         #    raise Exception(f'{mdb} is not a valid Digitale Standaard database.')
 
@@ -211,7 +185,39 @@ class MapTables:
                 mdbtbl = mdbtbl.rename(columns=cls._mapping_colnames[tblname])
             maptables[tblname] = mdbtbl
 
-        return cls(tables=maptables,mdbpath=filepath)
+        # clean tables: numeric to string type
+        maptables['Element'] = maptables['Element'].astype(
+            {'locatie_id':str,'elmid':str,})
+        maptables['KarteringVegetatietype']=maptables['KarteringVegetatietype'].astype(
+            {'locatie_id':str,})
+        maptables['VegetatieType'] = maptables['VegetatieType'].astype(
+            {'sbbcat_id': str, 'sbbcat2_id': str,}) 
+        maptables['SbbType'] = maptables['SbbType'].astype(
+            {"sbbcat_id": str, "sbbcat_versie": str, "sbbcat_vervangbaarheid": str,}) 
+        maptables['KarteringSoort']=maptables['KarteringSoort'].astype(
+            {'locatie_id':str,'krtsrt_srtcode':str,})
+        maptables['CbsSoort']=maptables['CbsSoort'].astype(
+            {'cbs_srtcode':str,})
+        maptables['KarteringAbiotiek']=maptables['KarteringAbiotiek'].astype(
+            {'locatie_id':str,})
+
+        # clean tables : change vevangbaarheid 5.0 to 5 stingtype
+        maptables['SbbType']['sbbcat_vervangbaarheid']=maptables['SbbType']['sbbcat_vervangbaarheid'].str[:1]
+
+        # clean tables : convert column locatietype to lowercase
+        # (locatietype can be: 'v','l','V','L')
+        maptables['Element']['locatietype'] = maptables['Element']['locatietype'].str.lower()
+
+        # fix small errors that occur in just a few (or just one) mdbfiles
+        # smallfix01
+        colnames = maptables['Element'].columns
+        if ((not 'sbbtype' in colnames) and ('sbbtype1' in colnames)):
+            maptables['Element']=maptables['Element'].rename(
+                columns={'sbbtype1':'sbbtype'})
+            Warnings.warn((f'Microsoft Access mdb file {filepath} '
+                f'has invalid column name sbbtype1. Renamed to abbtype.'))
+
+        return cls(tables=maptables,filepath=filepath) ##,mdb=mdb)
 
 
     def get_vegtype(self,loctype='v',select='all'):
@@ -238,7 +244,6 @@ class MapTables:
             warnings.warn((f'Loctype must be "v" of "l", not {loctype}. '
                 f'Elements of loctyp "v" will be returned.'))
             loctype = 'v'
-
 
         elmcolnames = ['locatie_id', 'elmid', 'locatietype', 'datum']
         element = self._tbldict['Element'][elmcolnames]
@@ -375,7 +380,9 @@ class MapTables:
         mapabi = mapabi.drop(columns=['locatie_id'])
         return mapabi[mapabi['abio_code'].notnull()]
 
-
+    def filepath(self):
+        """Return filepath to source of tables."""
+        return self._filepath
 
 
 

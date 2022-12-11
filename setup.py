@@ -16,7 +16,7 @@ setup(
     license="MIT",
     packages=["DSreader"],
     install_requires=[
-        'pandas','numpy','geopandas','fiona','json','pyodbc','plotly',
+        'pandas','numpy','geopandas','plotly','fiona','pyodbc',
         ],
     include_package_data=True,
     package_data={'': ['data/*.csv']},

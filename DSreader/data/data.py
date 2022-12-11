@@ -12,10 +12,10 @@ bht_ken()
 import pkg_resources
 import pandas as pd
 
-def bht_ken():
+def characteristic_vegetation_types():
     """Return table with characteristic vegetion types for all
     management types.
-    
+
     Column kenm contains four classes:
     1 : Very characteristic
     2 : Characteristic
@@ -28,12 +28,19 @@ def bht_ken():
     stream = pkg_resources.resource_stream(__name__, 'beheertypen_kenmerkendheid.csv')
     return pd.read_csv(stream, encoding='latin-1')
 
-def bht():
+def management_types():
     """Return table with management type codes and names"""
-    tbl = bht_ken()
+    tbl = characteristic_vegetation_types()
     tbl = tbl[['bht_code','bht_naam']].copy()
     tbl = tbl.drop_duplicates().set_index('bht_code').squeeze()
     tbl = tbl.sort_index(ascending=True)
+    tbl.name = 'management_types'
     return tbl
-    
-    
+
+def sbbcat_syntaxa():
+    """Return table with list of vegetation types in the Staatsbosbeheer
+    Catalogus."""
+    stream = pkg_resources.resource_stream(__name__, 'sbbcat_syntaxonnames.csv')
+    sbbcat = pd.read_csv(stream, encoding='latin-1')
+    sbbcat = sbbcat.set_index('sbbcat_code').sort_index()
+    return sbbcat
