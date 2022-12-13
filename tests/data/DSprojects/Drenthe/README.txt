@@ -8,8 +8,9 @@ Second map of Hijken (for comparisons).
 
 Dr 0271_De_Witten_2000
 Standard dataset with database, polygon shapefile, line shapefile 
-and Turboveg2 database. The Access database has been copied for 
-testing the ProjectsTable class.
+and Turboveg2 database. 
+The Access database and the shapefiles have been copied for testing 
+the ProjectsTable class.
 
 The area Terhorst has been mappend four times:
 

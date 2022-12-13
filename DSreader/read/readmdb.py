@@ -74,8 +74,13 @@ class ReadMdb:
              f'because of an {self._mdbopen_error["errtype"]} error. '
              f'Full error message: {self._mdbopen_error["errmsg"]}.'))
 
-            #self._cur.close()
-            #self._conn.close()
+            # Closing cursor and connection prevents 
+            # "[ODBC Microsoft Access Driver] Too many client tasks"
+            # error.
+            if self._cur is not None:
+                self._cur.close()
+            if self._conn is not None:
+                self._conn.close()
 
         return self._cur
 

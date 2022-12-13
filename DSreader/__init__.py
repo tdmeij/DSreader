@@ -46,6 +46,7 @@ from .sample.samplepolygonmap import SamplePolygonMap
 from .tools.projectstable import ProjectsTable
 from .plot.sankey_two_maps import SankeyTwoMaps
 from .tools.conversions import year_from_string
+from .tools.write_excel import write_to_excel
 from .data import data
 
 # import functions

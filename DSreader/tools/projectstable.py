@@ -51,7 +51,7 @@ class ProjectsTable:
     """
 
     _discardtags = ['conversion','ConversionPGB','catl','ctl','soorten',
-        'kopie','test','kievit','oud','oude','db1','test','fout',
+        'kopie','test','kievit','oude versie','db1','test','fout',
         'themas','florakartering','flora','toestand','backup',
         'foutmelding','Geodatabase',]
 
@@ -420,9 +420,15 @@ class ProjectsTable:
             ##    '|'.join(lowertags),na=False,regex=True,case=False)
             ##mask_fpath = filetbl['mdbpath'].str.contains(
             ##    '|'.join(discardtags),na=False,regex=True,case=False)
-            mask_fpath = filetbl['mdbpath'].apply(lambda x: any([tag.lower() in str(x).lower() for tag in discardtags]))
+            mask_fpath = filetbl['mdbpath'].apply(
+                lambda x: any([tag.lower() in str(x).lower() for tag in discardtags]))
+            
+            sumfpath = sum(mask_fpath)
+            warnings.warn((f'{sumfpath} rows with mdb-files have been '
+                f'marked as copies based on given tags.'))
         else:
             mask_fpath = Series(data=False,index=filetbl.index)
+
 
         # masktbl is a temporary copy of filetbl with columns for masking
         # mask_fname and mask_prjdir are series with the same index
@@ -441,7 +447,7 @@ class ProjectsTable:
             elif len(tbl[tbl['maskprj']])==1:
                 # exactly one mdb in prjdir
                 idx = tbl[tbl['maskprj']].index[0]
-            elif len(tbl[tbl['maskfpath']])==1: 
+            elif len(tbl[tbl['maskfpath']])==1:
                 # only one mdbfile found in entire tree structure 
                 # after excluding unlikely files
                 idx = tbl[tbl['maskfpath']].index[0]
@@ -463,6 +469,7 @@ class ProjectsTable:
                     idx = tbl[mask].index[0]
 
             if idx is not None:
+                # mark chosen file as selected
                 masktbl.loc[idx,'masksel']=True
 
         # create table of projects with selected mdb files
@@ -524,15 +531,10 @@ class ProjectsTable:
             key_contains = 'lijn'
             if colprefix is None:
                 colprefix = 'line'
-        #elif shptype=='point':
-        #    key_isname = 'punten.shp'
-        #    key_contains = 'punt'
-        #    if colprefix is None:
-        #        colprefix = 'point'
         else:
             raise(f'{shptype} is not a valid shapefile type. ')
 
-        namecol='shppath'
+        namecol='shpname'
         pathcol='shppath'
 
         isname = filetbl[namecol].str.lower()==key_isname
@@ -555,7 +557,7 @@ class ProjectsTable:
         for (provincie,project),tbl in masktbl.groupby(['provincie','project']):
 
             if len(tbl[tbl['isname']])==1: 
-                # only one file vlakken
+                # only one file named 'vlakken'
                 idx = tbl[tbl['isname']].index[0]
             elif len(tbl[tbl['isname']&tbl['inprj']])==1:
                 # only one file vlakken in projectfolder
