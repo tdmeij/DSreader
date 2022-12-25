@@ -33,9 +33,15 @@ def write_to_excel(filename,data):
 
         # set index columns width
         for icol,index_name in enumerate(df.index.names):
+
             vals = df.index.get_level_values(icol)
             val_len_max = max([len(x) for x in vals])               
-            column_width = max(len(index_name),val_len_max)
+
+            len_index_name=0
+            if not index_name is None:
+                len_index_name = len(index_name)
+                
+            column_width = max(len_index_name,val_len_max)
             writer.sheets[sheet_name].set_column(icol,icol,column_width)
 
         # set value columns width

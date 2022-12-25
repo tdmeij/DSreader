@@ -6,7 +6,7 @@ prevent GeoPandas from opening a shapefile are logged and
 fixed as much as possible.
 """
 
-import os
+import os, sys, stat
 import pandas as pd
 import geopandas as gpd
 import fiona
@@ -43,9 +43,10 @@ class ReadShapeFile:
         Fixed errors can be retriwved with shape_errors()
         """
         self._fpath = fpath
-        self._fname = os.path.basename(self._fpath)
         if not os.path.isfile(self._fpath):
             raise ValueError(f'{self._fpath} is not a valid filepath.')
+
+        self._fname = os.path.basename(self._fpath)
 
         # read shapefile
         self._shape,self._shape_errors = self._readfile(self._fpath)
@@ -74,11 +75,21 @@ class ReadShapeFile:
 
     def _readfile(self,fpath):
 
-        shape_errors = pd.DataFrame()
+
+        # reading shapefile with GeoPandas when .shx file is read only
+        # gives a fiona drivererror:
+        shxpath = f'{os.path.splitext(fpath)[0]}.shx'
+        if os.path.exists(shxpath):
+            if not os.access(shxpath, os.W_OK):
+                os.chmod(shxpath, stat.S_IRWXU)
+                warnings.warn((f'File permisson "read-only" has been set to '
+                    f'"write" on shapefile index {shxpath}.'))
+
+        # read shapefile with geopandas
         try:
-            # read with GeoPandas
             gdf = gpd.read_file(fpath)
             gdf.index.name = 'fid' #geopandas sets shapefile fid as index
+            shape_errors = pd.DataFrame()
 
         except Exception as e:
 
@@ -87,13 +98,6 @@ class ReadShapeFile:
                 'msg':repr(e),
                 'fpath':fpath,
                 }
-
-            # error: shapefile .shx file is read only and fiona needs 
-            # writing permisson for reading a shapefile, apparently...
-            errmsg = self._gpd_read_err['msg']
-            if '.shx for writing' in errmsg:
-                raise PermissionError((f"Fiona {errmsg}"
-                    f"(Fiona can not open .shx file that is read only)"))
 
             # try to fix geometry errors
             gdf, shape_errors = self._read_shape_with_errors(fpath)
@@ -120,12 +124,12 @@ class ReadShapeFile:
         # open shapefile with fiona
         # .shx index files are automatically rebuild
         # by changing GDAL standard setting:
-        fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',True)
+        #fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',True)
         # beware: now all .shx files are recreated, even when there not
         # missing or corrupted
         #####gdf = self._readfile(self._fpath)
         self._fiona = fiona.open(fpath)
-        fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',False)    
+        #fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',False)    
 
         # validate shape items one by one and copy valid items
         for key in self._fiona.keys():

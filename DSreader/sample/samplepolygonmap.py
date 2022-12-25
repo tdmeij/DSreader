@@ -5,18 +5,27 @@ grid.
 import numpy as np
 from pandas import Series, DataFrame
 import pandas as pd
+from geopandas import GeoDataFrame
 import geopandas as gpd
 import matplotlib.pyplot as plt
 
 class SamplePolygonMap:
     """Sample polygon map at grid points.
-    
-    Methods
-    -------
+
+    Properties
+    ----------
     gridpoints
         GeoDataFrame with gridpoints.
     sample
         GeoDataFrame with sampled values at gridpoints.
+    bbox
+        Grid boundaries as (xmin,ymin,xmax,ymax).
+
+    Methods
+    -------
+    plot_sample
+        Plot map of sample points.
+
     """
 
     XMIN = 188000
@@ -25,32 +34,37 @@ class SamplePolygonMap:
     YMAX = 609000
 
     def __init__(self,polygonmap,bbox=None,gridtype='regular',
-        step=100,crs='epsg:28992',):
+        step=100,grid=None,crs='epsg:28992',):
         """
         Parameters
         ----------
-        polygomap : geopandas.GeoDataFrame
-            Polygon map which must be sampled.
+        polygonmap : geopandas.GeoDataFrame
+            Polygon map as input to sample.
         bbox : numpy array, list or tuple, optional.
             Grid limits as (xmin,ymin,xmax,ymax).
         gridtype : {'regular','repr'}, default 'regular'
             Sample grid layout.
         step : number, default 100
             Grid points distance for regular grid.
+        grid : GeoDataFrame, optional
+            Existing grid for sampling (gridtype and step will be
+            ignored).
         crs : str, default 'epsg:28992'
             Polygon map crs.
+
+        
         """
 
-        if not isinstance(polygons,gpd.geodataframe.GeoDataFrame):
+        if not isinstance(polygonmap,GeoDataFrame):
             raise Exception(f'Expect class GeoDataFrame, not {shape.__class__}')
 
-        self._poly = polygons
+        self._poly = polygonmap
         self._step = step
         self._crs = crs
 
         if bbox is None:
             self._bbox = self._map_bounds()
-        elif isinstance(bbox,gpd.geodataframe.GeoDataFrame):
+        elif isinstance(bbox,GeoDataFrame):
             self._bbox = self._map_bounds(bbox)
             #self._bbox = bbox.total_bounds
         elif len(list(bbox))==4:
@@ -58,17 +72,29 @@ class SamplePolygonMap:
         else:
             raise ValueError(f'Invalid bbox {bbox}')
 
-        if gridtype not in ['regular','repr']:
-            warnings.warn((f'{gridtype} is not a valid grid type. '
-                f'Regular grid will be returned.'))
-            self._gridtype='regular'
+        # Set grid or define new grid
+        if grid is not None:
 
-        if gridtype=='regular':
-            self._gridpoints = self._regular_grid()
-        elif gridtype=='repr':
-            self._gridpoints = self._poly.representative_point()
-        self._gridpoints = self._gridpoints.reset_index(drop=True)
+            if not isinstance(grid,GeoDataFrame):
+                warnings.warn((f'Given grid is not GeoPandas but '
+                    f'{type(grid)}. New default grid will be created.'))
+                grid = None
+            self._gridpoints = grid
 
+        if grid is None:
+        
+            if gridtype not in ['regular','repr']:
+                warnings.warn((f'{gridtype} is not a valid grid type. '
+                    f'Regular grid will be returned.'))
+                self._gridtype='regular'
+
+            if gridtype=='regular':
+                self._gridpoints = self._regular_grid()
+            elif gridtype=='repr':
+                self._gridpoints = self._poly.representative_point()
+            self._gridpoints = self._gridpoints.reset_index(drop=True)
+        
+        # Sample the polygon on gridpoints
         self._sample = gpd.sjoin(self._gridpoints,self._poly,how='inner',op='within')
         self._sample = self._sample.reset_index(drop=True)
         if 'index_right' in self._sample.columns:
@@ -107,7 +133,8 @@ class SamplePolygonMap:
         xx, yy = np.meshgrid(xp, yp)
         pointgeom = gpd.points_from_xy(xx.flatten(), yy.flatten(), crs=self._crs)
         gridpoints = gpd.GeoDataFrame(geometry=pointgeom)
-        gridpoints['area_ha'] = self._step**2/10000
+        gridpoints['pointid'] = gridpoints.index.astype(str)
+        gridpoints['pointarea_ha'] = self._step**2/10000
         return gridpoints
 
     @property

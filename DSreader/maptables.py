@@ -214,8 +214,8 @@ class MapTables:
         if ((not 'sbbtype' in colnames) and ('sbbtype1' in colnames)):
             maptables['Element']=maptables['Element'].rename(
                 columns={'sbbtype1':'sbbtype'})
-            Warnings.warn((f'Microsoft Access mdb file {filepath} '
-                f'has invalid column name sbbtype1. Renamed to abbtype.'))
+            warnings.warn((f'Microsoft Access mdb file {filepath} '
+                f'has invalid column name "sbbtype1". Renamed to abbtype.'))
 
         return cls(tables=maptables,filepath=filepath) ##,mdb=mdb)
 

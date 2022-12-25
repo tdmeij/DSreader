@@ -101,7 +101,8 @@ class MapData:
     } # shapefile maximum column width is 10
 
 
-    def __init__(self,maptables=None,polygons=None,lines=None):
+    def __init__(self,maptables=None,polygons=None,lines=None,
+        mapname=None,mapyear=None):
         """MapPolygons constructor.
 
         Parameters
@@ -112,6 +113,10 @@ class MapData:
             Spatial data for all map polygons
         lines : DSreader.MapElelemnts
             Spatial data for all map lines
+        mapname : str, optional
+            Use defined name of the vegetation map.
+        mapyear : str, optional
+            Single mapping year.
         """
         if maptables is None:
             maptables = MapTables()
@@ -140,11 +145,15 @@ class MapData:
             self._lines = self._lines[['elmid','geometry']].copy()
             self._lines = self._lines.astype({'elmid':'str'})
 
+        self.mapname = mapname
+        self.mapyear = mapyear
+
     def __repr__(self):
         return f'MapData (n={self._maptbl.__len__()})'
 
     @classmethod
-    def from_filepaths(cls,mdbpath=None,polypath=None,linepath=None):
+    def from_filepaths(cls,mdbpath=None,polypath=None,linepath=None,
+        mapname=None,mapyear=None):
         """Create MapData instance from filepaths
 
         
@@ -156,7 +165,10 @@ class MapData:
             Valid filepath to ESRI shapefile with vegetation polygons.
         linepath : str, optional
             Valid filepath to ESRI shapefile with vegetation lines.
-
+        mapname : str, optional
+            Use defined name of the vegetation map.
+        mapyear : str, optional
+            Single mapping year.
 
         Returns
         -------
@@ -179,7 +191,8 @@ class MapData:
         else:
             line = MapElements()
 
-        return cls(maptables=tables,polygons=poly,lines=line)
+        return cls(maptables=tables,polygons=poly,lines=line,
+            mapname=mapname,mapyear=mapyear)
 
 
     def get_polys(self):
@@ -220,7 +233,8 @@ class MapData:
 
         if vegtbl.empty:
             name = str(vegtbl)
-            warnings.warn((f'Empty vegetation data in {name}'))
+            if shapepath is not None:
+                warnings.warn((f'Empty vegetation data in {name}'))
             return DataFrame()
 
         try:
