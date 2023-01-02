@@ -1,0 +1,5 @@
+FIELDNUMBER,FIELDNAME,TYPE,WIDTH,DECIMALS,DESCRIPTION
+1,RELEVE_NR,N,6,0,Relevénumber(=systemnumber)
+2,SPECIES_NR,N,5,0,Speciesnumber
+3,COVER_CODE,C,2,0,Coverabundancecode
+4,LAYER,N,1,0,Vegetationlayer

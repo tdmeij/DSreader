@@ -47,8 +47,10 @@ from .tools.projectstable import ProjectsTable
 from .plot.sankey_two_maps import SankeyTwoMaps
 from .tools.conversions import year_from_string
 from .tools.write_excel import write_to_excel
-from .data import data
+from .data.data import PackageData
 
 # import functions
 from .tools.filetools import relativepath as relativepath
 from .tools.filetools import absolutepath as absolutepath
+
+tables = PackageData()
