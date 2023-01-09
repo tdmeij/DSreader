@@ -4,7 +4,7 @@ from pandas import Series, DataFrame
 import pandas as pd
 from collections import OrderedDict
 import warnings
-from .read.readmdb import ReadMdb
+from .read.mdb import Mdb
 
 
 class MapTables:
@@ -166,17 +166,17 @@ class MapTables:
                 f'not type {fptype}.')
 
         # open mdb file and check format is Digitale Standaard
-        mdb = ReadMdb(filepath)
+        mdb = Mdb(filepath)
 
         # After mdb readerror return empty MapTables object
-        if not mdb.all_tables():
+        if not mdb.all_tables:
             return cls(tables=None) ##,mdb=mdb)
 
         #if any([item in mdb.tablenames() for item in cls._DS_tablenames]):
         #    raise Exception(f'{mdb} is not a valid Digitale Standaard database.')
 
         # all mdb tables to dict
-        mdbtables = mdb.all_tables()
+        mdbtables = mdb.all_tables
         maptables = {}
         for tblname in mdbtables.keys():
             mdbtbl = mdbtables[tblname]

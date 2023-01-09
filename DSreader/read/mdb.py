@@ -6,7 +6,7 @@ from pandas import Series, DataFrame
 import pandas as pd
 import pyodbc
 
-class ReadMdb:
+class Mdb:
     """
     Read tables from a Microsoft Access mdb file
 
@@ -88,6 +88,7 @@ class ReadMdb:
         """Return cursor, returns None if file could not be opened"""
         return self._cur
 
+    @property
     def read_error(self):
         """
         Return dict with readfile error message. Returns None if
@@ -95,6 +96,7 @@ class ReadMdb:
         """
         return self._mdbopen_error
 
+    @property
     def tablenames(self):
         """Return list of tablenames in database"""
         tblnames = []
@@ -103,7 +105,7 @@ class ReadMdb:
                 tblnames.append(table_info.table_name)
         return tblnames
 
-    def table(self,tblname):
+    def get_table(self,tblname):
         """Return specified table as pd.DataFrame"""
         qrstr = f'select * from [{tblname}]'
         self._cur.execute(qrstr)
@@ -116,15 +118,16 @@ class ReadMdb:
         table = DataFrame(data, columns=colnames)
         return table
 
+    @property
     def all_tables(self):
         """Return OrderedDict with all tables"""
-        catkeys = [x for x in self.tablenames() if not x.startswith('GDB_')]
+        catkeys = [x for x in self.tablenames if not x.startswith('GDB_')]
         cat = collections.OrderedDict()
         for key in catkeys:
-            table = self.table(key)
-            cat[key] = table
+            cat[key] = self.get_table(key)
         return cat
 
+    @property
     def filepath(self):
         """Return path to mdb sourcefile."""
         return self._mdbpath

@@ -13,17 +13,17 @@ import fiona
 import json
 import warnings
 
-class ReadShapeFile:
+class ShapeFile:
     """
     Open ESRI shapefile as GeoPandas object
 
-    Methods
-    -------
-    shape()
+    Attributes
+    ----------
+    shape
         Return shapefile data as GeoDataFrame.
-    shape_errors()
+    shape_errors
         Return table of errors in shapefile that have been fixed.
-    columns()
+    columns
         Return list of shapefile column names.
     """
 
@@ -124,12 +124,8 @@ class ReadShapeFile:
         # open shapefile with fiona
         # .shx index files are automatically rebuild
         # by changing GDAL standard setting:
-        #fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',True)
-        # beware: now all .shx files are recreated, even when there not
-        # missing or corrupted
-        #####gdf = self._readfile(self._fpath)
-        self._fiona = fiona.open(fpath)
-        #fiona._env.set_gdal_config('SHAPE_RESTORE_SHX',False)    
+        with fiona.Env(SHAPE_RESTORE_SHX='YES'):
+            self._fiona = fiona.open(fpath)
 
         # validate shape items one by one and copy valid items
         for key in self._fiona.keys():
@@ -183,18 +179,22 @@ class ReadShapeFile:
 
         return gdf,errors
 
+    @property
     def shape(self):
         """Return shape as GeoPandas dataframe"""
         return self._shape
 
+    @property
     def shape_errors(self):
         """Return Pandas dataframe with polygon errors."""
         return self._shape_errors
 
+    @property
     def columns(self):
         """Return shapefile column names as list"""
         return list(self._shape.columns)
 
+    @property
     def filepath(self):
         """Return shapefilepath"""
         return self._fpath

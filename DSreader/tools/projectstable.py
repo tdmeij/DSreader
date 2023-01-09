@@ -666,7 +666,12 @@ class ProjectsTable:
         #if relpaths: #remove root from paths
         #    tvdir[fpathcol] = self._relativepaths(tbl[fpathcol])
 
-        ambiguous = pd.concat(ambiguous)
+        # list of DataFrames to DataFrame
+        if not ambiguous:
+            ambiguous = DataFrame()
+        else:
+            ambiguous = pd.concat(ambiguous)
+
         return tvdir, ambiguous
 
 

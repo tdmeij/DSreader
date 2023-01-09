@@ -40,8 +40,8 @@ SankeyTwoMaps
 from .maptables import MapTables
 from .mapelements import MapElements
 from .mapdata import MapData
-from .read.readshapefile import ReadShapeFile
-from .read.readmdb import ReadMdb
+from .read.shapefile import ShapeFile
+from .read.mdb import Mdb
 from .read.tv2 import Tv2
 from .sample.samplepolygonmap import SamplePolygonMap
 from .tools.projectstable import ProjectsTable

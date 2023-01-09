@@ -1,6 +1,6 @@
 
 import pytest
-from DSreader import ReadMdb
+from DSreader import Mdb
 from collections import OrderedDict
 import pandas as pd
 
@@ -14,21 +14,21 @@ def goodpath(root):
 
 @pytest.fixture
 def mdb(goodpath):
-    return ReadMdb(goodpath)
+    return Mdb(goodpath)
 
 def test_tablesnames(mdb):
-    res = mdb.tablenames()
+    res = mdb.tablenames
     assert isinstance(res,list)
     assert len(res)!=0
 
 def test_table(mdb):
-    tablename = mdb.tablenames()[0]
-    res = mdb.table(tablename)
+    tablename = mdb.tablenames[0]
+    res = mdb.get_table(tablename)
     assert isinstance(res,pd.DataFrame)
     assert not res.empty
 
 def test_all_tables(mdb):
-    res = mdb.all_tables()
+    res = mdb.all_tables
     assert isinstance(res,OrderedDict)
-    assert list(res.keys())==mdb.tablenames()
+    assert list(res.keys())==mdb.tablenames
 

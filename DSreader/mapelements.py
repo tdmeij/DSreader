@@ -4,7 +4,7 @@ from pandas import Series, DataFrame
 import pandas as pd
 import geopandas as gpd
 
-from .read.readshapefile import ReadShapeFile
+from .read.shapefile import ShapeFile
 
 class MapElements:
     """Spatial data for mapped elements  
@@ -112,6 +112,6 @@ class MapElements:
                 f'not type {fptype}.')
 
         # open shapefile and check presence of column ElmID
-        shp = ReadShapeFile(filepath)
+        shp = ShapeFile(filepath)
         
         return cls(shape=shp._shape,filepath=filepath)

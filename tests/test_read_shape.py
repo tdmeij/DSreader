@@ -2,7 +2,7 @@
 import pytest
 import pandas as pd
 import pathlib
-from DSreader import ReadShapeFile
+from DSreader import ShapeFile
 
 @pytest.fixture
 def root():
@@ -30,28 +30,28 @@ def emptyshapepath(root):
 
 def test_open_goodfile(goodshapepath):
     """Test reading a valid shapefile"""
-    readr = ReadShapeFile(goodshapepath)
+    readr = ShapeFile(goodshapepath)
     return
 
 def test_shape(goodshapepath):
     """Test ReadShapeFile.shape()"""
-    readr = ReadShapeFile(goodshapepath)
-    assert isinstance(readr.shape(),pd.DataFrame)
+    readr = ShapeFile(goodshapepath)
+    assert isinstance(readr.shape,pd.DataFrame)
 
 def test_shape_errors(goodshapepath):
     """Test ReadShapeFile.shape_errors()"""
-    readr = ReadShapeFile(goodshapepath)
-    assert isinstance(readr.shape_errors(),pd.DataFrame)
+    readr = ShapeFile(goodshapepath)
+    assert isinstance(readr.shape_errors,pd.DataFrame)
 
 def test_columns(goodshapepath):
     """Test ReadShapeFile.columns()"""
-    readr = ReadShapeFile(goodshapepath)
-    assert readr.columns() # not empty list evaluates to True
+    readr = ShapeFile(goodshapepath)
+    assert readr.columns # not empty list evaluates to True
 
 def test_filepath(goodshapepath):
     """Test ReadShapeFile.filepath()"""
-    readr = ReadShapeFile(goodshapepath)
-    filepath = pathlib.Path(readr.filepath())
+    readr = ShapeFile(goodshapepath)
+    filepath = pathlib.Path(readr.filepath)
     assert filepath.is_file()
 
 def test_init_invalid_filepath(root):
@@ -67,13 +67,13 @@ def test_open_missing_shx(goodshapepath):
     if filepath.is_file():
         filepath.unlink()# delete .shx
     ##msg = 'Set SHAPE_RESTORE_SHX config option to YES to restore or create it.'
-    readr = ReadShapeFile(goodshapepath)
-    assert not readr.shape().empty
+    readr = ShapeFile(goodshapepath)
+    assert not readr.shape.empty
 
 def test_found_errors(badshapepath):
     """Test if known errors in shapefile are found"""
-    readr = ReadShapeFile(badshapepath)
-    err = readr.shape_errors()
+    readr = ShapeFile(badshapepath)
+    err = readr.shape_errors
 
     msg = 'rings with less than three nodes'
     err['match'] = err['error'].apply(lambda x:msg in x)
@@ -85,6 +85,6 @@ def test_found_errors(badshapepath):
 
 def test_empty_shape(emptyshapepath):
     """Test opening empty sdhapefile"""
-    readr = ReadShapeFile(emptyshapepath)
-    assert readr.shape().empty
+    readr = ShapeFile(emptyshapepath)
+    assert readr.shape.empty
 
