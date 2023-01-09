@@ -257,7 +257,7 @@ class ProjectsTable:
 
         return tbl.reset_index(drop=True)
 
-    def list_tv2(self):
+    def list_tv2(self,relpaths=True):
         """Return table with all Turboveg2 project files
         under a project folder."""
 
@@ -273,7 +273,7 @@ class ProjectsTable:
             for filedir,subdirs,files in os.walk(row['prjdir']):
                 if 'tvhabita.dbf' in [f.lower() for f in files]:
                     tvdirs.append(
-                        {'prv':prv,'prj':prj,'tvdir':filedir}
+                        {'provincie':prv,'project':prj,'tvdir':filedir}
                         )
         return DataFrame(tvdirs)
 
@@ -302,7 +302,7 @@ class ProjectsTable:
         """
         if not isinstance(filetbl,pd.DataFrame):
             warnings.warn(f'{filetbl} is not a DataFrame')
-            return None
+            return DataFrame()
 
         if colname is None:
             colname = 'shpname'
@@ -604,6 +604,72 @@ class ProjectsTable:
 
         return shpsel, ambiguous
 
+    def filter_tv2(self):
+        """Return table with TV2 source directories and select criteria."""
+
+        tvdir = self.list_tv2(relpaths=False)
+        
+        tvdir['path_depth'] = tvdir['tvdir'].apply(lambda x:len(os.path.normpath(x).split(os.sep)))
+        tvdir['mask_tv'] = tvdir['tvdir'].str.upper().str.contains('TV_')
+        tvdir['mask_tag'] = tvdir['tvdir'].str.lower().str.contains('kievit|cmsi|oud|wateropn',regex=True)
+        tvdir['selected']=False
+
+        ambiguous = []
+        for (prv,prj),tbl in tvdir.groupby(by=['provincie','project']):
+
+            if len(tbl)==1:
+                # just one directory with turboveg files
+
+                # get name of selected directory
+                icol = tbl.columns.get_loc('tvdir')
+                seldir = tbl.iloc[0,icol]
+
+            elif len(tbl[tbl['mask_tv']])==1:
+                # select directories starting with _TV
+
+                # get name of selected directory
+                icol = tbl.columns.get_loc('tvdir')
+                seldir = tbl[tbl['mask_tv']].iloc[0,icol]
+
+            elif len(tbl[tbl['mask_tv']&~tbl['mask_tag']])==1:
+                # just one directory after discarding directories with
+                # specific tags in pathname
+
+                # get name of selected directory
+                icol = tbl.columns.get_loc('tvdir')
+                seldir = tbl[tbl['mask_tv']&~tbl['mask_tag']].iloc[0,icol]
+
+            elif len(tbl[tbl['path_depth']==tbl['path_depth'].min()])==1:
+                # there is one directory that is on a hogher level in 
+                # the directory tree than all the other directories
+
+                # get name of selected directory
+                icol = tbl.columns.get_loc('tvdir')
+                seldir = tbl[tbl['path_depth']==tbl['path_depth'].min()].iloc[0,icol]
+
+            else:
+                # Last resort: just pick the first directory
+
+                # get name of selected directory
+                icol = tbl.columns.get_loc('tvdir')
+                seldir = tbl.iloc[0,icol]
+
+                warnings.warn((f'No single directory with Turboveg '
+                    f'files found for {prv} {prj}. Just picked the '
+                    f' first directory in the list.'))
+                ambiguous.append(tbl)
+
+            # set selected row to True
+            idx = tvdir[tvdir['tvdir']==seldir].index.values[0]
+            tvdir.loc[idx,'selected']=True
+
+        #if relpaths: #remove root from paths
+        #    tvdir[fpathcol] = self._relativepaths(tbl[fpathcol])
+
+        ambiguous = pd.concat(ambiguous)
+        return tvdir, ambiguous
+
+
 
     def list_projectfiles(self,relpaths=True,discardtags=None,default_tags=True,
         mdbpaths=None,polypaths=None,linepaths=None,pointpaths=None):
@@ -673,6 +739,19 @@ class ProjectsTable:
                 f'method filter_shpfiles to get a table of candidate '
                 f'files.'))
 
+        # list of TV2 directories
+        tvdir, tvambi = self.filter_tv2()
+        if not tvambi.empty:
+            warnings.warn((f'{ambiprj} projects with multiple TV2 directories '
+                f'found. Use '
+                f'method filter_tv2 to get a table of candidate '
+                f'files.'))
+        tvsel = tvdir[tvdir['selected']==True].set_index(['provincie','project'])
+        tvsel = tvsel[['tvdir']].copy()
+        if relpaths: #remove root from paths
+            tvsel['tvdir'] = self._relativepaths(tvsel['tvdir'])
+            #tvambi['tvdir'] = self._relativepaths(tvambi['tvdir'])
+
         # merge file tables with base project table
         baseprj = self.list_projects()
         baseprj = baseprj[['year']].copy()
@@ -683,10 +762,12 @@ class ProjectsTable:
             how='left',suffixes=[None,'_from_poly'],validate='one_to_one')
         prj = pd.merge(prj,linesel,left_index=True,right_index=True,
             how='left',suffixes=[None,'_from_line'],validate='one_to_one')
+        prj = pd.merge(prj,tvsel,left_index=True,right_index=True,
+            how='left',suffixes=[None,'_from_tv2'],validate='one_to_one')
 
         # drop duplicaste columns names
         colnames = []
-        for tag in ['_from_mdb','_from_poly','_from_line',]: #'_from_point']:
+        for tag in ['_from_mdb','_from_poly','_from_line','_from_tv2',]:
             colnames = colnames + [x for x in prj.columns if tag in x]
         prj = prj.drop(columns=colnames)
 

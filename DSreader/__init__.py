@@ -42,15 +42,16 @@ from .mapelements import MapElements
 from .mapdata import MapData
 from .read.readshapefile import ReadShapeFile
 from .read.readmdb import ReadMdb
+from .read.tv2 import Tv2
 from .sample.samplepolygonmap import SamplePolygonMap
 from .tools.projectstable import ProjectsTable
 from .plot.sankey_two_maps import SankeyTwoMaps
 from .tools.conversions import year_from_string
 from .tools.write_excel import write_to_excel
-from .data.data import PackageData
+from .data.packagedata import PackageData
 
 # import functions
 from .tools.filetools import relativepath as relativepath
 from .tools.filetools import absolutepath as absolutepath
 
-tables = PackageData()
+#tables = PackageData()

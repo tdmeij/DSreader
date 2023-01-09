@@ -1,11 +1,17 @@
 """
-
+Module containing functions that return datasets and tables.
     
 """
 
 import pkg_resources
 import pandas as pd
 import numpy as np
+
+
+def get_sbbcat_syntaxa():
+    """Return vegetation types in the Staatsbosbeheer Catalogus."""
+    pkd = PackageData()
+    return pkd.sbbcat_syntaxa
 
 
 class PackageData:
@@ -60,6 +66,7 @@ class PackageData:
         sbbcat = sbbcat.set_index('sbbcat_code').sort_index()
         return sbbcat
 
+
     @property
     def species_2017(self):
         """Species list from Synbiosys."""
@@ -74,11 +81,13 @@ class PackageData:
 
         return spec
 
+
     @property
     def def_tvabund(self):
         """Table definition of Turboveg2 tvabdund.dbf file."""
         stream = pkg_resources.resource_stream(__name__,'definition_tvabund.csv')
         return pd.read_csv(stream, encoding='latin-1').set_index('FIELDNUMBER')
+
 
     @property
     def tvabund_types(self):
@@ -86,14 +95,17 @@ class PackageData:
         return dict(zip(pdata.def_tvhabita.FIELDNAME.values,
             pdata.def_tvhabita.TYPE.values))
 
+
     @property
     def def_tvhabita(self):
         """Table definition of Turboveg2 tvhabita.dbf file."""
         stream = pkg_resources.resource_stream(__name__,'definition_tvhabita.csv')
         return pd.read_csv(stream, encoding='latin-1').set_index('FIELDNUMBER')
 
+
     @property
     def def_remarks(self):
         """Table definition of Turboveg2 remarks.dbf file."""
         stream = pkg_resources.resource_stream(__name__,'definition_remarks.csv')
         return pd.read_csv(stream, encoding='latin-1').set_index('FIELDNUMBER')
+
