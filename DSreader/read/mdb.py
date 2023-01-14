@@ -43,11 +43,15 @@ class Mdb:
         self._cur = self._connect()
 
     def __repr__(self):
-
+        """Return string representation of Mdb instance."""
         fname = os.path.basename(self._mdbpath)
         mdbname = os.path.splitext(fname)[0]
-        ntb = len(self.tablenames())
-        return f'{mdbname} ({ntb})'
+        number_of_tables = len(self) #.tablenames)
+        return f'{mdbname} ({number_of_tables})'
+
+    def __len__(self):
+        """Return number of tables."""
+        return len(self.tablenames)
 
     def _connect(self):
 
