@@ -9,17 +9,17 @@ from .read.shapefile import ShapeFile
 class MapElements:
     """Spatial data for mapped elements  
     
-    Methods
-    -------
-    get_shape : GeoDataFrame
+    Properties
+    ----------
+    shape : GeoDataFrame
         Return table of spatial data.
-    get_colnames : list
+    colnames : list
         Return attribute column names.
-    get_geomtype : str
-        Return geometry type (vlakken or lines)
-    get_filepath : str
+    shape_type : str
+        Return shape geometry type ('polygon' or 'linestring')
+    filepath : str
         Return sourcefile path
-    get_boundary : shape
+    boundary : shape
         Return outer boundary of mappend area
 
     Classmethods
@@ -33,11 +33,15 @@ class MapElements:
         
         Parameters
         ----------
-        shape : GeoDataFrame
+        shape : GeoDataFrame, optional
             Spatial data
-        filepath : str
+        filepath : str, optional
             Sourcefile path (used for warnings)
-            
+
+        Notes
+        -----
+        Parameter shape is optional, however not giving a valid 
+        shapefilepath results in an empty MapElements object.
         """
         if shape is None:
             shape = gpd.GeoDataFrame()
@@ -72,27 +76,30 @@ class MapElements:
     def __len__(self):
         return self._shape.__len__()
 
-    def get_shape(self):
+    @property
+    def shape(self):
         """Return spatial data"""
         return self._shape
-        
-    def get_colnames(self):
+
+    @property
+    def colnames(self):
         return list(self._shape)
-        
-    def get_geomtype(self):
-        geom_type = list(set(self._shape.geom_type))[0].lower()
-        return geom_type
-        
-    def get_filepath(self):
+
+    @property
+    def shape_type(self):
+        return list(set(self._shape.geom_type))[0].lower()
+
+    @property
+    def filepath(self):
         return self._filepath
 
-    def get_boundary(self):
+    @property
+    def boundary(self):
         """Return outer boundary of mapped area"""
         outline = self._shape.copy()
-        outline['diss']=1
-        outline = outline.dissolve('diss')
-        outline = outline.geometry.boundary
-        return outline
+        outline['boundary']=1
+        outline = outline.dissolve('boundary')
+        return outline.geometry.boundary
         
 
     @classmethod
