@@ -9,7 +9,7 @@ from .read.mdb import Mdb
 
 class MapTables:
     """
-    Tables with data related to vegetation map elements
+    Contains tables from Digital Standard vegetation map.
 
     Methods
     -------
@@ -34,13 +34,14 @@ class MapTables:
     -----
     A mapped element can be a polygon or a line. Spatial data for these
     elements are stored in shapefiles and linked to the table data by 
-    the attribute ElmID.
+    the attribute ElmID. Use MapData object to read both tables from 
+    Microsoft mdb file and mappend elements from shapefiles.
     
     """
 
-    _DS_tablenames = ['vegetatietype','sbbtype']
+    ##_DS_tablenames = ['vegetatietype','sbbtype']
 
-    _mapping_colnames = OrderedDict({
+    MAPPING_COLNAMES = OrderedDict({
         'Element' : {
             'intern_id' : 'locatie_id',
             },
@@ -120,21 +121,17 @@ class MapTables:
         Parameters
         ----------
         tables : OrderedDict
-            Dictionary of tables from mdb file
+            Dictionary of tables from mdb file.
         mdb : ReadMdb object, optional
-            Original source with tables
+            Original source with tables.
 
         Notes
         -----
         Use classmethod MapTables.from_mdb(<filepath>) to create a 
         MapTables instance with data from a Microsoft Access mdb file.
         """
-
         self._tbldict = tables
-        ##self._mdb = mdb
         self._filepath = filepath
-        #if mdb is not None:
-        #    self._filepath = mdb.filepath()
 
     def __repr__(self):
         return f'MapTables (n={self.__len__()})'
@@ -170,10 +167,7 @@ class MapTables:
 
         # After mdb readerror return empty MapTables object
         if not mdb.all_tables:
-            return cls(tables=None) ##,mdb=mdb)
-
-        #if any([item in mdb.tablenames() for item in cls._DS_tablenames]):
-        #    raise Exception(f'{mdb} is not a valid Digitale Standaard database.')
+            return cls(tables=None)
 
         # all mdb tables to dict
         mdbtables = mdb.all_tables
@@ -181,8 +175,8 @@ class MapTables:
         for tblname in mdbtables.keys():
             mdbtbl = mdbtables[tblname]
             mdbtbl.columns = map(str.lower,mdbtbl.columns)
-            if tblname in cls._mapping_colnames.keys():
-                mdbtbl = mdbtbl.rename(columns=cls._mapping_colnames[tblname])
+            if tblname in cls.MAPPING_COLNAMES.keys():
+                mdbtbl = mdbtbl.rename(columns=cls.MAPPING_COLNAMES[tblname])
             maptables[tblname] = mdbtbl
 
         # clean tables: numeric to string type
@@ -217,7 +211,7 @@ class MapTables:
             warnings.warn((f'Microsoft Access mdb file {filepath} '
                 f'has invalid column name "sbbtype1". Renamed to abbtype.'))
 
-        return cls(tables=maptables,filepath=filepath) ##,mdb=mdb)
+        return cls(tables=maptables,filepath=filepath)
 
 
     def get_vegtype(self,loctype='v',select='all'):
@@ -380,6 +374,7 @@ class MapTables:
         mapabi = mapabi.drop(columns=['locatie_id'])
         return mapabi[mapabi['abio_code'].notnull()]
 
+    @property
     def filepath(self):
         """Return filepath to source of tables."""
         return self._filepath
