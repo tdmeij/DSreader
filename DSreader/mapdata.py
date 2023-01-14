@@ -134,13 +134,13 @@ class MapData:
         self._polypath = self._mapelements_polygons._filepath
         self._linepath = self._mapelements_lines._filepath
 
-        self._poly = self._mapelements_polygons.get_shape()
+        self._poly = self._mapelements_polygons.shape
         if not self._poly.empty:
             self._poly = self._poly[['elmid','geometry']].copy()
             self._poly = self._poly.astype({'elmid':'str'})
             self._poly['oppha']=self._poly['geometry'].area/10000
 
-        self._lines = self._mapelements_lines.get_shape()
+        self._lines = self._mapelements_lines.shape
         if not self._lines.empty:
             self._lines = self._lines[['elmid','geometry']].copy()
             self._lines = self._lines.astype({'elmid':'str'})
@@ -194,14 +194,20 @@ class MapData:
         return cls(maptables=tables,polygons=poly,lines=line,
             mapname=mapname,mapyear=mapyear)
 
-
-    def get_polys(self):
+    @property
+    def polygons(self):
         """Return polygon geometry as GeoPandas dataframe"""
         return self._poly
 
-    def get_lines(self):
+    @property
+    def lines(self):
         """Return line geometry as GeoPandas dataframe"""
         return self._lines
+
+    @property
+    def boundary(self):
+        """Return outer boundary of mapped area"""
+        return self._mapelements_polygons.boundary
 
 
     def get_vegtype(self,loctype='v',select='all'):
@@ -323,9 +329,6 @@ class MapData:
 
         return abi
 
-    def get_boundary(self):
-        """Return outer boundary of mapped area"""
-        return self._mapelements_polygons.get_boundary()
 
     def to_shapefile(self,tablename=None,loctype='v',filepath=None):
         """Save table to ESRI shapefile
