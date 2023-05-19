@@ -42,6 +42,7 @@ class MapData:
     """
 
     _shapefile_colnames = {
+        # shapefile maximum column width is 10
         'vegtype': OrderedDict(
              elmid='elmid',
              datum='datum',
@@ -58,6 +59,20 @@ class MapData:
              sbbcat_vervangbaarheid='sbb_vvangb',
              oppha='oppha',
              geometry='geometry',
+        ),
+        'vegtype_singlepoly' : OrderedDict(
+            elmid='elmid', 
+            datum='datum',
+            locatietype='loctype', 
+            vegtype_combi_code='veg_code', 
+            vegtype_combi_naam='veg_naam', 
+            vegtype_eenvoudig_code='veg_glob',
+            vegtype_eenvoudig_naam='veg_globnm',
+            sbbcat_combi_code='sbb_code', 
+            sbbcat_combi_nednaam='sbb_nednm', 
+            sbbcat_combi_wetnaam='sbb_wetnm',
+            oppha='oppha', 
+            geometry='geometry', 
         ),
         'mapspecies': OrderedDict(
             elmid='elmid',
@@ -98,7 +113,7 @@ class MapData:
             abio_wrn='abio_wrn',
             geometry='geometry',
         ),
-    } # shapefile maximum column width is 10
+    }
 
 
     def __init__(self,maptables=None,polygons=None,lines=None,
@@ -258,6 +273,21 @@ class MapData:
 
         return shape
 
+    def get_vegtype_singlepoly(self,loctype='v'):
+
+        if loctype=='v':
+            shape = self._poly
+            shapepath = self._polypath
+        if loctype=='l':
+            shape = self._lines
+            shapepath = self._linepath
+
+        vegtbl = self._maptbl.get_vegtype_singlepoly(loctype=loctype)
+        shape = pd.merge(shape,vegtbl,how='left',left_on='elmid',right_on='elmid',)
+        shape = shape.dropna(subset=['locatietype'])
+        return shape
+
+
     def get_mapspecies(self,loctype='v'):
         """Return map polygons with species data
 
@@ -354,7 +384,8 @@ class MapData:
         shapefile or it is an empty DataFrame.
         """
         # validate tablename
-        tablenames = ['vegtype','mapspecies','pointspecies','abiotiek']
+        tablenames = ['vegtype','mapspecies','pointspecies','abiotiek',
+            'vegtype_singlepoly',]
         if tablename not in tablenames:
             warnings.warn((f'{tablename} is not a valid tablename. '
                 f'No file has been saved.'))
@@ -386,6 +417,8 @@ class MapData:
             table = self.get_pointspecies()
         elif tablename=='abiotiek':
             table = self.get_abiotiek(loctype=loctype)
+        elif tablename=='vegtype_singlepoly':
+            table = self.get_vegtype_singlepoly(loctype=loctype)
         else:
             raise ValueError('{tablename} is not a valid table name.')
 

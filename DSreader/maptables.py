@@ -32,8 +32,8 @@ class MapTables:
 
     Notes
     -----
-    A mapped element can be a polygon or a line. Spatial data for these
-    elements are stored in shapefiles and linked to the table data by 
+    A mapped element can be a polygon or a line. Spatial data for mapped
+    elements are stored in shapefiles and linked to the MapTables data by 
     the attribute ElmID. Use MapData object to read both tables from 
     Microsoft mdb file and mappend elements from shapefiles.
     
@@ -42,6 +42,7 @@ class MapTables:
     MAPPING_COLNAMES = OrderedDict({
         'Element' : {
             'intern_id' : 'locatie_id',
+            'samengesteldelegenda':'vegtype_combi_code', 
             },
         'KarteringVegetatietype' : {
             'locatie': 'locatie_id',
@@ -110,6 +111,21 @@ class MapTables:
         'Abiotiek': {
             'code':'abio_code',
             'omschrijving':'abio_wrn',
+            },
+        'LegendaHulp' : {
+            'samengesteld':'vegtype_combi_code', 
+            'gegevens':'karteer_item', 
+            'omschrijving':'vegtype_combi_naam',
+            'aantal':'aantal_elementen',
+            'vereenvoudigd':'vegtype_eenvoudig_code',
+            'landtypened':'sbbcat_combi_nednaam',
+            'landtypewet':'sbbcat_combi_wetnaam', 
+            'opp':'opp_ha', 
+            'sbbtype':'sbbcat_combi_code',
+            },
+        'VereenvoudigdeLegenda' : {
+            'code':'vegtype_eenvoudig_code',
+            'omschrijving':'vegtype_eenvoudig_naam',
             },
         })
 
@@ -274,6 +290,60 @@ class MapTables:
             element = element.groupby('elmid').head(1)
 
         return element.copy()
+
+    def get_vegtype_singlepoly(self,loctype='v'):
+        """
+        Return vegetation type for each mapped element. Each element is 
+        returned only once. When multiple vegetation types are present
+        in a mapped element, vegetation types are combined in a single
+        code.
+
+        Parameters
+        ----------
+        loctype : {'v','l'}, default 'l'
+            Element location type
+
+        Notes
+        -----
+        A mapped element can have multiple vegetation types (vegetation
+        complexes). To avoid returning the same polygon multiple times,
+        multiple vegetation types are combined in one code composed of
+        the seperate vegetation types. These combined vegetation codes
+        are stored in the Digital Standard database, this function 
+        retrieves this already stored information and does not calculate
+        them on the fly.
+        """
+    
+        if loctype not in ['v','l']:
+            warnings.warn((f'Loctype must be "v" of "l", not {loctype}. '
+                f'Elements of loctyp "v" will be returned.'))
+            loctype = 'v'
+
+        # table ElmID
+        #elmcols = ['ElmID','Datum','SamengesteldeLegenda']
+        elmcols = ['elmid', 'locatietype', 'datum','vegtype_combi_code',]
+
+        mask = self._tbldict['Element']['locatietype']==loctype
+        elmtbl = self._tbldict['Element'][mask][elmcols].copy()
+
+        # table with legend 
+        legcols = [
+            'vegtype_combi_code', 'vegtype_combi_naam',
+            'vegtype_eenvoudig_code','sbbcat_combi_code','sbbcat_combi_nednaam',
+            'sbbcat_combi_wetnaam',]
+        mask = self._tbldict['LegendaHulp']['karteer_item']=='vegetatie'
+        legtbl = self._tbldict['LegendaHulp'][mask][legcols].copy()
+
+        # add description to legend table
+        legtbl = pd.merge(legtbl,self._tbldict['VereenvoudigdeLegenda'],
+            left_on='vegtype_eenvoudig_code',right_on='vegtype_eenvoudig_code',
+            how='left')
+
+        # merge Elments with combined legend
+        singlepoly = pd.merge(elmtbl,legtbl,left_on='vegtype_combi_code',
+            right_on='vegtype_combi_code',how='left')
+
+        return singlepoly
 
 
     def get_pointspecies(self):

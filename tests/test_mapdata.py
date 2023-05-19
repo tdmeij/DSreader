@@ -34,6 +34,9 @@ def test_mapyear(mpd):
 def test_get_vegtype(mpd):
     assert isinstance(mpd.get_vegtype(),GeoDataFrame)
 
+def test_get_vegtype_singlepoly(mpd):
+    assert isinstance(mpd.get_vegtype_singlepoly(),GeoDataFrame)
+
 def test_get_mapspecies(mpd):
     assert isinstance(mpd.get_mapspecies(),GeoDataFrame)
 
