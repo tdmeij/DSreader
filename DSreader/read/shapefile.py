@@ -7,6 +7,7 @@ fixed as much as possible.
 """
 
 import os, sys, stat
+import numpy as np
 import pandas as pd
 import geopandas as gpd
 import fiona
@@ -48,8 +49,12 @@ class ShapeFile:
 
         self._fname = os.path.basename(self._fpath)
 
+        # empty dataframe for shape errors
+        columns = ['fid','error','solution']
+        self._shperr = pd.DataFrame(columns=columns)
+
         # read shapefile
-        self._shape,self._shape_errors = self._readfile(self._fpath)
+        self._shape, self._shperr = self._readfile(self._fpath,self._shperr)
 
         """
         if (self._shape is None) and (fix_errors==True): 
@@ -63,18 +68,16 @@ class ShapeFile:
         if not self._shape.empty:
             self._shape.columns = map(str.lower,self._shape.columns)
             
+            
             # get geometry type
-            self._geom_type = list(set(self._shape.geom_type))[0].lower()
-            self._geom_typeset = set(self._shape.geom_type)
-
-
+            #self._geom_type = list(set(self._shape.geom_type))[0].lower()
+            #self._geom_typeset = set(self._shape.geom_type)
 
     def __repr__(self):
         nrows = len(self._shape)
         return f'{self._fname} (n={nrows})'
 
-    def _readfile(self,fpath):
-
+    def _readfile(self,fpath,shperr):
 
         # reading shapefile with GeoPandas when .shx file is read only
         # gives a fiona drivererror:
@@ -89,7 +92,6 @@ class ShapeFile:
         try:
             gdf = gpd.read_file(fpath)
             gdf.index.name = 'fid' #geopandas sets shapefile fid as index
-            shape_errors = pd.DataFrame()
 
         except Exception as e:
 
@@ -100,84 +102,117 @@ class ShapeFile:
                 }
 
             # try to fix geometry errors
-            gdf, shape_errors = self._read_shape_with_errors(fpath)
+            gdf, shperr = self.read_with_fiona(fpath,shperr)
 
         else:
             self._gpd_read_err = None
         
-            # check for None type geometries (GeoPandas does not check
-            # for this when reading a shapefile, but it's method geom.type
-            # will fail)
-            if None in set(gdf.geom_type):
-                gdf, shape_errors = self._read_shape_with_errors(fpath)
+            # remove rows with None type geometries (GeoPandas does not 
+            # check for this when reading a shapefile, but it's method 
+            # geom.type will fail)
+            ##if None in set(gdf.geom_type):
+            ##    gdf, shape_errors = self.read_shape_with_errors(fpath)
+            geom_null = gdf[gdf.geom_type.isnull()]
+            if not geom_null.empty:
+                warnings.warn((f'Deleted {len(geom_null)} rows without '
+                    f'valid geometry in {self._fpath}.'))
+                for fid,row in geom_null.iterrows():
+                    idx = len(shperr)
+                    shperr.loc[idx,'fid'] = fid
+                    shperr.loc[idx,'error'] = f'Geometry type is None'
+                    shperr.loc[idx,'solution'] =f'Dropped record with fid={fid}'
+                gdf = gdf[gdf.geom_type.notnull()].copy()
 
         if gdf.empty:
             warnings.warn((f'Empty shapefile: {self._fpath}.'))
 
-        return gdf,shape_errors
+        return gdf,shperr
 
-    def _read_shape_with_errors(self,fpath):
+    def read_with_fiona(self,fpath,shperr=None):
+        """Read shapefile with errors and return GeoPandas dataframe.
 
-        fiona_errors = []
-        reclist = []
+        Parameters
+        ----------
+        fpath : str
+            Valid filepath to shapefile.
+
+        Returns
+        -------
+        geoapndas.GeoDataFrame
+
+
+        Notes
+        -----
+        This function is used internally, but it can be used with any 
+        filepath without changes the status of the ShapeFile object. 
+        Reading is done with fiona instead of geopandas and some errors 
+        are fixed automatically and user warnings of changes are issued.
+        """
+        if shperr is None:
+            shperr = self._shperr.copy()
 
         # open shapefile with fiona
         # .shx index files are automatically rebuild
-        # by changing GDAL standard setting:
+        # by temprarily changing GDAL standard setting:
         with fiona.Env(SHAPE_RESTORE_SHX='YES'):
             self._fiona = fiona.open(fpath)
 
         # validate shape items one by one and copy valid items
+        ##fiona_errors = []
+        reclist = []
         for key in self._fiona.keys():
 
             # copy feature from fiona to dict
             feature = self._fiona.get(key)
-            fid = feature['id']
-            geom = feature['geometry']
+            #fid = feature['id']
+            #geom = feature['geometry']
 
             # error: Geometry is None
-            if geom is None:
-                fiona_errors.append({
-                    'fid':fid,
-                    'geomtype':'None',
-                    'error':f'Geometry type is None',
-                    #'fpath':self._fiona.path,
-                    })
+            if feature['geometry'] is None:
+                idx = len(shperr)
+                shperr.loc[idx,'fid'] = feature["id"]
+                shperr.loc[idx,'error'] = f'Geometry type is None'
+                shperr.loc[idx,'solution'] = f'Dropped record with fid={feature["id"]}'
                 continue # simply ignore this feature
 
             # error: polygon field contains rings with less than three nodes
-            if geom['type']=='Polygon':
+            if feature['geometry']['type']=='Polygon':
                 newcoords = []
                 badrings = 0
-                for ring in geom['coordinates']:
+                for ring in feature['geometry']['coordinates']:
                     if len(ring)<3:
                         badrings+=1
                     else:
                         newcoords.append(ring)
 
                 if badrings!=0:
-                    fiona_errors.append({
-                        'fid':fid,
-                        'geomtype': geom['type'],
-                        'error':f'Dropped rings with less than three nodes',
-                        #'fpath':self._fiona.path,
-                        })
+                    
+                    idx = len(shperr)
+                    shperr.loc[idx,'fid'] = feature['id']
+                    shperr.loc[idx,'error'] = f'Found {str(badrings)} polygon rings with less than three nodes.'
+                    shperr.loc[idx,'solution'] = f'Dropped {str(badrings)} invalid polygon rings with less than three nodes'
         
                 feature['geometry']['coordinates']=newcoords
 
             # append validated feature to reclist
             reclist.append(feature)
         
+        # create GeoDataFrame from list of fiona features
+        if self._fiona.crs.is_valid:
+            crs = self._fiona.crs
+        else:
+            crs = shp._fiona.crs.from_epsg(28992) # dutch grid
+        gdf = gpd.GeoDataFrame.from_features([feature for feature in reclist], crs=crs)
 
-        # create GeoDataFrame from fiona reclist
-        df = pd.DataFrame(reclist)
-        jsongeom = json.loads(df.to_json(orient='records'))
-        gdf = gpd.GeoDataFrame.from_features(jsongeom)
+        # tidy up geodataframe
+        columns = list(self._fiona.schema["properties"]) + ["geometry"]
+        for col in columns:
+            if col not in gdf.columns: # fiona drops columns with only nans?
+                gdf[col] = np.nan
+        gdf = gdf[columns]  
         gdf.index.name = 'fid' #geopandas sets shapefile fid as index
 
-        errors = pd.DataFrame(fiona_errors)
-
-        return gdf,errors
+        return gdf, shperr
 
     @property
     def shape(self):

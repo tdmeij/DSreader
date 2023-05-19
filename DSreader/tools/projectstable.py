@@ -51,7 +51,7 @@ class ProjectsTable:
     """
 
     _discardtags = ['conversion','ConversionPGB','catl','ctl','soorten',
-        'kopie','test','kievit','oude versie','db1','test','fout',
+        'kopie','test','oude versie','db1','test','fout',
         'themas','florakartering','flora','toestand','backup',
         'foutmelding','Geodatabase',]
 

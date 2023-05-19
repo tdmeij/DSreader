@@ -240,7 +240,7 @@ class MapData:
         if vegtbl.empty:
             name = str(vegtbl)
             if shapepath is not None:
-                warnings.warn((f'Empty vegetation data in {name}'))
+                warnings.warn((f'Empty vegetation data in {shapepath}'))
             return DataFrame()
 
         try:
@@ -413,6 +413,8 @@ class MapData:
                     f'{tablename}: {coldif} in {filepath}.'))
 
             coldif2 = set(shapecols) - set(table.columns)
+            if loctype=='l': # lines have no surface area
+                coldif2 = [col for col in coldif2 if col not in ['oppha']]
             if len(coldif2)!=0:
                 warnings.warn((f'Missing column names in table '
                     f'{tablename}: {coldif2}.'))

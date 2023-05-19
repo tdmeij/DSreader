@@ -28,10 +28,12 @@ class SamplePolygonMap:
 
     """
 
-    XMIN = 188000
-    XMAX = 276000
-    YMIN = 307000
-    YMAX = 609000
+    XMIN = 0
+    XMAX = 280000
+    YMIN = 300000
+    YMAX = 620000
+    STEP = 100
+    CRS = 'epsg:28992' # Dutch RD grid
 
     def __init__(self,polygonmap,bbox=None,gridtype='regular',
         step=100,grid=None,crs='epsg:28992',):
@@ -56,7 +58,7 @@ class SamplePolygonMap:
         """
 
         if not isinstance(polygonmap,GeoDataFrame):
-            raise Exception(f'Expect class GeoDataFrame, not {shape.__class__}')
+            raise Exception(f'Expect class GeoDataFrame, not {polygonmap.__class__}')
 
         self._poly = polygonmap
         self._step = step
@@ -127,15 +129,33 @@ class SamplePolygonMap:
 
     def _regular_grid(self):
         """Return regular grid of sampling points"""
-        xmin,ymin,xmax,ymax = self.bbox
-        xp = np.arange(xmin,xmax,self._step)
-        yp = np.arange(ymin,ymax,self._step)
+        gridpoints = self.regular_grid(bbox=self.bbox,step=self._step)
+        return gridpoints
+
+    @classmethod
+    def regular_grid(cls, bbox=None, step=None):
+
+        # set grid bounadries
+        if bbox is None: # nederland
+            xmin,ymin,xmax,ymax = cls.XMIN,cls.YMIN,cls.XMAX,cls.YMAX
+        else:
+            xmin,ymin,xmax,ymax = bbox
+
+        # set grid distance
+        if step is None:
+            step = cls.STEP
+
+        xp = np.arange(xmin,xmax,step)
+        yp = np.arange(ymin,ymax,step)
         xx, yy = np.meshgrid(xp, yp)
-        pointgeom = gpd.points_from_xy(xx.flatten(), yy.flatten(), crs=self._crs)
+        pointgeom = gpd.points_from_xy(xx.flatten(), yy.flatten(), crs=cls.CRS)
         gridpoints = gpd.GeoDataFrame(geometry=pointgeom)
         gridpoints['pointid'] = gridpoints.index.astype(str)
-        gridpoints['pointarea_ha'] = self._step**2/10000
+        gridpoints['pointarea_ha'] = step**2/10000
+
         return gridpoints
+
+
 
     @property
     def gridpoints(self):

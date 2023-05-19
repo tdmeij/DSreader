@@ -45,9 +45,11 @@ def test_get_pointspecies(db):
 def test_get_vegtype(db):
     assert isinstance(db.get_vegtype(),DataFrame)
 
-def test_get_years(db):
-    assert isinstance(db.get_years(),Series)
+def test_yearcounts(db):
+    assert isinstance(db.yearcounts,Series)
 
+def test_get_mapyear(db):
+    assert isinstance(db.get_mapyear(),int)
 
 """ For developing
 srcdir = r'.\data\DSprojects\Drenthe\Dr 0469_Hijken_2001\\'

@@ -1,5 +1,5 @@
 
-
+import numpy as np
 from pandas import Series, DataFrame
 import pandas as pd
 from collections import OrderedDict
@@ -25,7 +25,7 @@ class MapTables:
         get_year
             Return year of mapping, returns 0000 if no dates are present.
 
-    Classmethods
+    Class methods
     ------------
         from_mdb
             Create MapTables object from Microsoft Access mdb filepath.
@@ -38,8 +38,6 @@ class MapTables:
     Microsoft mdb file and mappend elements from shapefiles.
     
     """
-
-    ##_DS_tablenames = ['vegetatietype','sbbtype']
 
     MAPPING_COLNAMES = OrderedDict({
         'Element' : {
@@ -141,6 +139,7 @@ class MapTables:
         if self._tbldict:
             nelm = len(self._tbldict['Element'])
         return nelm
+
 
     @classmethod
     def from_mdb(cls,filepath):
@@ -245,17 +244,17 @@ class MapTables:
         element = element[isloctype].copy()
 
         vegloc = self._tbldict['KarteringVegetatietype']
-        element = pd.merge(element,vegloc,left_on='locatie_id',
+        element = pd.merge(element,vegloc,how='left',left_on='locatie_id',
             right_on='locatie_id',suffixes=(None,'_vegloc'),
             validate='one_to_many')
 
         vegtype = self._tbldict['VegetatieType']
-        element = pd.merge(element,vegtype,left_on='vegtype_code',
+        element = pd.merge(element,vegtype,how='left',left_on='vegtype_code',
             right_on='vegtype_code',suffixes=(None,'_vegtype'),
             validate='many_to_one')
 
         sbbtype = self._tbldict['SbbType']
-        element = pd.merge(element,sbbtype,left_on='sbbcat_id',
+        element = pd.merge(element,sbbtype,how='left',left_on='sbbcat_id',
             right_on='sbbcat_id',suffixes=(None,'sbbtype'),
             validate='many_to_one')
 
@@ -276,36 +275,85 @@ class MapTables:
 
         return element.copy()
 
+
     def get_pointspecies(self):
         """Return table of point locations for mapped plant species"""
+
+        # if no pointspecies table is present
+        colnames = list(self.MAPPING_COLNAMES['PuntLocatieSoort'].values())
+        emptytbl = DataFrame(columns=colnames)
+        if self._tbldict is None:
+            return emptytbl
+        if 'PuntLocatieSoort' not in self._tbldict.keys():
+            return emptytbl
+
+        # create pointspecies export
         pntsrt = self._tbldict['PuntLocatieSoort'].copy()
         pntsrt['srtdatum'] = pntsrt['srtdatum'].apply(
             lambda x: x.strftime('%d%m%Y') if not pd.isna(x) else '')
         return pntsrt
 
-    """
-    def get_year(self):
-        Return year of mapping, returns 0000 if no dates are present
-        dates = pd.to_datetime(self._tbldict['Element']['datum'],errors='coerce')
-        years = list(dates.dt.year.unique())
 
-        if len(years)==1:
-            if pd.isnull(years[0]):
-                return '0000'
-            return str(years[0])
-        return str(min(years))+'-'+str(max(years))
-    """
+    def get_mapyear(self,preference='count'):
+        """Return single year of mapping.
+        
+        Parameters
+        ----------
+        preference : {'count','first','last'}, default 'count'
+            Criterium to choose one mapping year from several possible
+            years ('count':choose year with maximum number of mapped 
+            elements, 'first': choose first year, 'last': choose last year.
 
-    def get_years(self):
-        """Return frequency of mapped elements by year."""
+        Return
+        ------
+        int | None
+        """
+        year = None
+
+        if self.yearcounts.empty: #no valid years found
+            return None
+
+        if len(self.yearcounts)==1: #exactly one valid year found
+            return int(self.yearcounts.index[0])
+
+        if preference=='count':
+            year = self.yearcounts.idxmax()
+
+        # if multiple mapping years are present, return last or first 
+        # year, but only if no years in between are missing.
+        if preference in ['first','last']:
+            years = self.yearcounts.index.to_list()
+            years_subsequent = [(years[i]-years[i-1])==1 for i in range(1,len(years))]
+            if np.all(years_subsequent)==1:
+                if preference=='last':
+                    year = years[-1]
+                else:
+                    year = years[0]
+
+        if year is not None:
+            year = int(year)
+
+        return year
+
+    @property
+    def empty(self):
+        if self._maptbl._tbldict is None:
+            return True
+        return False
+
+    @property
+    def yearcounts(self):
+        """Return number of mapped elements by year."""
         dates = pd.to_datetime(self._tbldict['Element']['datum'],errors='coerce')
-        years = dates.dt.year.value_counts(sort=False)
+        years = dates.dt.year.value_counts()
+        years.name = 'elements'
+        years.index.name = 'jaar'
 
         if years.empty:
             warnings.warn((f'No valid dates in {self._filepath}.'),stacklevel=1)
-            ##return None
 
-        return years
+        return years.sort_index()
+    
 
     def get_mapspecies(self,loctype='all'):
         """Return species data attached to mapped elements.
@@ -317,12 +365,12 @@ class MapTables:
 
         Returns
         -------
-        pandas DataFrame
+        pandas.DataFrame
 
         Note
         ----
         Multiple species can be mapped for a map element. Values for
-        field ElmID will therefore not be unique.
+        field ElmID will not be unique for this reason.
         """
 
         if loctype not in ['all','v','l']:
@@ -351,7 +399,16 @@ class MapTables:
 
 
     def get_abiotiek(self,loctype='all'):
-        """Return table of environmental observatons"""
+        """Return table with abiotic observatons.
+        
+        Parameters
+        ----------
+        loctype : '{'all','v','l'}, default 'all'
+
+        Returns
+        -------
+        pandas.Dataframe
+        """
 
         if loctype not in ['all','v','l']:
             raise ValueError(f'Invalid loctype {loctype}')
@@ -373,6 +430,7 @@ class MapTables:
 
         mapabi = mapabi.drop(columns=['locatie_id'])
         return mapabi[mapabi['abio_code'].notnull()]
+
 
     @property
     def filepath(self):

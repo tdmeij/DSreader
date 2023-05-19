@@ -53,6 +53,23 @@ class MapElements:
             # set crs
             if self._shape.crs is None:
                 self._shape = self._shape.set_crs('epsg:28992')
+                # this happens to often for a usefull warning:
+                # warnings.warn((f'crs has been set to epsg:28992 on '
+                #    f'shapefile with missing crs: {self._filepath}.'))
+
+            if (self._shape.crs.name=='RD_New') & (self._shape.crs.to_epsg() is None):
+                # this needs some investigating, reporjection doesnt work
+                # but effect of overriding crs has not been tested.
+                self._shape = self._shape.set_crs(epsg=28992,allow_override=True)
+                warnings.warn((f'crs has been set to epsg:28992 on '
+                    f'shapefile with unknown dutch grid crs: {self._filepath}.'))
+
+            if self._shape.crs.name=='Rijksdriehoekstelsel_New':
+                # I think epsg:28992 has name "Amersfoort / RD New" in 
+                # GeoPandas and "Rijksdriehoekstelsel_New" in Fiona.
+                # Geopandas won't concat frames if both these names are
+                # present.
+                self._shape = self._shape.to_crs(epsg=28992)
 
             # ElmID dtype to int
             if not pd.api.types.is_integer_dtype(self._shape['elmid']):
@@ -95,11 +112,11 @@ class MapElements:
 
     @property
     def boundary(self):
-        """Return outer boundary of mapped area"""
+        """Return single polygon with boundary of mapped area"""
         outline = self._shape.copy()
         outline['boundary']=1
         outline = outline.dissolve('boundary')
-        return outline.geometry.boundary
+        return outline.geometry
         
 
     @classmethod

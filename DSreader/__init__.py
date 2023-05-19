@@ -49,6 +49,7 @@ from .plot.sankey_two_maps import SankeyTwoMaps
 from .tools.conversions import year_from_string
 from .tools.write_excel import write_to_excel
 from .data.packagedata import PackageData
+from .tools import sbbcat
 
 # import functions
 from .tools.filetools import relativepath as relativepath
