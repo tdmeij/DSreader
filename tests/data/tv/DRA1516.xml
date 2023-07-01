@@ -1,0 +1,2023 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Plot_package UserName="woest" EmailAddress="" TurbovegVersion="3.5.0.0 (Dutch version)" Dictionary="default" SpeciesList="floranld_2017" Description="" ShareWithMembersOnly="no" CreationDate="11/06/2023">
+	<Plots>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="1" guid="{53289A2B-1EB4-41EE-8DB7-1BA82C79FA5B}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="1" coverscale="03" date="20150629" km_hok_x="242.373288" km_hok_y="559.305455" length="2" width="2" surf_area="4" cov_total="90" cov_herbs="60" cov_mosses="30" cov_litter="5" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09RG09"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I5a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="F.H.Everts"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="162"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A1-3"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A1d"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="162"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA01"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="66" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="232" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="236" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="261" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="386" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="654" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="679" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="780" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="784" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1017" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1040" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1305" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="m1" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="2" guid="{AEEA6D7B-5170-437F-BFDE-FC7E9CB02B04}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="2" coverscale="03" date="20150709" km_hok_x="242.557288" km_hok_y="559.386455" length="2" width="2" surf_area="4" cov_total="100" cov_shrubs="5" cov_herbs="70" cov_mosses="50" cov_litter="20" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r19AA02"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I2c"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="N.P.J.De Vries"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="165"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A-5"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A2a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="165"/>
+				<udf_record ispredefined="false" name="sbb_type2" type="C" len="15" dec="0" value="16A-f"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA02"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="139" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="246" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="335" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="473" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="519" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="687" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="r2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1933" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2923" cover="m2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2996" cover="2" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="3" guid="{6B4830A0-A2E5-4358-88AD-FFBE7DAF2F5F}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="3" coverscale="03" date="20150709" km_hok_x="242.973288" km_hok_y="559.562455" length="2" width="2" surf_area="4" cov_total="100" cov_herbs="70" cov_mosses="40" cov_litter="30" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09RG05"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D7e"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="N.P.J.De Vries"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="168"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-3"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3c"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="168"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16RG28"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="260" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="456" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="654" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="784" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="925" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="3239" cover="3" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="4" guid="{D08B7617-DA2E-428D-A415-27FACD33F68F}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="4" coverscale="03" date="20150709" km_hok_x="240.432288" km_hok_y="558.324455" length="2" width="2" surf_area="4" cov_total="90" cov_shrubs="2" cov_herbs="40" cov_mosses="70" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09RG09"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I5a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="F.H.Everts"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="202"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A1-3"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A1d"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="202"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="246" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="261" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="336" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="418" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="461" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="463" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="673" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="923" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1056" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1557" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1637" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2316" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="7" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="5" guid="{DCE52953-7B4E-4314-B55B-08D7F8C99D47}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="5" coverscale="03" date="20150709" km_hok_x="242.634288" km_hok_y="558.898455" length="2" width="2" surf_area="4" cov_total="98" cov_shrubs="2" cov_herbs="50" cov_mosses="70" cov_litter="10" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA02"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I2b"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="209"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A2-2"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A2c"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="209"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA02"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="220" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="246" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="654" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="673" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1017" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1037" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2923" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="3" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="6" guid="{0072A2B9-EB78-4355-9C73-B4636E273453}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="6" coverscale="03" date="20150709" km_hok_x="242.780288" km_hok_y="558.998455" length="2" width="2" surf_area="4" cov_total="100" cov_shrubs="10" cov_herbs="80" cov_mosses="90" cov_litter="5" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09RG10"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I2a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="214"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A2-1"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A2a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="214"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA01"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="220" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="236" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="386" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="813" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="946" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1006" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="9" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="7" guid="{10F7D245-094D-45F5-B412-19160A58F0A6}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="7" coverscale="03" date="20150713" km_hok_x="242.822288" km_hok_y="559.007455" length="2" width="2" surf_area="4" cov_total="100" cov_shrubs="7" cov_herbs="70" cov_mosses="85" cov_litter="5" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA01B"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I2d"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="215"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A2-3"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A2a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="215"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="92"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA02"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="66" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="139" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="186" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="228" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="251" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="386" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="418" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="473" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="673" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="687" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="780" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="924" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="946" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1017" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1040" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1066" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1199" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1305" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1933" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2316" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="8" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="8" guid="{18DE0FD8-53D7-4B49-8B17-AA6584A4D174}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="8" coverscale="03" date="20150713" km_hok_x="242.942288" km_hok_y="559.082455" length="2" width="2" surf_area="4" cov_total="98" cov_shrubs="7" cov_herbs="80" cov_mosses="70" cov_litter="10" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA01B"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I1e"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="216"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A1-1"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A1b"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="216"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="92"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA01"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="228" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="236" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="261" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="473" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="654" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="687" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="813" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="924" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1006" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1017" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1040" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1199" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1557" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1933" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="5+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="2" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="9" guid="{EC1E1888-F982-472E-97CB-E9760CCB0C60}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="9" coverscale="03" date="20150715" km_hok_x="242.898288" km_hok_y="558.785455" length="2" width="2" surf_area="4" cov_total="98" cov_shrubs="8" cov_herbs="80" cov_mosses="60" cov_litter="5" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA02"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I2a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="231"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A2-1"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A2a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="231"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="92"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA02"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="m2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="66" cover="m2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="139" cover="p4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="236" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="335" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="386" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="526" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="556" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="679" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="813" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="946" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="p4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1933" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="3" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="10" guid="{547E0EE2-025D-46DD-9007-61749658527E}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="10" coverscale="03" date="20150720" km_hok_x="243.020288" km_hok_y="558.712455" length="2" width="2" surf_area="4" cov_total="95" cov_herbs="85" cov_mosses="15" cov_litter="10" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA01B"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I1e"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="240"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A1-1"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A1a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="240"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="92"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA01"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="220" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="236" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="5-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="261" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="673" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="780" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="813" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="929" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1174" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1199" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1616" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2996" cover="m4" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="11" guid="{8F991102-BF14-4911-8A46-EA81C49B2FFB}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="11" coverscale="03" date="20150720" km_hok_x="242.940288" km_hok_y="558.663455" length="2" width="2" surf_area="4" cov_total="100" cov_shrubs="5" cov_herbs="90" cov_mosses="10" cov_litter="15" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA01B"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I3a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="241"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A1-2"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A1a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="241"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="92"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA01"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="m2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="139" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="236" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="261" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="332" cover="4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="673" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="r4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1199" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2996" cover="m2" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="12" guid="{835942C8-2A16-423C-BE5F-2E5E94D29EC0}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="12" coverscale="03" date="20150720" km_hok_x="243.035288" km_hok_y="558.678455" length="2" width="2" surf_area="4" cov_total="100" cov_shrubs="15" cov_herbs="80" cov_mosses="5" cov_litter="60" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r19AA02"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I3a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="243"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A1-2"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A1b"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="243"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="92"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA01"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="5" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="19" cover="m2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="139" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="255" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="332" cover="4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="473" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="832" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="p4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1124" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1153" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1199" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1258" cover="p4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1616" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="m4" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="13" guid="{BF5CEB5C-6686-47C8-8637-C603BEEF1814}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="13" coverscale="03" date="20150708" km_hok_x="236.665288" km_hok_y="556.036955" length="2" width="2" surf_area="4" cov_total="99" cov_shrubs="1" cov_herbs="85" cov_mosses="20" cov_litter="2" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16RG28"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D9b"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="D.P.Pranger"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="320"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-5"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3c"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="320"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="106"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09AA03"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="18" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="36" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="228" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="463" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="780" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="784" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="813" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="958" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1040" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1066" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1306" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1544" cover="5+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1642" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="51609" cover="r1" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="14" guid="{13CD73DC-E94D-4BB1-8173-200AF6A560BD}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="14" coverscale="03" date="20150708" km_hok_x="236.743288" km_hok_y="556.155455" length="2" width="2" surf_area="4" cov_total="90" cov_herbs="80" cov_mosses="10" cov_litter="20" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09RG05"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D7a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="D.P.Pranger"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="323"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-1"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="323"/>
+				<udf_record ispredefined="false" name="sbb_type2" type="C" len="15" dec="0" value="09B-b"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="106"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09RG05"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="173" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="260" cover="4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="463" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="821" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1544" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2619" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="m2" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="15" guid="{26599112-173C-4BAD-9137-4CAD69ADA765}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="15" coverscale="03" date="20150701" km_hok_x="236.225288" km_hok_y="555.564455" length="2" width="2" surf_area="4" cov_total="100" cov_herbs="85" cov_mosses="30" cov_litter="2" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09RG01"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D9b"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="D.P.Pranger"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="333"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-5"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3c"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="333"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="110"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09RG01"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="66" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="5+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="335" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1544" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="1+" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="16" guid="{4A1520E0-C569-44CD-BA76-784DF47E1BA4}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="16" coverscale="03" date="20160525" km_hok_x="236.609731" km_hok_y="574.323729" length="2" width="2" surf_area="4" cov_total="100" cov_herbs="70" cov_mosses="60" cov_litter="1" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16RG08"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D9g"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.E.Tolman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="429"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-6"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="429"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="4"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09AA03"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="205" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="219" cover="5+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="397" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="463" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="930" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="6" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="m2" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="17" guid="{AE2E3158-8BE9-4680-86EE-9198CA0323E4}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="17" coverscale="03" date="20160616" km_hok_x="238.790288" km_hok_y="567.793455" length="2" width="2" surf_area="4" cov_total="100" cov_herbs="85" cov_mosses="60" cov_litter="60" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09RG05"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D7c"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="480"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-2"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="480"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="20"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09AA03"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="219" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="260" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="463" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="519" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="813" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="957" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1254" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1544" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="5+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="51335" cover="p2" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="18" guid="{BDE2C1C8-F0EE-476D-94C0-512A48A4B4DE}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="18" coverscale="03" date="20160616" km_hok_x="239.463288" km_hok_y="567.755455" length="2" width="2" surf_area="4" cov_total="100" cov_herbs="85" cov_mosses="60" cov_litter="20" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09AA03A"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="10"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D7a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="486"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-1"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="486"/>
+				<udf_record ispredefined="false" name="sbb_type2" type="C" len="15" dec="0" value="09B-b"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="21"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09RG05"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="173" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="219" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="260" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="783" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="784" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="821" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="933" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1254" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="m2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2619" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="3023" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="51335" cover="3" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="19" guid="{5A3B9E8C-9FB3-4793-9896-FC3A192A6576}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="19" coverscale="03" date="20160616" km_hok_x="239.578288" km_hok_y="567.641455" length="2" width="2" surf_area="4" cov_total="98" cov_herbs="80" cov_mosses="45" cov_litter="10" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r09RG05"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D7e"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="M.Jongman"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="488"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-3"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3c"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="488"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="21"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="18" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="260" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="463" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="519" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="780" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="784" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="813" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="869" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="959" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1254" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1306" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="6192" cover="p1" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="20" guid="{34145C00-CD10-4318-9246-8DE9DB52199D}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="20" coverscale="03" date="20160615" km_hok_x="240.160288" km_hok_y="563.411455" length="2" width="2" surf_area="4" cov_total="80" cov_herbs="50" cov_mosses="30" cov_litter="2" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16RG08"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="D9g"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="F.H.Everts"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="538"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="09A3-6"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="09A3a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="538"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="43"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r09AA03"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="66" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="219" cover="4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="463" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="519" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="680" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1056" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="3" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="21" guid="{4D686E20-EF27-418C-AFA0-04C59CB658D2}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="21" coverscale="03" date="20160615" km_hok_x="240.689288" km_hok_y="563.110455" length="2" width="2" surf_area="4" cov_total="100" cov_herbs="70" cov_mosses="10" cov_litter="30" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA02"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I2a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="F.H.Everts"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="540"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A2-1"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A2c"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="540"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="43"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA02"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="139" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="1+" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="335" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="519" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1093" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1616" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1933" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="1+" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="22" guid="{6A4AE777-342F-4B84-81C3-74DE0AE5C11A}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="22" coverscale="03" date="20160615" km_hok_x="240.597288" km_hok_y="563.391455" length="2" width="2" surf_area="4" cov_total="100" cov_herbs="80" cov_mosses="80" cov_litter="10" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA02"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I2a"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="F.H.Everts"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="543"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A2-1"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A2b"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="543"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="43"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="r16AA02"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="24" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="36" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="66" cover="m4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="335" cover="p4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="386" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="m2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="3" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="785" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="946" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1008" cover="a4" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1040" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1066" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1093" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1385" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1616" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1637" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1933" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="8" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="51470" cover="a1" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+		<Plot database="dr 0936_drentsche aa_1516" releve_nr="23" guid="{9FB29C61-CBBA-4251-B84D-2BE58F71B70E}" create_user="" create_date="01/01/1900" modify_user="Gebruiker" modify_date="07/07/2017" ndff_qual="0">
+			<header_data>
+				<standard_record releve_nr="23" coverscale="03" date="20160711" km_hok_x="239.144288" km_hok_y="561.348455" length="2" width="2" surf_area="4" cov_total="95" cov_shrubs="2" cov_herbs="60" cov_mosses="80" cov_litter="5" />
+				<udf_record ispredefined="false" name="precision" type="N" len="6" dec="0" value="-1"/>
+				<udf_record ispredefined="false" name="associa_01" type="C" len="8" dec="0" value="r16AA02"/>
+				<udf_record ispredefined="false" name="volg_nr" type="N" len="5" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="bed_openwa" type="N" len="10" dec="0" value="0"/>
+				<udf_record ispredefined="false" name="veg_type" type="C" len="10" dec="0" value="I2e"/>
+				<udf_record ispredefined="false" name="bureau" type="C" len="35" dec="0" value="Ecologen Groep Groningen"/>
+				<udf_record ispredefined="false" name="auteurnaam" type="C" len="35" dec="0" value="N.P.J.De Vries"/>
+				<udf_record ispredefined="false" name="sbbprjcode" type="N" len="15" dec="0" value="936"/>
+				<udf_record ispredefined="false" name="opnamenr" type="C" len="5" dec="0" value="564"/>
+				<udf_record ispredefined="false" name="loc_type" type="C" len="15" dec="0" value="16A2-4"/>
+				<udf_record ispredefined="false" name="sbb_type1" type="C" len="15" dec="0" value="16A2a"/>
+				<udf_record ispredefined="false" name="volgnr" type="N" len="10" dec="0" value="564"/>
+				<udf_record ispredefined="false" name="deelgebied" type="C" len="56" dec="0" value="59"/>
+				<udf_record ispredefined="false" name="_expert_" type="C" len="8" dec="0" value="WE"/>
+			</header_data>
+			<species_data>
+				<species>
+					<standard_record nr="19" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="66" cover="m2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="228" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="244" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="246" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="248" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="261" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="335" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="386" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="631" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="641" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="670" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="763" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="784" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="813" cover="1-" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="923" cover="2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1017" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1040" cover="r1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1048" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1119" cover="p2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1305" cover="a2" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="1306" cover="p1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2376" cover="a1" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2620" cover="7" layer="0"/>
+				</species>
+				<species>
+					<standard_record nr="2976" cover="1-" layer="0"/>
+				</species>
+			</species_data>
+		</Plot>
+	</Plots>
+	<Lookup_tables>
+		<Coverscale_list>
+			<coverscale_record>
+				<code>03</code>
+				<description>Londo (1) volledig</description>
+				<data_record code="1" percentage="10"/>
+				<data_record code="1 " percentage="10"/>
+				<data_record code="1+" percentage="12"/>
+				<data_record code="1-" percentage="7"/>
+				<data_record code="10" percentage="97"/>
+				<data_record code="2" percentage="20"/>
+				<data_record code="2 " percentage="20"/>
+				<data_record code="2+" percentage="22"/>
+				<data_record code="2-" percentage="17"/>
+				<data_record code="3" percentage="30"/>
+				<data_record code="3 " percentage="30"/>
+				<data_record code="3+" percentage="32"/>
+				<data_record code="3-" percentage="27"/>
+				<data_record code="4" percentage="40"/>
+				<data_record code="4 " percentage="40"/>
+				<data_record code="4+" percentage="42"/>
+				<data_record code="4-" percentage="37"/>
+				<data_record code="5" percentage="50"/>
+				<data_record code="5 " percentage="50"/>
+				<data_record code="5+" percentage="52"/>
+				<data_record code="5-" percentage="47"/>
+				<data_record code="6" percentage="60"/>
+				<data_record code="6 " percentage="60"/>
+				<data_record code="6+" percentage="62"/>
+				<data_record code="6-" percentage="57"/>
+				<data_record code="7" percentage="70"/>
+				<data_record code="7 " percentage="70"/>
+				<data_record code="7+" percentage="72"/>
+				<data_record code="7-" percentage="67"/>
+				<data_record code="8" percentage="80"/>
+				<data_record code="8 " percentage="80"/>
+				<data_record code="8+" percentage="82"/>
+				<data_record code="8-" percentage="77"/>
+				<data_record code="9" percentage="90"/>
+				<data_record code="9 " percentage="90"/>
+				<data_record code="9+" percentage="92"/>
+				<data_record code="9-" percentage="87"/>
+				<data_record code="a1" percentage="1"/>
+				<data_record code="a2" percentage="2"/>
+				<data_record code="a4" percentage="4"/>
+				<data_record code="m1" percentage="1"/>
+				<data_record code="m2" percentage="2"/>
+				<data_record code="m4" percentage="4"/>
+				<data_record code="p1" percentage="1"/>
+				<data_record code="p2" percentage="2"/>
+				<data_record code="p4" percentage="4"/>
+				<data_record code="r1" percentage="1"/>
+				<data_record code="r2" percentage="2"/>
+				<data_record code="r4" percentage="4"/>
+			</coverscale_record>
+		</Coverscale_list>
+		<Country_list>
+			<country_record code="NL" description="Netherlands"/>
+		</Country_list>
+		<Associa_01_list>
+			<associa_01_record code="r09AA03A" description="Carici curtae-Agrostietum typicum"/>
+			<associa_01_record code="r09RG01" description="RG Carex nigra-Agrostis canina-[Caricion nigrae]"/>
+			<associa_01_record code="r09RG05" description="RG Carex rostrata-[Caricetalia nigrae/Phragmitetea]"/>
+			<associa_01_record code="r09RG09" description="RG Carex oederi subsp. oederi-[Parvocarictea]"/>
+			<associa_01_record code="r09RG10" description="RG Carex oederi subsp. oedocarpa-[Parvocaricetea]"/>
+			<associa_01_record code="r16AA01B" description="Cirsio dissecti-Molinietum typicum"/>
+			<associa_01_record code="r16AA02" description="Crepido-Juncetum acutiflori"/>
+			<associa_01_record code="r16RG08" description="RG Juncus effusus-[Molinietalia/Lolio-Potentillion anserinae]"/>
+			<associa_01_record code="r16RG28" description="RG Juncus acutiflorus-[Molinietalia]"/>
+			<associa_01_record code="r19AA02" description="Gentiano pneumonanthes-Nardetum"/>
+		</Associa_01_list>
+		<Species_list>
+			<species_record nr="1006" code="POTEANS" name="Potentilla anserina" author="Potentilla anserina" valid_nr="1006" valid_name="" valid_author="" synonym="no" nativename="Zilverschoon"/>
+			<species_record nr="1008" code="POTEERE" name="Potentilla erecta" author="Potentilla erecta" valid_nr="1008" valid_name="" valid_author="" synonym="no" nativename="Tormentil"/>
+			<species_record nr="1017" code="PRUNVUL" name="Prunella vulgaris" author="Prunella vulgaris" valid_nr="1017" valid_name="" valid_author="" synonym="no" nativename="Gewone brunel"/>
+			<species_record nr="1037" code="QUERROB" name="Quercus robur" author="Quercus robur" valid_nr="1037" valid_name="" valid_author="" synonym="no" nativename="Zomereik"/>
+			<species_record nr="1040" code="RANUACR" name="Ranunculus acris" author="Ranunculus acris" valid_nr="1040" valid_name="" valid_author="" synonym="no" nativename="Scherpe boterbloem"/>
+			<species_record nr="1048" code="RANUFLA" name="Ranunculus flammula" author="Ranunculus flammula" valid_nr="1048" valid_name="" valid_author="" synonym="no" nativename="Egelboterbloem"/>
+			<species_record nr="1056" code="RANUREP" name="Ranunculus repens" author="Ranunculus repens" valid_nr="1056" valid_name="" valid_author="" synonym="no" nativename="Kruipende boterbloem"/>
+			<species_record nr="1066" code="RHINANG" name="Rhinanthus angustifolius" author="Rhinanthus angustifolius" valid_nr="1066" valid_name="" valid_author="" synonym="no" nativename="Grote ratelaar"/>
+			<species_record nr="1093" code="RUMEACE" name="Rumex acetosa" author="Rumex acetosa" valid_nr="1093" valid_name="" valid_author="" synonym="no" nativename="Veldzuring"/>
+			<species_record nr="1119" code="SALXCIN" name="Salix cinerea" author="Salix cinerea" valid_nr="1119" valid_name="" valid_author="" synonym="no" nativename="Grauwe en Rossige wilg"/>
+			<species_record nr="1124" code="SALXREP" name="Salix repens" author="Salix repens" valid_nr="1124" valid_name="" valid_author="" synonym="no" nativename="Kruipwilg"/>
+			<species_record nr="1153" code="SCIRC-G" name="Trichophorum cespitosum subsp. germanicum" author="Trichophorum cespitosum s. germanicum" valid_nr="1153" valid_name="" valid_author="" synonym="no" nativename="Gewone veenbies"/>
+			<species_record nr="1174" code="SCUTMIN" name="Scutellaria minor" author="Scutellaria minor" valid_nr="1174" valid_name="" valid_author="" synonym="no" nativename="Klein glidkruid"/>
+			<species_record nr="1199" code="DANTDEC" name="Danthonia decumbens" author="Danthonia decumbens" valid_nr="1199" valid_name="" valid_author="" synonym="no" nativename="Tandjesgras"/>
+			<species_record nr="1254" code="STELPAS" name="Stellaria palustris" author="Stellaria palustris" valid_nr="1254" valid_name="" valid_author="" synonym="no" nativename="Zeegroene muur"/>
+			<species_record nr="1258" code="SUCCPRA" name="Succisa pratensis" author="Succisa pratensis" valid_nr="1258" valid_name="" valid_author="" synonym="no" nativename="Blauwe knoop"/>
+			<species_record nr="1305" code="TRIFPRA" name="Trifolium pratense" author="Trifolium pratense" valid_nr="1305" valid_name="" valid_author="" synonym="no" nativename="Rode klaver"/>
+			<species_record nr="1306" code="TRIFREP" name="Trifolium repens" author="Trifolium repens" valid_nr="1306" valid_name="" valid_author="" synonym="no" nativename="Witte klaver"/>
+			<species_record nr="1385" code="VIOLPAL" name="Viola palustris" author="Viola palustris" valid_nr="1385" valid_name="" valid_author="" synonym="no" nativename="Moerasviooltje"/>
+			<species_record nr="139" code="BETUPUB" name="Betula pubescens" author="Betula pubescens" valid_nr="139" valid_name="" valid_author="" synonym="no" nativename="Zachte berk"/>
+			<species_record nr="1544" code="AGRSCAN" name="Agrostis canina" author="Agrostis canina" valid_nr="1544" valid_name="" valid_author="" synonym="no" nativename="Moerasstruisgras"/>
+			<species_record nr="1557" code="CARE*FU" name="Carex hostiana x oederi subsp. oedocarpa" author="Carex hostiana x oederi s. oedocarpa" valid_nr="1557" valid_name="" valid_author="" synonym="no" nativename="Blonde  x Geelgroene zegge"/>
+			<species_record nr="1616" code="DACYMAC" name="Dactylorhiza maculata" author="Dactylorhiza maculata" valid_nr="1616" valid_name="" valid_author="" synonym="no" nativename="Gevlekte orchis"/>
+			<species_record nr="1637" code="DACYMAJ" name="Dactylorhiza majalis s.l." author="Dactylorhiza majalis s.l." valid_nr="1637" valid_name="" valid_author="" synonym="no" nativename="Brede orchis/Rietorchis"/>
+			<species_record nr="1642" code="EPILTET" name="Epilobium tetragonum" author="Epilobium tetragonum" valid_nr="1642" valid_name="" valid_author="" synonym="no" nativename="Kantige basterdwederik s.l."/>
+			<species_record nr="173" code="CALACAN" name="Calamagrostis canescens" author="Calamagrostis canescens" valid_nr="173" valid_name="" valid_author="" synonym="no" nativename="Hennegras"/>
+			<species_record nr="18" code="AGRSSTO" name="Agrostis stolonifera" author="Agrostis stolonifera" valid_nr="18" valid_name="" valid_author="" synonym="no" nativename="Fioringras"/>
+			<species_record nr="186" code="CALUVUL" name="Calluna vulgaris" author="Calluna vulgaris" valid_nr="186" valid_name="" valid_author="" synonym="no" nativename="Struikhei"/>
+			<species_record nr="19" code="AGRSCAP" name="Agrostis capillaris" author="Agrostis capillaris" valid_nr="19" valid_name="" valid_author="" synonym="no" nativename="Gewoon struisgras"/>
+			<species_record nr="1933" code="LUZUMUL" name="Luzula multiflora s.l." author="Luzula multiflora s.l." valid_nr="1933" valid_name="" valid_author="" synonym="no" nativename="Veelbloemige veldbies (groep)"/>
+			<species_record nr="205" code="CARDPRA" name="Cardamine pratensis" author="Cardamine pratensis" valid_nr="205" valid_name="" valid_author="" synonym="no" nativename="Pinksterbloem"/>
+			<species_record nr="219" code="CARECUR" name="Carex curta" author="Carex curta" valid_nr="219" valid_name="" valid_author="" synonym="no" nativename="Zompzegge"/>
+			<species_record nr="220" code="CAREO-O" name="Carex oederi subsp. oedocarpa" author="Carex oederi s. oedocarpa" valid_nr="220" valid_name="" valid_author="" synonym="no" nativename="Geelgroene zegge"/>
+			<species_record nr="228" code="CAREECH" name="Carex echinata" author="Carex echinata" valid_nr="228" valid_name="" valid_author="" synonym="no" nativename="Sterzegge"/>
+			<species_record nr="2316" code="EUPRSTR" name="Euphrasia stricta" author="Euphrasia stricta" valid_nr="2316" valid_name="" valid_author="" synonym="no" nativename="Stijve ogentroost"/>
+			<species_record nr="232" code="CAREFLC" name="Carex flacca" author="Carex flacca" valid_nr="232" valid_name="" valid_author="" synonym="no" nativename="Zeegroene zegge"/>
+			<species_record nr="236" code="CAREHOS" name="Carex hostiana" author="Carex hostiana" valid_nr="236" valid_name="" valid_author="" synonym="no" nativename="Blonde zegge"/>
+			<species_record nr="2376" code="GALUPAL" name="Galium palustre s.l." author="Galium palustre s.l." valid_nr="2376" valid_name="" valid_author="" synonym="no" nativename="Moeraswalstro"/>
+			<species_record nr="24" code="AJUGREP" name="Ajuga reptans" author="Ajuga reptans" valid_nr="24" valid_name="" valid_author="" synonym="no" nativename="Kruipend zenegroen"/>
+			<species_record nr="244" code="CARENIG" name="Carex nigra" author="Carex nigra" valid_nr="244" valid_name="" valid_author="" synonym="no" nativename="Zwarte zegge"/>
+			<species_record nr="246" code="CAREOVA" name="Carex ovalis" author="Carex ovalis" valid_nr="246" valid_name="" valid_author="" synonym="no" nativename="Hazenzegge"/>
+			<species_record nr="248" code="CAREPAN" name="Carex panicea" author="Carex panicea" valid_nr="248" valid_name="" valid_author="" synonym="no" nativename="Blauwe zegge"/>
+			<species_record nr="251" code="CAREPIL" name="Carex pilulifera" author="Carex pilulifera" valid_nr="251" valid_name="" valid_author="" synonym="no" nativename="Pilzegge"/>
+			<species_record nr="255" code="CAREPUL" name="Carex pulicaris" author="Carex pulicaris" valid_nr="255" valid_name="" valid_author="" synonym="no" nativename="Vlozegge"/>
+			<species_record nr="260" code="CAREROS" name="Carex rostrata" author="Carex rostrata" valid_nr="260" valid_name="" valid_author="" synonym="no" nativename="Snavelzegge"/>
+			<species_record nr="261" code="CAREO-R" name="Carex oederi subsp. oederi" author="Carex oederi s. oederi" valid_nr="261" valid_name="" valid_author="" synonym="no" nativename="Dwergzegge"/>
+			<species_record nr="2619" code="CALRCOR" name="Calliergon cordifolium" author="Calliergon cordifolium" valid_nr="2619" valid_name="" valid_author="" synonym="no" nativename="Hartbladig puntmos"/>
+			<species_record nr="2620" code="CALGCUS" name="Calliergonella cuspidata" author="Calliergonella cuspidata" valid_nr="2620" valid_name="" valid_author="" synonym="no" nativename="Gewoon puntmos"/>
+			<species_record nr="2923" code="POLRCOM" name="Polytrichum commune" author="Polytrichum commune" valid_nr="2923" valid_name="" valid_author="" synonym="no" nativename="Gewoon haarmos"/>
+			<species_record nr="2976" code="RHYTSQU" name="Rhytidiadelphus squarrosus" author="Rhytidiadelphus squarrosus" valid_nr="2976" valid_name="" valid_author="" synonym="no" nativename="Gewoon haakmos"/>
+			<species_record nr="2996" code="SPHGDEN" name="Sphagnum denticulatum" author="Sphagnum denticulatum" valid_nr="2996" valid_name="" valid_author="" synonym="no" nativename="Geoord veenmos"/>
+			<species_record nr="3023" code="SPHGSQU" name="Sphagnum squarrosum" author="Sphagnum squarrosum" valid_nr="3023" valid_name="" valid_author="" synonym="no" nativename="Haakveenmos"/>
+			<species_record nr="3239" code="SPHGREC" name="Sphagnum fallax/flexuosum/angustifolium" author="Sphagnum fallax/flexuosum/angustifolium" valid_nr="3239" valid_name="" valid_author="" synonym="no" nativename="null"/>
+			<species_record nr="332" code="CIRSDIS" name="Cirsium dissectum" author="Cirsium dissectum" valid_nr="332" valid_name="" valid_author="" synonym="no" nativename="Spaanse ruiter"/>
+			<species_record nr="335" code="CIRSPAL" name="Cirsium palustre" author="Cirsium palustre" valid_nr="335" valid_name="" valid_author="" synonym="no" nativename="Kale jonker"/>
+			<species_record nr="336" code="CIRSVUL" name="Cirsium vulgare" author="Cirsium vulgare" valid_nr="336" valid_name="" valid_author="" synonym="no" nativename="Speerdistel"/>
+			<species_record nr="36" code="ALNUGLU" name="Alnus glutinosa" author="Alnus glutinosa" valid_nr="36" valid_name="" valid_author="" synonym="no" nativename="Zwarte els"/>
+			<species_record nr="386" code="CYNSCRI" name="Cynosurus cristatus" author="Cynosurus cristatus" valid_nr="386" valid_name="" valid_author="" synonym="no" nativename="Kamgras"/>
+			<species_record nr="397" code="DESCCES" name="Deschampsia cespitosa" author="Deschampsia cespitosa" valid_nr="397" valid_name="" valid_author="" synonym="no" nativename="Ruwe smele"/>
+			<species_record nr="418" code="DROSROT" name="Drosera rotundifolia" author="Drosera rotundifolia" valid_nr="418" valid_name="" valid_author="" synonym="no" nativename="Ronde zonnedauw"/>
+			<species_record nr="456" code="EPILPAL" name="Epilobium palustre" author="Epilobium palustre" valid_nr="456" valid_name="" valid_author="" synonym="no" nativename="Moerasbasterdwederik"/>
+			<species_record nr="461" code="EPIPPAL" name="Epipactis palustris" author="Epipactis palustris" valid_nr="461" valid_name="" valid_author="" synonym="no" nativename="Moeraswespenorchis"/>
+			<species_record nr="463" code="EQUIFLU" name="Equisetum fluviatile" author="Equisetum fluviatile" valid_nr="463" valid_name="" valid_author="" synonym="no" nativename="Holpijp"/>
+			<species_record nr="473" code="ERICTET" name="Erica tetralix" author="Erica tetralix" valid_nr="473" valid_name="" valid_author="" synonym="no" nativename="Gewone dophei"/>
+			<species_record nr="5" code="ACHIPTA" name="Achillea ptarmica" author="Achillea ptarmica" valid_nr="5" valid_name="" valid_author="" synonym="no" nativename="Wilde bertram"/>
+			<species_record nr="51335" code="POTEPAL" name="Potentilla palustris" author="Potentilla palustris = Comarum palustre" valid_nr="346" valid_name="" valid_author="" synonym="yes" nativename="null"/>
+			<species_record nr="51470" code="LYCHFLO" name="Lychnis flos-cuculi" author="Lychnis flos-cuculi = Silene flos-cuculi" valid_nr="772" valid_name="" valid_author="" synonym="yes" nativename="null"/>
+			<species_record nr="51609" code="SENEAQU" name="Senecio aquaticus" author="Senecio aquaticus = Jacobaea aquatica" valid_nr="1183" valid_name="" valid_author="" synonym="yes" nativename="null"/>
+			<species_record nr="519" code="FESTPRA" name="Festuca pratensis" author="Festuca pratensis" valid_nr="519" valid_name="" valid_author="" synonym="no" nativename="Beemdlangbloem"/>
+			<species_record nr="526" code="FILIULM" name="Filipendula ulmaria" author="Filipendula ulmaria" valid_nr="526" valid_name="" valid_author="" synonym="no" nativename="Moerasspirea"/>
+			<species_record nr="556" code="GALUULI" name="Galium uliginosum" author="Galium uliginosum" valid_nr="556" valid_name="" valid_author="" synonym="no" nativename="Ruw walstro"/>
+			<species_record nr="6192" code="EPIL-SP" name="Epilobium species" author="Epilobium species" valid_nr="6192" valid_name="" valid_author="" synonym="no" nativename="Basterdwederik (G)"/>
+			<species_record nr="631" code="HOLCLAN" name="Holcus lanatus" author="Holcus lanatus" valid_nr="631" valid_name="" valid_author="" synonym="no" nativename="Gestreepte witbol"/>
+			<species_record nr="641" code="HYDOVUL" name="Hydrocotyle vulgaris" author="Hydrocotyle vulgaris" valid_nr="641" valid_name="" valid_author="" synonym="no" nativename="Gewone waternavel"/>
+			<species_record nr="654" code="HYPCRAD" name="Hypochaeris radicata" author="Hypochaeris radicata" valid_nr="654" valid_name="" valid_author="" synonym="no" nativename="Gewoon biggenkruid"/>
+			<species_record nr="66" code="ANTXODO" name="Anthoxanthum odoratum" author="Anthoxanthum odoratum" valid_nr="66" valid_name="" valid_author="" synonym="no" nativename="Gewoon reukgras"/>
+			<species_record nr="670" code="JUNCACU" name="Juncus acutiflorus" author="Juncus acutiflorus" valid_nr="670" valid_name="" valid_author="" synonym="no" nativename="Veldrus"/>
+			<species_record nr="673" code="JUNCART" name="Juncus articulatus" author="Juncus articulatus" valid_nr="673" valid_name="" valid_author="" synonym="no" nativename="Zomprus"/>
+			<species_record nr="679" code="JUNCCON" name="Juncus conglomeratus" author="Juncus conglomeratus" valid_nr="679" valid_name="" valid_author="" synonym="no" nativename="Biezenknoppen"/>
+			<species_record nr="680" code="JUNCEFF" name="Juncus effusus" author="Juncus effusus" valid_nr="680" valid_name="" valid_author="" synonym="no" nativename="Pitrus"/>
+			<species_record nr="687" code="JUNCSQU" name="Juncus squarrosus" author="Juncus squarrosus" valid_nr="687" valid_name="" valid_author="" synonym="no" nativename="Trekrus"/>
+			<species_record nr="763" code="LOTUULI" name="Lotus pedunculatus" author="Lotus pedunculatus" valid_nr="763" valid_name="" valid_author="" synonym="no" nativename="Moerasrolklaver"/>
+			<species_record nr="780" code="LYCPEUR" name="Lycopus europaeus" author="Lycopus europaeus" valid_nr="780" valid_name="" valid_author="" synonym="no" nativename="Wolfspoot"/>
+			<species_record nr="783" code="LYSITHY" name="Lysimachia thyrsiflora" author="Lysimachia thyrsiflora" valid_nr="783" valid_name="" valid_author="" synonym="no" nativename="Moeraswederik"/>
+			<species_record nr="784" code="LYSIVUL" name="Lysimachia vulgaris" author="Lysimachia vulgaris" valid_nr="784" valid_name="" valid_author="" synonym="no" nativename="Grote wederik"/>
+			<species_record nr="785" code="LYTHSAL" name="Lythrum salicaria" author="Lythrum salicaria" valid_nr="785" valid_name="" valid_author="" synonym="no" nativename="Grote kattenstaart"/>
+			<species_record nr="813" code="MENTAQU" name="Mentha aquatica" author="Mentha aquatica" valid_nr="813" valid_name="" valid_author="" synonym="no" nativename="Watermunt"/>
+			<species_record nr="821" code="MENYTRI" name="Menyanthes trifoliata" author="Menyanthes trifoliata" valid_nr="821" valid_name="" valid_author="" synonym="no" nativename="Waterdrieblad"/>
+			<species_record nr="832" code="MOLICAE" name="Molinia caerulea" author="Molinia caerulea" valid_nr="832" valid_name="" valid_author="" synonym="no" nativename="Pijpenstrootje"/>
+			<species_record nr="869" code="OENAFIS" name="Oenanthe fistulosa" author="Oenanthe fistulosa" valid_nr="869" valid_name="" valid_author="" synonym="no" nativename="Pijptorkruid"/>
+			<species_record nr="923" code="PEDIPAL" name="Pedicularis palustris" author="Pedicularis palustris" valid_nr="923" valid_name="" valid_author="" synonym="no" nativename="Moeraskartelblad"/>
+			<species_record nr="924" code="PEDISYL" name="Pedicularis sylvatica" author="Pedicularis sylvatica" valid_nr="924" valid_name="" valid_author="" synonym="no" nativename="Heidekartelblad"/>
+			<species_record nr="925" code="LYTHPOR" name="Lythrum portula" author="Lythrum portula" valid_nr="925" valid_name="" valid_author="" synonym="no" nativename="Waterpostelein"/>
+			<species_record nr="929" code="PEUCPAL" name="Peucedanum palustre" author="Peucedanum palustre" valid_nr="929" valid_name="" valid_author="" synonym="no" nativename="Melkeppe"/>
+			<species_record nr="930" code="PHALARU" name="Phalaris arundinacea" author="Phalaris arundinacea" valid_nr="930" valid_name="" valid_author="" synonym="no" nativename="Rietgras"/>
+			<species_record nr="933" code="PHRAAUS" name="Phragmites australis" author="Phragmites australis" valid_nr="933" valid_name="" valid_author="" synonym="no" nativename="Riet"/>
+			<species_record nr="946" code="PLAALAN" name="Plantago lanceolata" author="Plantago lanceolata" valid_nr="946" valid_name="" valid_author="" synonym="no" nativename="Smalle weegbree"/>
+			<species_record nr="957" code="POA PAL" name="Poa palustris" author="Poa palustris" valid_nr="957" valid_name="" valid_author="" synonym="no" nativename="Moerasbeemdgras"/>
+			<species_record nr="958" code="POA PRA" name="Poa pratensis" author="Poa pratensis" valid_nr="958" valid_name="" valid_author="" synonym="no" nativename="Veldbeemdgras"/>
+			<species_record nr="959" code="POA TRI" name="Poa trivialis" author="Poa trivialis" valid_nr="959" valid_name="" valid_author="" synonym="no" nativename="Ruw beemdgras"/>
+		</Species_list>
+	</Lookup_tables>
+	<Template>
+		<Files>
+			<record file_nr="1" file_name="tvflora" file_desc="FLORA" fieldindex="0" file_edit="false" array_pos="0" progpath="false" print_it="false"/>
+			<record file_nr="2" file_name="tvhabita" file_desc="HEADER DATA" fieldindex="0" file_edit="false" array_pos="0" progpath="false" print_it="false"/>
+			<record file_nr="3" file_name="tvabund" file_desc="SPECIES DATA" fieldindex="0" file_edit="false" array_pos="0" progpath="false" print_it="false"/>
+			<record file_nr="4" file_name="remarks" file_desc="REMARKS" fieldindex="0" file_edit="false" array_pos="0" progpath="false" print_it="false"/>
+			<record file_nr="5" file_name="tvschaal" file_desc="OPNAMESCHALEN" fieldindex="1" file_edit="true" array_pos="1" progpath="true" print_it="true"/>
+			<record file_nr="6" file_name="tvwaarne" file_desc="AUTEURS" fieldindex="2" file_edit="true" array_pos="2" progpath="true" print_it="true"/>
+			<record file_nr="7" file_name="tvprojct" file_desc="PROJECTEN" fieldindex="1" file_edit="true" array_pos="3" progpath="true" print_it="true"/>
+			<record file_nr="8" file_name="syntaxa" file_desc="WESTHOFF-SYNTAXA" fieldindex="0" file_edit="true" array_pos="4" progpath="true" print_it="true"/>
+			<record file_nr="9" file_name="newsynt" file_desc="Schaminée-syntaxa" fieldindex="0" file_edit="true" array_pos="5" progpath="true" print_it="true"/>
+			<record file_nr="10" file_name="transect" file_desc="TRANSECTCODES" fieldindex="0" file_edit="true" array_pos="6" progpath="true" print_it="true"/>
+			<record file_nr="11" file_name="sbbcodes" file_desc="SBBCODES" fieldindex="2" file_edit="true" array_pos="0" progpath="true" print_it="true"/>
+			<record file_nr="12" file_name="sbbwaarn" file_desc="SBBWAARNEMERS" fieldindex="0" file_edit="true" array_pos="0" progpath="true" print_it="true"/>
+			<record file_nr="13" file_name="tvrefenc" file_desc="REFERENTIES" fieldindex="1" file_edit="true" array_pos="0" progpath="true" print_it="true"/>
+			<record file_nr="14" file_name="nat2000" file_desc="NATURA 2000 GEBIEDEN" fieldindex="0" file_edit="false" array_pos="7" progpath="true" print_it="true"/>
+		</Files>
+		<Dbasedic>
+			<record file_nr="1" field_name="SPECIES_NR" field_type="N" field_len="5" field_dec="0" field_pict="@ 99999" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Soorten number code" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="1" field_name="LETTERCODE" field_type="C" field_len="8" field_dec="0" field_pict="@ !!!!!!!!" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Soorten letter code" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="1" field_name="SHORTNAME" field_type="C" field_len="25" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Soortsnaam" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="1" field_name="ABBREVIAT" field_type="C" field_len="37" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Wetenschappelijke naam" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="1" field_name="NATIVENAME" field_type="C" field_len="25" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Nederlandse naam" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="1" field_name="REMARKS" field_type="M" field_len="10" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="RELEVE_NR" field_type="N" field_len="6" field_dec="0" field_pict="@ 999999" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Opnamenummer" field_menu="Opnamenummer" field_sel="3" field_list="0"/>
+			<record file_nr="2" field_name="REFERENCE" field_type="C" field_len="6" field_dec="0" field_pict="@ !XXXXX" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Biblio referentie" field_menu="Biblioreferen." field_sel="3" field_list="-3"/>
+			<record file_nr="2" field_name="COVERSCALE" field_type="C" field_len="2" field_dec="0" field_pict="@ ##" field_tran="" field_eval="CHECK_2(1, .T., .T., .T.)" field_esel="" field_when="" field_carg="" field_desc="Bedekkingsschaal" field_menu="Bedekkingssch." field_sel="2" field_list="1"/>
+			<record file_nr="2" field_name="PROJECT" field_type="C" field_len="3" field_dec="0" field_pict="@ ###" field_tran="" field_eval="CHECK_2(3, .T., .F., .T.)" field_esel="" field_when="" field_carg="" field_desc="Project (code)" field_menu="Project code" field_sel="2" field_list="3"/>
+			<record file_nr="2" field_name="AUTHOR" field_type="C" field_len="4" field_dec="0" field_pict="@ ####" field_tran="" field_eval="CHECK_2(2, .T., .F., .T.)" field_esel="" field_when="" field_carg="" field_desc="Auteur (code)" field_menu="Auteur code" field_sel="2" field_list="2"/>
+			<record file_nr="2" field_name="DATE" field_type="C" field_len="8" field_dec="0" field_pict="@R ####/##/##" field_tran="@R ####/##/##" field_eval="CHECK_5()" field_esel="" field_when="" field_carg="" field_desc="Datum (jaar/maand/dag)" field_menu="Datum" field_sel="3" field_list="0"/>
+			<record file_nr="2" field_name="KM_HOK_X" field_type="N" field_len="10" field_dec="6" field_pict="@Z 999.999999" field_tran="" field_eval="CHECK_COORD(1)" field_esel="" field_when="" field_carg="" field_desc="X-coordinaat (km)" field_menu="X-coordinaat m" field_sel="1" field_list="-2"/>
+			<record file_nr="2" field_name="KM_HOK_Y" field_type="N" field_len="10" field_dec="6" field_pict="@Z 999.999999" field_tran="" field_eval="CHECK_COORD(2)" field_esel="" field_when="" field_carg="" field_desc="Y-coordinaat (km)" field_menu="Y-coordinaat m" field_sel="1" field_list="-2"/>
+			<record file_nr="2" field_name="BLOK" field_type="C" field_len="8" field_dec="0" field_pict="@R !#-##-##-##" field_tran="@R X#-##-##-##" field_eval="CHECK_BLOK()" field_esel="" field_when="" field_carg="" field_desc="Bloknummer" field_menu="Bloknummer" field_sel="2" field_list="-2"/>
+			<record file_nr="2" field_name="SYNTAXON" field_type="C" field_len="7" field_dec="0" field_pict="@ ##!!##!" field_tran="" field_eval="CHECK_2(4, .F., .F., .T.)" field_esel="" field_when="" field_carg="" field_desc="Syntaxoncode Westhoff" field_menu="Westhoff-code" field_sel="2" field_list="4"/>
+			<record file_nr="2" field_name="NEW_SYNTAX" field_type="C" field_len="8" field_dec="0" field_pict="@ X##!!##!" field_tran="" field_eval="CHECK_2(5, .F., .F., .T.)" field_esel="" field_when="" field_carg="" field_desc="Syntaxoncode Schaminée" field_menu="Schaminée-code" field_sel="2" field_list="5"/>
+			<record file_nr="2" field_name="LENGTH" field_type="N" field_len="6" field_dec="2" field_pict="@Z 999.99" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Lengte proefvlak (m)" field_menu="Lengte opn.  m" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="WIDTH" field_type="N" field_len="5" field_dec="2" field_pict="@Z 99.99" field_tran="" field_eval="CHECK_AREA()" field_esel="" field_when="" field_carg="" field_desc="Breedte proefvlak (m)" field_menu="Breedte opn. m" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="SURF_AREA" field_type="N" field_len="8" field_dec="2" field_pict="@Z 99999.99" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Opp. proefvlak (m¦)" field_menu="Oppervlakte m2" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="EXPOSITION" field_type="C" field_len="3" field_dec="0" field_pict="@ !!!" field_tran="" field_eval="CHECK_4(&quot;NWZOVX&quot;)" field_esel="" field_when="" field_carg="" field_desc="Expositie (`NWZOVX')" field_menu="Expositie" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="INCLINATIO" field_type="C" field_len="2" field_dec="0" field_pict="@ ##" field_tran="" field_eval="CHECK_1(&quot;VAL(cVar) &lt;= 90&quot;)" field_esel="" field_when="" field_carg="" field_desc="Inclinatie (graden)" field_menu="Hellingsh.  gr" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="COV_TOTAL" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="CHECK_1(&quot;cVar &lt;= 100&quot;)" field_esel="" field_when="" field_carg="" field_desc="Bedekking totaal (%)" field_menu="Bed. totaal  %" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="COV_TREES" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="CHECK_1(&quot;cVar &lt;= 100&quot;)" field_esel="" field_when="" field_carg="" field_desc="Bedekking boomlaag (%)" field_menu="Bed. booml.  %" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="COV_SHRUBS" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="CHECK_1(&quot;cVar &lt;= 100&quot;)" field_esel="" field_when="" field_carg="" field_desc="Bedekking struiklaag (%)" field_menu="Bed. struikl.%" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="COV_HERBS" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="CHECK_1(&quot;cVar &lt;= 100&quot;)" field_esel="" field_when="" field_carg="" field_desc="Bedekking kruidlaag (%)" field_menu="Bed. kruidl. %" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="COV_MOSSES" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="CHECK_1(&quot;cVar &lt;= 100&quot;)" field_esel="" field_when="" field_carg="" field_desc="Bedekking moslaag (%)" field_menu="Bed. moslaag %" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="COV_ALGAE" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="CHECK_1(&quot;cVar &lt;= 100&quot;)" field_esel="" field_when="" field_carg="" field_desc="Bedekking algenlaag (%)" field_menu="Bed. algenl. %" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="COV_LITTER" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="CHECK_1(&quot;cVar &lt;= 100&quot;)" field_esel="" field_when="" field_carg="" field_desc="Bedekking strooisellaag (%)" field_menu="Bed. strooi. %" field_sel="1" field_list="0"/>
+			<record file_nr="2" field_name="TREE_HIGH" field_type="N" field_len="2" field_dec="0" field_pict="@Z 99" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Hoogte (hoge) boomlaag (m)" field_menu="Hgt hoge bl. m" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="TREE_LOW" field_type="N" field_len="2" field_dec="0" field_pict="@Z 99" field_tran="" field_eval="" field_esel="" field_when="(aRecord[24]&gt;0).OR.(aRecord[25]&gt;0)" field_carg="" field_desc="Hoogte lage boomlaag (m)" field_menu="Hgt lage bl. m" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="SHRUB_HIGH" field_type="N" field_len="4" field_dec="1" field_pict="@Z 99.9" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Hoogte (hoge) struiklaag (m)" field_menu="Hgt hoge sl. m" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="SHRUB_LOW" field_type="N" field_len="4" field_dec="1" field_pict="@Z 99.9" field_tran="" field_eval="" field_esel="" field_when="(aRecord[26]&gt;0).OR.(aRecord[27]&gt;0)" field_carg="" field_desc="Hoogte lage struiklaag (m)" field_menu="Hgt lage sl. m" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="HERB_HIGH" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Gem. hoogte (hoge) kruidl (cm)" field_menu="Hgt hoge kl.cm" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="HERB_LOW" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="" field_esel="" field_when="(aRecord[28]&gt;0).OR.(aRecord[29]&gt;0)" field_carg="" field_desc="Gem. hoogte lage kruidl. (cm)" field_menu="Hgt lage kl.cm" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="HERB_MAX" field_type="N" field_len="3" field_dec="0" field_pict="@Z 999" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Maximale hoogte kruidlaag (cm)" field_menu="Max hgt kl. cm" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="MOSS_IDENT" field_type="C" field_len="1" field_dec="0" field_pict="@ !" field_tran="" field_eval="CHECK_1(&quot;cVar $ ' JN'&quot;)" field_esel="" field_when="" field_carg="" field_desc="Mossen geidentificeerd (J/N)" field_menu="Mossen iden. ?" field_sel="2" field_list="0"/>
+			<record file_nr="2" field_name="PQ" field_type="C" field_len="1" field_dec="0" field_pict="@ !" field_tran="" field_eval="CHECK_1(&quot;cVar $ ' JN'&quot;)" field_esel="" field_when="" field_carg="" field_desc="Permanent Quadraat (J/N)" field_menu="Perm. Quadr. ?" field_sel="2" field_list="0"/>
+			<record file_nr="2" field_name="TRANSECT" field_type="C" field_len="1" field_dec="0" field_pict="@ #" field_tran="" field_eval="CHECK_2(6, .F., .F., .T.)" field_esel="" field_when="" field_carg="" field_desc="Transect" field_menu="Transect" field_sel="2" field_list="6"/>
+			<record file_nr="2" field_name="SBBCODE" field_type="C" field_len="8" field_dec="0" field_pict="@ ########" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="SBB-code" field_menu="SBB-code" field_sel="2" field_list="-1"/>
+			<record file_nr="2" field_name="REMARKS" field_type="C" field_len="56" field_dec="0" field_pict="@S56" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Opmerking" field_menu="Opmerkingen" field_sel="4" field_list="2"/>
+			<record file_nr="3" field_name="RELEVE_NR" field_type="N" field_len="6" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Opnamenummer" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="3" field_name="SPECIES_NR" field_type="N" field_len="5" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Soort" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="3" field_name="COVER_CODE" field_type="C" field_len="2" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Bedekking" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="4" field_name="RELEVE_NR" field_type="N" field_len="6" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="4" field_name="REMARKS" field_type="C" field_len="25" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="5" field_name="SCALE_NR" field_type="C" field_len="2" field_dec="0" field_pict="@ 99" field_tran="" field_eval="CHECK_3(uVar, oGet)" field_esel="" field_when="" field_carg="" field_desc="Code bedekkingsschaal" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="5" field_name="SCALE_NAME" field_type="C" field_len="22" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Naam schaal" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="5" field_name="SCALE_CODE" field_type="C" field_len="6" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Afkorting naam" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="6" field_name="AUTH_CODE" field_type="C" field_len="4" field_dec="0" field_pict="@ 9999" field_tran="" field_eval="CHECK_3(uVar, oGet)" field_esel="" field_when="" field_carg="" field_desc="Auteurscode" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="6" field_name="AUTH_NAME" field_type="C" field_len="30" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Naam auteur" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="6" field_name="AFKORTING" field_type="C" field_len="10" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Afkorting" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="7" field_name="PROJECT" field_type="C" field_len="3" field_dec="0" field_pict="@ 999" field_tran="" field_eval="CHECK_3(uVar, oGet)" field_esel="" field_when="" field_carg="" field_desc="Projectcode" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="7" field_name="PROJ_NAME" field_type="C" field_len="30" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Naam project" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="8" field_name="CODE" field_type="C" field_len="7" field_dec="0" field_pict="@ 99!!99X" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Syntaxoncode" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="8" field_name="SYNTAXON" field_type="C" field_len="36" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Naam syntaxon" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="9" field_name="CODE" field_type="C" field_len="7" field_dec="0" field_pict="@ 99!!99X" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Syntaxoncode" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="9" field_name="SYNTAXON" field_type="C" field_len="36" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Naam syntaxon" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="10" field_name="CODE" field_type="C" field_len="1" field_dec="0" field_pict="@ 9" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Transectcode" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="10" field_name="OMSCHRIJF" field_type="C" field_len="36" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Omschrijving" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="11" field_name="SBBCODE" field_type="C" field_len="8" field_dec="0" field_pict="@ 99999999" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="SBB-code" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="11" field_name="BLOKNUMMER" field_type="C" field_len="6" field_dec="0" field_pict="@ 999999" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Bloknr." field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="11" field_name="SBBTERREIN" field_type="C" field_len="52" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Naam SBB-terrein" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="11" field_name="PROVINCIE" field_type="C" field_len="2" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Prov." field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="12" field_name="PG_WNCODE" field_type="C" field_len="4" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="PG waarn.-code" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="12" field_name="SBBWNCODE" field_type="C" field_len="5" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="SBB waarn.-code" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="12" field_name="SBBWNNAAM" field_type="C" field_len="30" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="SBB waarn.-naam" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="6" field_name="EMBARGO" field_type="L" field_len="1" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Embargo" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="3" field_name="LAYER" field_type="N" field_len="1" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Laag" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="13" field_name="BIBLIO_NR" field_type="C" field_len="6" field_dec="0" field_pict="@ 999999" field_tran="" field_eval="CHECK_3(uVar, oGet)" field_esel="" field_when="" field_carg="" field_desc="Biblio ref." field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="13" field_name="AUTEUR" field_type="C" field_len="80" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Auteur" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="13" field_name="JAAR" field_type="C" field_len="4" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Jaar" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="13" field_name="TITEL" field_type="C" field_len="200" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Titel" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="13" field_name="UITGEGEVEN" field_type="C" field_len="200" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Uitgave" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="7" field_name="EMBARGO" field_type="L" field_len="1" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Embargo" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="2" field_name="NAT2000GEB" field_type="C" field_len="4" field_dec="0" field_pict="@ 9999" field_tran="" field_eval="CHECK_2(7, .T., .F., .T.)" field_esel="" field_when="" field_carg="" field_desc="Natura 2000-gebied" field_menu="Nat.2000-geb." field_sel="2" field_list="7"/>
+			<record file_nr="14" field_name="CODE" field_type="C" field_len="4" field_dec="0" field_pict="@ 9999" field_tran="" field_eval="CHECK_3(uVar, oGet)" field_esel="" field_when="" field_carg="" field_desc="Code" field_menu="" field_sel="0" field_list="0"/>
+			<record file_nr="14" field_name="GEBIED" field_type="C" field_len="80" field_dec="0" field_pict="" field_tran="" field_eval="" field_esel="" field_when="" field_carg="" field_desc="Natura 2000-gebied" field_menu="" field_sel="0" field_list="0"/>
+		</Dbasedic>
+	</Template>
+</Plot_package>

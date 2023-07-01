@@ -45,6 +45,9 @@ def test_get_pointspecies(db):
 def test_get_vegtype(db):
     assert isinstance(db.get_vegtype(),DataFrame)
 
+def test_get_vegtype_singlepoly(db);
+    assert isinstance(db.get_vegtype_singlepoly(loctype='v'),DataFrame)
+
 def test_yearcounts(db):
     assert isinstance(db.yearcounts,Series)
 

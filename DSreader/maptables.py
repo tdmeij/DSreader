@@ -320,7 +320,6 @@ class MapTables:
             loctype = 'v'
 
         # table ElmID
-        #elmcols = ['ElmID','Datum','SamengesteldeLegenda']
         elmcols = ['elmid', 'locatietype', 'datum','vegtype_combi_code',]
 
         mask = self._tbldict['Element']['locatietype']==loctype
