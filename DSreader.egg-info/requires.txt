@@ -1,7 +1,6 @@
 pandas
 numpy
 geopandas
-fiona
-json
-pyodbc
 plotly
+fiona
+pyodbc

@@ -1,0 +1,12 @@
+{
+  "tests/test_listprojects.py::test_init_has_projects_dataframe": true,
+  "tests/test_listprojects.py::test_projectfiletable": true,
+  "tests/test_openshape.py::test_fix_missing_shx": true,
+  "tests/test_openshape.py::test_fix_ringerror_shapefile": true,
+  "tests/test_openshape.py::test_open_ringerror_shapefile": true,
+  "tests/test_projectstable.py::test_selectfiletype_mdb": true,
+  "tests/test_projectstable.py::test_selectfiletype_shp": true,
+  "tests/test_package_data.py": true,
+  "tests/test_read_tv2.py::test_contains_sbb": true,
+  "tests/test_read_tv2.py::test_get_locations": true
+}

@@ -36,12 +36,12 @@ def test_open_goodfile(goodshapepath):
 def test_shape(goodshapepath):
     """Test ReadShapeFile.shape()"""
     readr = ShapeFile(goodshapepath)
-    assert isinstance(readr.shape,pd.DataFrame)
+    assert isinstance(readr.shape, pd.DataFrame)
 
 def test_shape_errors(goodshapepath):
     """Test ReadShapeFile.shape_errors()"""
     readr = ShapeFile(goodshapepath)
-    assert isinstance(readr.shape_errors,pd.DataFrame)
+    assert isinstance(readr.shape_errors, pd.DataFrame)
 
 def test_columns(goodshapepath):
     """Test ReadShapeFile.columns()"""

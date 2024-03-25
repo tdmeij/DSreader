@@ -222,7 +222,7 @@ class ShapeFile:
     @property
     def shape_errors(self):
         """Return Pandas dataframe with polygon errors."""
-        return self._shape_errors
+        return self._shperr
 
     @property
     def columns(self):

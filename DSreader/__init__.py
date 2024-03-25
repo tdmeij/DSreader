@@ -50,8 +50,12 @@ from .plot.sankey_two_maps import SankeyTwoMaps
 from .tools.conversions import year_from_string
 from .tools.write_excel import write_to_excel
 from .tools.projectstable import ProjectsTable
-from .tools import sbbcat
-from .data.packagedata import PackageData
+from .tools import syntaxontools
+
+# import package data
+from .data import syntaxa
+from .data import taxa
+from .data import turboveg
 
 # import functions
 from .tools.filetools import relativepath as relativepath

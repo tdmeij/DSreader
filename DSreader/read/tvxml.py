@@ -26,7 +26,7 @@ class TvXml:
         self.xmlmeta = Series(self._root.attrib, name='xmlmeta')
 
     def __repr__(self):
-        return f'{self.__class__.__name__} ({len(self)} releves)'
+        return f'{self.__class__.__name__}(n={len(self)}'
 
     def __len__(self):
         return len(self.releve_numbers)
@@ -112,10 +112,14 @@ class TvXml:
     @property
     def tvhabita(self):
         """Turboveg2 standard header data."""
+
         releves = []
+        # get header data for all Plots
         for plot in self._root.iterfind('.//Plot'):
+            # standard records
             hd = Series(plot.find(".//header_data//standard_record").attrib)
             hd = DataFrame(hd).T
+            # user defined records
             for rec in plot.iterfind(".//header_data//udf_record"):
                 hd[rec.attrib['name']] = rec.attrib['value']
             releves.append(hd)
@@ -130,8 +134,8 @@ class TvXml:
                 else:
                     tvhab[colname] = tvhab[colname].astype('float64')
 
-        tvhab['releve_nr'] = tvhab['releve_nr'].astype('int64')
-        tvhab = tvhab.set_index('releve_nr',drop=True)
+        tvhab['releve_nr'] = tvhab['releve_nr'].astype('Int64')
+        tvhab = tvhab.set_index('releve_nr', drop=True)
         return tvhab
 
     @property
@@ -150,7 +154,7 @@ class TvXml:
                     })
             releves.append(DataFrame(species))
 
-        releves = pd.concat(releves)
+        releves = pd.concat(releves, ignore_index=True)
         for colname in ['releve_nr','species_nr',]:
             releves[colname] = releves[colname].astype('int64')
         return releves
