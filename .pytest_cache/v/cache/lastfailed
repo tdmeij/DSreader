@@ -8,5 +8,6 @@
   "tests/test_projectstable.py::test_selectfiletype_shp": true,
   "tests/test_package_data.py": true,
   "tests/test_read_tv2.py::test_contains_sbb": true,
-  "tests/test_read_tv2.py::test_get_locations": true
+  "tests/test_read_tv2.py::test_get_locations": true,
+  "tests/test_tvxml.py::test_xmlmeta": true
 }

@@ -23,13 +23,13 @@ class TvXml:
         """
         self._tree = tree
         self._root = self._tree.getroot()
-        self.xmlmeta = Series(self._root.attrib, name='xmlmeta')
+        self.xmlinfo = Series(self._root.attrib, name='xmlinfo')
 
     def __repr__(self):
         return f'{self.__class__.__name__}(n={len(self)}'
 
     def __len__(self):
-        return len(self.releve_numbers)
+        return len(self.guids)
 
     @classmethod
     def from_file(cls,xmlpath):
@@ -95,8 +95,8 @@ class TvXml:
             raise KeyError(f'No lookuptable with name "{name}" in dictionary of lookuptables.')
 
     @property
-    def releve_numbers(self):
-        """Return list of releve numbers."""
+    def guids(self):
+        """Return list of unique releve identifier (guid) for each releve."""
         return list(self.tvhabita.index.values)
 
     @property
@@ -110,11 +110,22 @@ class TvXml:
         return tbl
 
     @property
+    def guidnumbers(self):
+        """Return unique numbers for guids."""
+        guids = []
+        for plot in self._root.iterfind('.//Plot'):
+            guid = plot.attrib['guid'].strip('{').strip('}')
+            guids.append(guid)
+        relnrs = list(range(1,len(guids)+1))
+        return Series(relnrs, index=guids, name='relnrs')
+
+    @property
     def tvhabita(self):
         """Turboveg2 standard header data."""
 
-        releves = []
+        #releves = []
         # get header data for all Plots
+        """
         for plot in self._root.iterfind('.//Plot'):
             # standard records
             hd = Series(plot.find(".//header_data//standard_record").attrib)
@@ -124,6 +135,30 @@ class TvXml:
                 hd[rec.attrib['name']] = rec.attrib['value']
             releves.append(hd)
         tvhab = pd.concat(releves)
+        """
+        releves = []
+        for plot in self._root.iterfind('.//Plot'):
+
+            plot_attributes = {}
+
+            # plot identifiers
+            for key in ['guid','database','releve_nr',]:
+                value = plot.attrib[key]
+                if key=='guid':
+                    value = value.strip('{').strip('}')
+                plot_attributes[key] = value
+            
+            # standard attributes
+            standard_attributes = plot.find(".//header_data//standard_record").attrib
+            for key in standard_attributes:
+                plot_attributes[key] = standard_attributes[key]
+            
+            # user defined records
+            for rec in plot.iterfind(".//header_data//udf_record"):
+                plot_attributes[rec.attrib['name']] = rec.attrib['value']
+
+            releves.append(plot_attributes.copy())
+        tvhab = DataFrame(releves)
 
         # convert columns dtypes
         for colname in tvhab.columns:
@@ -134,8 +169,12 @@ class TvXml:
                 else:
                     tvhab[colname] = tvhab[colname].astype('float64')
 
+        # conver releve id
         tvhab['releve_nr'] = tvhab['releve_nr'].astype('Int64')
-        tvhab = tvhab.set_index('releve_nr', drop=True)
+
+        # set guid as index
+        tvhab = tvhab.set_index('guid', drop=True)
+
         return tvhab
 
     @property
@@ -147,6 +186,8 @@ class TvXml:
             species = []
             for spec in plot.iterfind(".//species_data//species//standard_record"):
                 species.append({
+                    'guid' : plot.attrib['guid'].strip('{').strip('}'),
+                    'database': plot.attrib['database'],
                     'releve_nr' : plot.attrib['releve_nr'],
                     'species_nr' : spec.attrib['nr'],
                     'cover_code' : spec.attrib['cover'],
@@ -162,6 +203,22 @@ class TvXml:
     @property
     def tvhabita_template(self):
         """Return header columns definitions."""
+
+        # table of releve identifiers
+        identifiers = [
+            {'field_name':'guid','field_type':'C','field_len':40, 'field_dec':0, 
+            'field_desc':'Unique releve identifier','ispredefined':'true',},
+            {'field_name':'database','field_type':'C','field_len':200, 'field_dec':0, 
+            'field_desc':'Turboveg3 source database','ispredefined':'true',},
+            #{'field_name':'releve_nr','field_type':'N','field_len':10, 'field_dec':0, 
+            #'field_desc':'Releve number in tv3 database','ispredefined':'true',},
+            ]
+        relid = DataFrame(identifiers).set_index('field_name')
+
+        # table of turboveg predefined columns
+        tvcol = self.templates['tvhabita']
+        tvcol['ispredefined'] = 'true'
+        
         # table of user defined (udf) header columns
         data = []
         for releve in self._tree.findall(".//Plot/header_data"):
@@ -180,15 +237,11 @@ class TvXml:
         udf = DataFrame.from_records(data,columns=colnames)
         udf = udf.drop_duplicates().set_index('field_name',drop=True)
 
-        # table of turboveg predefined columns
-        tvcol = self.templates['tvhabita']
-        tvcol['ispredefined'] = 'true'
-
-        return pd.concat([tvcol,udf])
+        return pd.concat([relid,tvcol,udf])
 
 
     @property
-    def _releve_metadata(self):
+    def releve_metadata(self):
         """Releve database metadata."""
         metadata = []
         for plot in self._root.iterfind('.//Plot'):
@@ -197,7 +250,7 @@ class TvXml:
         metadata = pd.concat(metadata)
 
         metadata['releve_nr'] = metadata['releve_nr'].astype('int64')
-        metadata.set_index('releve_nr', drop=True, inplace=True)
+        metadata.set_index('guid', drop=True, inplace=True, verify_integrity=True)
 
         return metadata
 
@@ -224,11 +277,12 @@ class TvXml:
             for rec in scale.iterchildren():
                 if rec.tag != 'data_record':
                     continue
-                vals.append({
+                coverscale = {
                     'scalecode':code,
                     'scaledescription':desc,
                     'covercode':rec.attrib['code'],
-                    'cover':rec.attrib['percentage'],})
+                    'cover':rec.attrib['percentage'],}
+                vals.append(coverscale.copy())
 
         # merge all scales in one dataframe
         scales =  DataFrame(vals)
@@ -269,15 +323,17 @@ class TvXml:
 
         return filedict
 
-    def get_releve(self,releve_number):
+    def get_releve(self, guid):
         """Return releve by number."""
 
         releve = Releve()
 
-        # species data
+        # get species names
         species_nrs = self.tvabund['species_nr'].values
         mask = self.tvflora.index.isin(species_nrs)
         tvflora = self.tvflora[mask].copy()
+
+        # species data
         releve.tvflora.reindex(tvflora.index)
         releve.tvflora['lettercode'] = tvflora['code']
         releve.tvflora['shortname'] = tvflora['name']
@@ -285,13 +341,13 @@ class TvXml:
         releve.tvflora['nativename'] = tvflora['nativename']
         
         # select tvhabita data and copy to series
-        tvhabita = self.tvhabita.loc[releve_number,:]
+        tvhabita = self.tvhabita.loc[guid,:]
         for (field,value) in tvhabita.items():
             releve.tvhabita[field] = value
-        releve.tvhabita['releve_nr'] = releve_number
+        releve.tvhabita['releve_nr'] = guid
 
         # tvabund data
-        tvabund = self.tvabund[self.tvabund['releve_nr']==releve_number]
+        tvabund = self.tvabund[self.tvabund['guid']==guid]
         releve.tvabund = pd.concat([releve.tvabund, tvabund,]).reset_index(drop=True)
 
         return releve

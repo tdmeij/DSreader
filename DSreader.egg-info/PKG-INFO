@@ -8,6 +8,12 @@ Author-email: thomasdemeij@gmail.com
 License: MIT
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: geopandas
+Requires-Dist: plotly
+Requires-Dist: fiona
+Requires-Dist: pyodbc
 
 # DSreader
 Tools for reading vegetation maps created in the 'Digitale 

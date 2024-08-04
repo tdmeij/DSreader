@@ -20,12 +20,17 @@ def test_len(tvxml):
 def test_repr(tvxml):
     assert isinstance(str(tvxml),str)
 
+def guidnumbers(tvxml):
+    assert isinstance(tvxml.guidnumbers, Series)
+    assert not tvxml.guidnumbers.empty
+
 def releve_numbers(tvxml):
     assert isinstance(releve_numbers, list)
 
 def test_get_releve(tvxml):
-    rel = tvxml.get_releve(tvxml.releve_numbers[0])
+    rel = tvxml.get_releve(tvxml.guids[0])
     assert isinstance(rel, Releve)
+    # todo: add test for releve not empty!
 
 def test_tvflora(tvxml):
     assert isinstance(tvxml.tvflora, DataFrame)
@@ -36,8 +41,8 @@ def test_tvhabita(tvxml):
 def test_tvabund(tvxml):
     assert isinstance(tvxml.tvabund, DataFrame)
 
-def test_xmlmeta(tvxml):
-    assert isinstance(tvxml.xmlmeta, Series)
+def test_xmlinfo(tvxml):
+    assert isinstance(tvxml.xmlinfo, Series)
 
 def test_get_coverscales(tvxml):
     assert isinstance(tvxml.get_coverscales(),DataFrame)

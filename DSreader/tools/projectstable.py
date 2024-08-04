@@ -55,7 +55,7 @@ class ProjectsTable:
         'themas','florakartering','flora','toestand','backup',
         'foutmelding','Geodatabase',]
 
-    def __init__(self,rootdir,relpaths=True):
+    def __init__(self, rootdir, relpaths=True):
         """
         Parameters
         ----------

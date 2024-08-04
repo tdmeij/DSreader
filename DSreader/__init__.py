@@ -45,7 +45,7 @@ from .read.shapefile import ShapeFile
 from .read.mdb import Mdb
 from .read.tv2 import Tv2
 from .read.tvxml import TvXml
-from .sample.samplepolygonmap import SamplePolygonMap
+from .stats.samplepolygonmap import SamplePolygonMap
 from .plot.sankey_two_maps import SankeyTwoMaps
 from .tools.conversions import year_from_string
 from .tools.write_excel import write_to_excel

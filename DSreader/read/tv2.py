@@ -272,9 +272,9 @@ class Tv2:
     @property
     def usercols(self):
         """Names of user defined columns."""
-        if self.get_tvhabita().empty:
+        if self.tvhabita.empty:
             return []
-        return [col for col in self.tvhabita.columns if col not in self.STANDARD_TV2COLS]
+        return [col for col in self.tvhabita.columns if col not in self.TVHABITA_COLS]
 
 
     @property

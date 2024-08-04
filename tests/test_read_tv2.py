@@ -43,3 +43,7 @@ def test_has_sbb(db):
 
 def test_locations(db):
     assert isinstance(db.locations, GeoDataFrame)
+
+def test_usercols(db):
+    assert isinstance(db.usercols, list)
+    assert len(db.usercols)>0
