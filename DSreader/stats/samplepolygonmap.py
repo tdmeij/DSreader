@@ -54,9 +54,9 @@ class SamplePolygonMap:
             raise Exception(f'Expect class GeoDataFrame, not {polygonmap.__class__}')
 
         if samplegrid is not None:
-            if not isinstance(grid,GeoDataFrame):
+            if not isinstance(samplegrid,GeoDataFrame):
                 warnings.warn((f'Given grid is not GeoPandas but '
-                    f'{type(grid)}. New default grid will be created.'))
+                    f'{type(samplegrid)}. New default grid will be created.'))
                 samplegrid = None
 
         # set variables
@@ -198,10 +198,16 @@ class SamplePolygonMap:
     @property
     def grid(self):
         """GeoDataFrame with gridpoints."""
-        # create sampling grid
+
         if self._samplegrid is None:
+
+            step = self._step
+            if step is None:
+                step = self.GRIDSTEP
+
             self._samplegrid = self.create_sampling_grid(self._polygonmap, 
-                gridtype=self._gridtype, step=self.GRIDSTEP)
+                gridtype=self._gridtype, step=step)
+
         return self._samplegrid
 
     @property
@@ -212,7 +218,7 @@ class SamplePolygonMap:
 
     def get_polygon_sample(self):
         """Return GeoDataFrame with sampled values at gridpoints."""
-        sample = gpd.sjoin(self.grid, self.polygons, how='inner', op='within')
+        sample = gpd.sjoin(self.grid, self.polygons, how='inner', predicate='within')
 
         if 'index_right' in sample.columns:
             sample = sample.drop(columns=['index_right'])

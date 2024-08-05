@@ -2,6 +2,9 @@
 import pytest
 from geopandas import GeoSeries, GeoDataFrame
 import geopandas as gpd
+
+import matplotlib
+
 from DSreader import SamplePolygonMap
 
 @pytest.fixture
@@ -69,18 +72,21 @@ def test_init_representative_points(polyshape):
         crs='epsg:28992')
     assert isinstance(smp, SamplePolygonMap)
 
-# test get_polygon_sample
-# -----------------------
+# test methods
+# ------------
 
 def test_get_polygon_sample(polyshape):
     smp = SamplePolygonMap(polyshape)
     gdf = smp.get_polygon_sample()
     assert isinstance(gdf, GeoDataFrame)
     assert not gdf.empty
-    
 
 # test properties
 # ---------------
+
+def test_repr(polyshape):
+    smp = SamplePolygonMap(polyshape)
+    assert isinstance(str(smp), str)
 
 def test_grid(polyshape):
     smp = SamplePolygonMap(polyshape)

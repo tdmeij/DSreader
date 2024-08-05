@@ -126,6 +126,7 @@
   "tests/test_stats_samplepolygonmap.py::test_init_representative_points",
   "tests/test_stats_samplepolygonmap.py::test_init_with_defaults",
   "tests/test_stats_samplepolygonmap.py::test_init_without_shape",
+  "tests/test_stats_samplepolygonmap.py::test_plot_sample",
   "tests/test_stats_samplepolygonmap.py::test_polygons",
   "tests/test_stats_samplepolygonmap.py::test_property_grid",
   "tests/test_stats_samplepolygonmap.py::test_regulargrid",

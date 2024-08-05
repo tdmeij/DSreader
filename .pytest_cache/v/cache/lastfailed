@@ -9,5 +9,6 @@
   "tests/test_package_data.py": true,
   "tests/test_read_tv2.py::test_contains_sbb": true,
   "tests/test_read_tv2.py::test_get_locations": true,
-  "tests/test_tvxml.py::test_xmlmeta": true
+  "tests/test_tvxml.py::test_xmlmeta": true,
+  "tests/test_stats_samplepolygonmap.py::test_plot_sample": true
 }
